@@ -1,0 +1,17 @@
+<div ng-class="{'nextshift nextshift--fixed': shift}">
+
+    <div ng-if="!shiftIsCurrent">
+        <div class="nextshift__label" ng-if="shift">Your next shift is</div>
+        <div class="nextshift__main">
+            {{shift.start | date:'EEEE d'}}{{shift.start | ordinal}} {{shift.start | date:'shortTime'}}
+        </div>
+    </div>
+
+    <div ng-if="shiftIsCurrent">
+        <div class="nextshift__label">Your shift ends in</div>
+        <div class="nextshift__main">
+            <span shifts-duration start="now" end="shift.end"></span> at {{shift.end | date:'shortTime'}}
+        </div>
+    </div>
+
+</div>

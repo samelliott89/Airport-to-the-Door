@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="{{appIdentifier}}" version="{{appVersion}}" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>{{appDisplayName}}</name>
+    <description>{{description}}</description>
+    <author email="{{author.email}}" href="{{author.site}}">{{author.name}}</author>
+
+    <platform name="ios">
+        {{#each iosIcons.sizes}}
+            <icon src="{{../iosIcons.base}}/{{name}}" width="{{width}}" height="{{height}}" />
+        {{/each}}
+
+        {{#each iosSplash.sizes}}
+            <splash src="{{../iosSplash.base}}/{{name}}" width="{{width}}" height="{{height}}" />
+        {{/each}}
+    </platform>
+
+    <platform name="android">
+        {{#each androidIcons.sizes}}
+            <icon src="{{../androidIcons.base}}/{{name}}" density="{{density}}" />
+        {{/each}}
+    </platform>
+
+    {{#each preferences}}
+        <preference name="{{@key}}" value="{{this}}"/>
+    {{/each}}
+
+    {{#each features}}
+        <feature name="{{this}}"/>
+    {{/each}}
+
+    <content src="{{mainPage}}" />
+
+    {{#each networkWhitelist}}
+        <access origin="{{this}}" />
+    {{/each}}
+</widget>

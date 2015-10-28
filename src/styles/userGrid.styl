@@ -1,0 +1,54 @@
+user-grid-spacing = 20px
+
+.user-grid
+    font-size 0
+    display: flex
+    flex-wrap: wrap
+    padding: user-grid-spacing
+    padding-bottom: 0
+
+.user-grid__user
+    padding: 0 user-grid-spacing
+    box-sizing: border-box
+    flex: 0 0 50%
+    margin-bottom: 25px
+    font-size font-size-base
+    text-align center
+
+.user-grid__img-wrapper
+    width: 60%
+    min-width: 80px;
+    margin: auto
+    margin-bottom: (user-grid-spacing / 2)
+
+// This creates an even square 'placeholder' for the image
+// that prevents the 'popcorning' effect of images loading in
+// and making the layout jump around
+.user-grid__img-placeholder
+    padding-top: 100%
+    position relative
+    background: darken(background-color, 15%)
+    border-radius 50%
+    overflow: hidden
+
+.user-grid__image
+    position absolute
+    top 0
+    left 0
+    display block
+    width: 100%
+
+.user-grid__title
+    font-weight: 500
+
+.user-grid__subtitle
+    font-size 12px
+
+
+@media iphone-5
+    .user-grid
+        padding: 20px (user-grid-spacing / 2)
+        padding-bottom: 0
+
+    .user-grid__user
+        padding: 0 (user-grid-spacing / 2)

@@ -1,0 +1,37 @@
+.nextshift
+    height: nextshift-height
+    display: flex
+    padding: 0 15px
+    border-top: 1px solid border-color
+    color: brand-blue
+    background: border-color
+    justify-content: center
+    text-align: center
+    flex-direction: column
+    font-weight 500
+
+    .user &
+        background: none
+
+.nextshift--fixed
+    position: fixed
+    top: 42px
+    left: 0
+    right: 0
+    z-index: 5
+
+    & ~ ons-page > .page__content
+        top: 96px
+
+    .page__status-bar-fill ~ .page__content &
+        top: 63px
+
+        & ~ .page .page__status-bar-fill ~ .page__content
+            top: 116px
+
+.nextshift__label
+    font-size: 14px
+    opacity: .8
+
+.nextshift__main
+    font-size: 16px

@@ -1,0 +1,35 @@
+.text-input
+    display block
+    width 100%
+
+.floatfield
+    position relative
+
+    label
+        position absolute
+        left 5px
+        font-size 10px
+        font-weight 500
+        top -10px
+        opacity 0
+        transform translateY(10px)
+        transition all 250ms ease-in-out
+        color: #ddd
+
+    .text-input.ng-has-text + label
+        opacity 1
+        transform translateY(0)
+
+    .text-input:focus + label
+        color white
+
+.invis-input-wrap
+    position: relative
+
+.invis-input
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    opacity 0

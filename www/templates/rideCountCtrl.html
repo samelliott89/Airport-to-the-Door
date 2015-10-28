@@ -1,0 +1,43 @@
+<div ng-controller="RideCountCtrl as ride">
+
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <shifts-left-button></shifts-left-button>
+            </div>
+
+            <div class="center">How many travelling?</div>
+
+            <div class="right">
+                <ons-toolbar-button ng-if="ride.value" ng-click="ride.submitCount()">
+                    Next
+                </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <div class="removeElement">
+            <div class="textOne padd text-muted text-center">
+                <p>How many of you are riding today?</p>
+            </div>
+
+            <div class="text-center">
+                <ons-button class="buttonOne button--clear margin-top button-radius margin-md"
+                    ng-click="ride.submitValue(1)">One</ons-button>
+                <ons-button class="buttonTwo button--clear margin-top button-radius margin-md"
+                    ng-click="ride.submitValue(2)">Two</ons-button>
+            </div>
+        </div>
+
+        <div class="padd text-muted text-center animated fadeIn fade-in-slow">
+            <div ng-show="ride.value">
+                <ons-icon icon="ion-ios7-checkmark-outline" class="icon-center icon-success icon-bounce" size="60px"></ons-icon>
+                <p class="text-success" style="text-transform: uppercase;">{{ride.value}} riding</p>
+                <p ng-show="ride.value == 1">Tap on next to find you a ride</p>
+                <p ng-show="ride.value == 2">Tap on next to find you two a ride</p>
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="ride.clearValue()">Back</ons-button>
+            </div>
+        </div>
+
+    </ons-page>
+
+</div>

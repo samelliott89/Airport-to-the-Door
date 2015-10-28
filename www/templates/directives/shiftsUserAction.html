@@ -1,0 +1,25 @@
+<ons-list>
+    <ons-list-header ng-if="listHeader">{{listHeader}}</ons-list-header>
+    <ons-list-item class="list-item-container list-item-container--action" ng-repeat="friend in users">
+        <div class="list-item-left" ng-click="nav.goto('profileCtrl', {profileId: friend.id})">
+            <img ng-src="{{friend.profilePhoto.href}}/-/scale_crop/80x80/" class="avator" ng-if="friend.profilePhoto">
+            <img ng-src="{{friend.defaultPhoto}}&s=80" class="avator" ng-if="!friend.profilePhoto">
+        </div>
+        <div class="list-item-right">
+            <div class="list-item-content">
+                <!-- Cross to dismiss connection -->
+                <ons-icon class="icon-delete pull-right" icon="ion-ios7-close-outline" size="40px" ng-if="!friend.isFriend"
+                  ng-click="decline(friend)"></ons-icon>
+                <!-- Plus to accept connection -->
+                <ons-icon class="icon-success pull-right" icon="ion-ios7-plus-outline" size="40px" ng-if="!friend.isFriend"
+                  ng-click="accept(friend)"></ons-icon>
+                <!-- Tick to confirm new connection -->
+                <ons-icon class="icon-success icon-bounce pull-right" icon="ion-ios7-checkmark" size="40px" ng-if="friend.isFriend"></ons-icon>
+
+                <div class="name">{{friend.displayName}}</div>
+
+                <div class="profile-desc--cell" ng-if="friend.bio">{{friend.bio}}</div>
+            </div>
+        </div>
+    </ons-list-item>
+</ons-list>

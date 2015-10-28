@@ -1,0 +1,10 @@
+{
+    appIdentifier: 'com.qantas.tothedoorTest'
+    appDisplayName: 'QantasTest'
+    apiBase: 'http://shiftsapi-test.elasticbeanstalk.com'
+    s3WebAppBucketName: 'robby-web-mobile-app-test'
+    defaultShiftReminderTime: 1 # 1 minute
+
+    # Tells build to load hotfix script
+    loadHotfix: true
+}

@@ -1,0 +1,89 @@
+<ons-page ng-controller="AuthCtrl as wlcm">
+    <style>
+        .page__content { margin-top: 0px; }
+    </style>
+
+    <div class="welcome">
+        <div class="welcome__inner">
+
+            <div class="auth-form-container">
+
+                <div class="pre-login-form margin-btm" ng-if="!wlcm.toShow" ng-animate=" 'animate' ">
+                    <p style="font-size: 16px"><strong>Qantas to the door</strong> is the easiest way for Qantas passengers to<br/>get from where they are to where they want to be.</p>
+
+                    <ons-button modifier="large" class="button--clear button-cyclinder" type="button" ng-click="wlcm.toShow = 'reg'">Register</ons-button>
+                    <br>
+                    <ons-button modifier="large--quiet" class="button--bs" type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
+                </div>
+
+                <div class="login-form login-form--login" ng-if="wlcm.toShow === 'login'" ng-animate=" 'animate' ">
+                    <form ng-submit="wlcm.loginSubmit()" autocomplete="off">
+                        <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+                        <input style="display:none" type="text" name="fakeusernameremembered"/>
+                        <input style="display:none" type="password" name="fakepasswordremembered"/>
+
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.email"
+                                type="email" placeholder="Email" id="LoginEmail">
+                            <label for="LoginEmail">Email</label>
+                        </div>
+
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.password"
+                                type="password" placeholder="Password" id="LoginPassword">
+                            <label for="LoginPassword">Password</label>
+                        </div>
+
+                        <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.loginSubmit()">Log in</ons-button>
+                    </form>
+
+                    <p>
+                        <ons-button modifier="large--quiet" class="button--bs" type="button"
+                            ng-click="wlcm.toShow = 'reg'">Haven't registered yet?</ons-button>
+                        <ons-button modifier="large--quiet" class="button--bs" type="button"
+                            ng-click="nav.setRootPage('resetPasswordCtrl', {animation: 'lift'})">Forgotten password?</ons-button>
+                    </p>
+                </div>
+
+                <div class="login-form login-form--reg" ng-if="wlcm.toShow === 'reg'" ng-animate=" 'animate' ">
+                    <form ng-submit="wlcm.registerSubmit()" autocomplete="off">
+                        <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
+                        <input style="display:none" type="text" name="fakeusernameremembered"/>
+                        <input style="display:none" type="password" name="fakepasswordremembered"/>
+                        <input style="display:none" type="email" name="fakeemailremembered"/>
+
+                        <!-- TODO: replace floatfield with a directive -->
+
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.displayName"
+                                    type="text" placeholder="Your name" id="RegisterText">
+                            <label for="RegisterText">Your name</label>
+                        </div>
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.email"
+                                    type="email" placeholder="Email" id="RegisterEmail">
+                            <label for="RegisterEmail">Email</label>
+                        </div>
+
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.password"
+                                    type="password" placeholder="Password" id="RegisterPassword">
+                            <label for="RegisterPassword">Password</label>
+                        </div>
+                        <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.registerSubmit()">Register</ons-button>
+                    </form>
+
+                    <p>
+                        <ons-button modifier="large--quiet" class="button--bs" type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
+                        <p class="text-center small">
+                            By registering, you agree to our
+                            <strong ng-click="nav.openInAppBrowser('http://getatum.com/terms')">Terms of Service</strong> and
+                            <strong ng-click="nav.openInAppBrowser('http://getatum.com/privacy')">Privacy Policy</strong>.
+                        </p>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</ons-page>

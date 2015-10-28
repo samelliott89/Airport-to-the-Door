@@ -1,0 +1,114 @@
+.pre-login-form,
+.login-form--reg,
+.login-form--login
+    transition: all 0.4s cubic-bezier(0.1, 0.7, 0.1, 1)
+
+.login-form--reg
+    &.ng-enter        { transform: translateX(120%) }
+    &.ng-enter-active { transform: translateX(0) }
+    &.ng-leave        { transform: translateX(0) }
+    &.ng-leave-active { transform: translateX(120%) }
+
+.login-form--login
+    &.ng-enter        { transform: translateX(-120%) }
+    &.ng-enter-active { transform: translateX(0) }
+    &.ng-leave        { transform: translateX(0) }
+    &.ng-leave-active { transform: translateX(-120%) }
+
+.pre-login-form
+    padding-top 100px
+    &.ng-leave        { transform: translateX(0) }
+    &.ng-leave-active { transform: translateX(-120%) }
+
+.mainlogo
+    font-size: 0
+    text-index: -9999px
+    display inline-block
+    background url('ASSET{images/authLogo.png}')
+    height 148px
+    width 152px
+    background-size cover
+
+.welcome
+    background-color: brand-blue
+    background-image url("ASSET{images/welcome-bg.png}")
+    background-size cover
+    background-position center
+    background-repeat no-repeat
+    color white
+    text-align center
+    height 100vh
+    display flex
+    justify-content center
+    align-items center
+
+    .text-input
+        background none
+
+    ons-button
+        color white
+        &:active
+            color rgba(white, .75)
+
+    .button--clear:active
+        background-color rgba(white, .2)
+        color rgba(white, .2)
+        opacity 1
+
+    _input-placeholder-color = rgba(255, 255, 255, .6)
+
+    .text-input
+        color: white
+        padding: 5px
+        width: 100%
+        display: block
+
+        &::-webkit-input-placeholder { color: _input-placeholder-color }
+        &:-ms-input-placeholder      { color: _input-placeholder-color }
+        &::-moz-placeholder          { color: _input-placeholder-color }
+        &:-moz-placeholder           { color: _input-placeholder-color }
+
+    .text-input,
+    .floatfield
+        & + .text-input { margin-top: 20px }
+        & + .floatfield { margin-top: 20px }
+
+.welcome__inner
+    width: 80%
+    min-height: 450px
+    width 80%
+
+.welcome__or
+    padding 10px 0
+    line-height 1
+
+.auth__welcome
+    margin-bottom 20px
+
+.auth__login,
+.auth__register
+
+    input:last-of-type
+        margin-bottom spacing * 1.5
+
+    .btn
+        font-weight 500
+
+    .btn-block
+        margin-bottom spacing * 1
+
+.auth__errors
+    margin-bottom: (spacing / 2)
+    padding: (spacing / 2)
+    border-radius: border-radius-base
+    font-weight: 500
+    background: white
+    color: brand-blue
+
+.auth-form-container
+    position relative
+
+    > *
+        position absolute
+        width 100%
+

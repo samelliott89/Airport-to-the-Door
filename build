@@ -1,0 +1,170 @@
+#!/usr/bin/env coffee
+
+{execSync} = require('child_process')
+argv = require('yargs').argv
+require 'colors'
+
+androidHome = process.env.ANDROID_HOME
+
+run = ->
+    [task, config] = argv._
+    config ?= 'local'
+    func = $[task]
+
+    if func
+        func config
+    else
+        console.log "Couldn\'t find task `#{task}`"
+
+sh = (cmd, arg2, arg3) ->
+
+    if arg3 or (typeof arg2 is 'string')
+        msg = arg2
+        options = arg3
+    else if typeof arg2 is 'object'
+        options = arg2
+
+    msg ?= cmd
+
+    options ?= {failOK: false}
+    print msg, 'blue'
+
+    try
+        execSync cmd
+    catch e
+        if not options.failOK
+            print "Error running command '#{cmd}'", 'red'
+            console.log e.stack
+            print "Aborting.", 'red'
+            process.exit()
+
+gulp = (task, config) ->
+    cmd = "./node_modules/.bin/gulp #{task}"
+    cmd += " --config=#{config}"  if config
+    sh cmd, 'Building with Gulp'
+
+installPlugins = ->
+    plugins = [
+        'org.apache.cordova.camera'
+        'org.apache.cordova.console'
+        'org.apache.cordova.dialogs'
+        'org.apache.cordova.statusbar'
+        'org.apache.cordova.geolocation'
+        'org.apache.cordova.file-transfer'
+        # 'org.apache.cordova.globalization'
+        'nl.x-services.plugins.socialsharing'
+        'de.appplant.cordova.plugin.badge@0.6.1'
+        'https://github.com/Shifts/cordova-plugin-inappbrowser.git'
+        'https://github.com/NorthMcCormick/cordova-plugin-local-notifications'
+        'https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git'
+        'https://github.com/whiteoctober/cordova-plugin-app-version.git'
+        'https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git'
+        'https://github.com/apache/cordova-plugin-contacts.git'
+        'https://github.com/phonegap-build/PushPlugin.git'
+    ]
+
+    for plugin in plugins
+        sh "cordova plugin add #{plugin}"
+
+print = (msg, color='cyan') ->
+    console.log '[builder] '.gray + msg[color]
+
+cleanPlatforms = (platform) ->
+    sh "./platforms/#{platform}/cordova/clean", "Cleaning old #{platform} builds"
+
+buildToDevice = (config, platform, runOnly) ->
+
+    cleanPlatforms platform
+
+    unless runOnly
+        gulp 'build', config
+
+    sh "cordova run #{platform} --device --justlaunch", "Compiling to #{platform} device"
+
+###
+## Define tasks below!
+###
+
+$ =
+    setup: (config) ->
+        sh 'rm -rv configs/local.cson platforms/ plugins/', {failOK: true}
+        sh 'npm install'
+        sh 'mkdir platforms'
+        sh 'echo "{build: useLiveReload: true }" > configs/local.cson'
+        sh 'cordova platform add ios'
+        sh 'cordova platform add android'
+        gulp 'build', config
+        installPlugins()
+
+    plugins: ->
+        installPlugins()
+
+    emulate: (config) ->
+        cleanPlatforms 'ios'
+        gulp 'build', config
+        sh 'cordova emulate ios',  "Compiling to ios device"
+
+        print 'Done!', 'green'
+
+    run: (config) ->
+        buildToDevice config, 'ios'
+        print 'Done!', 'green'
+
+    runAndroid: (config) ->
+        buildToDevice config, 'android'
+        print 'Done!', 'green'
+
+    runAll: (config) ->
+        buildToDevice config, 'android'
+        buildToDevice config, 'ios', true
+        print 'Done!', 'green'
+
+    upload: (config) ->
+        print 'Using config ' + config, 'magenta'
+        gulp 'build', config
+        gulp '_upload', config
+        print 'Done!', 'green'
+
+    appStore: (config) ->
+        if config isnt 'local'
+            print 'Prod config is forced for App Store build. Run again without a config', 'red'
+            process.exit()
+
+        $.setup 'prod'
+        gulp 'build', 'prod'
+        sh 'cordova build --release ios', "Compiling to iOS for release"
+
+        console.log ''
+        # print 'Installing Crashlytics'
+        # sh './crashlytics.sh'
+        # sh 'ruby crashlytics.rb'
+        # sh 'xcproj -p platforms/ios/Robby.xcodeproj touch'
+
+        sh 'open platforms/ios'
+
+        print 'Done.', 'green'
+
+    playStore: (config) ->
+        if config isnt 'local'
+            print 'Prod config is forced for App Store build. Run again without a config', 'red'
+            process.exit()
+
+        $.setup 'prod'
+        gulp 'build', 'prod'
+        sh 'cordova build --release android'
+
+        buildPath = './platforms/android/ant-build'
+        finalApkPath = "#{buildPath}/robby-app-release-signed.apk"
+
+        print 'Signing APK'
+        sh 'cp ./buildAssets/robby-mobileapps.keystore ./platforms/android/ant-build/'
+
+        print 'Build almost done, you just need to run these commands:', 'green'
+        print ''
+        print "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore #{buildPath}/robby-mobileapps.keystore #{buildPath}/MainActivity-release-unsigned.apk robbymobileapps", 'blue'
+        print ''
+        print "#{androidHome}/build-tools/22.0.0/zipalign -v 4 #{buildPath}/MainActivity-release-unsigned.apk #{finalApkPath}", 'blue'
+
+        print "\nAPK will be built to #{finalApkPath}", 'green'
+
+run()

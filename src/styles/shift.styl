@@ -1,0 +1,93 @@
+list-offset = 15px
+
+.list
+    list-style: none
+    padding: 0
+    margin: 0
+
+.list__item
+    min-height: 44px
+    padding-left: list-offset
+
+.shift
+    display: flex
+    flex-wrap: wrap
+    width: 100%
+    // min-height: 44px
+    line-height: 1.2
+    font-size: 15px
+    padding: 10px 0
+    flex: 1
+    justify-content: space-between
+    align-items: center
+
+.shift__main
+    max-width: 100%
+    overflow: hidden
+    flex: 0 1 auto
+    white-space: nowrap
+    text-overflow: ellipsis
+
+.shift__day-off
+    background-color background-color
+
+.shift__accessory
+    font-size: font-size-base
+    white-space: nowrap
+    color: color-gray-darker
+    flex-shrink: 0
+    margin: 3px 0 0 5px
+    max-height: 28px
+    display: block
+    text-align: right
+    max-height: initial
+    align-self: flex-start
+
+.shift__title--avatar
+    margin-left 50px
+
+.shift__subtitle--avatar
+    margin-left 50px
+
+.shift__coworker-summary
+    flex: 1 0 100%
+    font-weight: 500
+
+.list__item__actions
+    position: relative
+    padding: 10px
+    text-align: center
+    background: border-color-alt
+    margin-top: 8px
+
+    &:before
+        content: ''
+        display: block
+        position: absolute
+        top: -16px
+        border: 8px solid transparent
+        border-bottom-color: border-color-alt
+        z-index: 9
+        left: 23px
+
+.list__item__actions-wrapper
+    overflow: hidden
+    max-height: 0
+    transition: max-height 200ms ease
+    margin-left: (-(list-offset))
+    border-bottom: 1px solid border-color-alt
+    transform: translate3d(0,0,0)
+
+    .list__item--show-actions &
+        max-height: 60px
+
+.shift__subtitle
+    margin-top: 5px
+    font-size: 12.5px
+
+.shift__start,
+.shift__end
+    color: black
+
+.shift__start
+    margin-bottom: 6px

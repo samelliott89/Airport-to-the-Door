@@ -1,0 +1,21 @@
+<ons-dialog var="addShiftsDialog" cancelable animation="iosAlertStyle" ng-controller="addShiftsDialogCtrl as dlg">
+
+    <ons-list class="text-center">
+        <ons-list-item modifier="tappable" ng-click="dlg.camera()">
+            <div class="invis-input-wrap">
+                <input type="file" class="invis-input" ng-file-select="dlg.cameraFileSelect($files)">
+                <div class="invis-input-content">
+                    Capture with Camera
+                </div>
+            </div>
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable" ng-click="dlg.manually()">
+            Add manually
+        </ons-list-item>
+
+        <ons-list-item modifier="tappable" ng-click="dlg.close()">
+            <span class="semi-bold">Cancel</span>
+        </ons-list-item>
+    </ons-list>
+</ons-dialog>

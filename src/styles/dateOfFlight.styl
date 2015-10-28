@@ -1,0 +1,307 @@
+dyn-font-size-base = 4.5vw
+
+.add
+    display flex
+    width 100%
+    height 100%
+    flex-direction column
+    line-height 1
+
+.add__display
+    flex 1 1 auto
+    display flex
+    flex-direction column
+    justify-content center
+    padding 15px
+
+.add__keypad
+    flex 0 0 keypad-height
+
+.week
+    padding: 12px 0 18px 0
+    text-align center
+    white-space nowrap
+    background none
+    // Float forces the element to have a 'proper' height
+    float left
+
+// just to show scrolling
+.week-wrap
+    width 99.8%
+    overflow auto
+
+.week__day
+    position relative
+    display: inline-block
+    min-width: 15vw
+
+.week__background
+    _size = 8.5vw
+    display block
+    position absolute
+    background rgba(brand-blue, 0%)
+    content ''
+    width _size
+    height _size
+    bottom -1.8vw
+    left 3.2vw
+    border-radius 100%
+    transition all 40ms ease-in-out
+    z-index 1
+
+    .week__day:active &
+        background: lighten(brand-blue, 60%)
+
+    .week__day--working &
+        background #F0CECE
+
+    .week__day--selected &
+        border 1px solid white
+
+    .week__day--invalid
+        band-width = 7px
+        background-image: repeating-linear-gradient(
+            45deg,
+            lighten(color-danger, 30%),
+            lighten(color-danger, 30%) band-width,
+            color-danger band-width,
+            color-danger (band-width * 2)
+        )
+
+.week__title
+    position relative
+    font-size 3.5vw
+    color white
+    margin-bottom 2.5vw
+    z-index 2
+
+.week__number
+    position relative
+    font-size dyn-font-size-base
+    color white
+    z-index 2
+    padding-top 3px
+
+    .week__day--selected &
+    .week__day--invalid &
+        color darken(white, 20%)
+
+.keypad
+    position relative
+    height keypad-height
+
+.keypad__key
+    position absolute
+    height key-height
+    width key-width
+    border 1px solid grey
+    border-style solid none none solid
+    font-size 5.2vw
+    font-family app-font
+    font-weight 300
+    color black
+    background none
+    outline none
+    transition all 40ms ease-in-out
+
+    &:active
+        box-shadow 0 0 5px -1px rgba(0, 0, 0, .2) inset
+        background darken(white, 10%)
+
+    &:disabled
+        color darken(white, 15%)
+
+.keypad__1
+    top key-height * 0
+    left key-width * 0
+
+.keypad__2
+    top key-height * 0
+    left key-width * 1
+
+.keypad__3
+    top key-height * 0
+    left key-width * 2
+
+.keypad__4
+    top key-height * 1
+    left key-width * 0
+
+.keypad__5
+    top key-height * 1
+    left key-width * 1
+
+.keypad__6
+    top key-height * 1
+    left key-width * 2
+
+.keypad__7
+    top key-height * 2
+    left key-width * 0
+
+.keypad__8
+    top key-height * 2
+    left key-width * 1
+
+.keypad__9
+    top key-height * 2
+    left key-width * 2
+
+.keypad__am
+    top key-height * 3
+    left key-width * 0
+
+.keypad__0
+    top key-height * 3
+    left key-width * 1
+
+.keypad__pm
+    top key-height * 3
+    left key-width * 2
+
+.keypad__clear
+    background #EEEEEE
+    top key-height * 0
+    left key-width * 3
+
+    &:active
+        background darken(#EEEEEE, 10%) !important
+
+.keypad__next
+    background brand-blue
+    height key-height * 3
+    top key-height * 1
+    left key-width * 3
+    color white
+
+    &:active
+        background darken(brand-blue, 15%) !important
+
+.keypad__next--disabled
+    background #EEEEEE
+
+    &:active
+        background #EEEEEE !important
+
+.keypad__clear
+.keypad__next
+.keypad__am
+.keypad__pm
+    font-size: 4vw
+
+.keypad__1,
+.keypad__4,
+.keypad__7,
+.keypad__am
+    border-left none
+
+.add__display__timesd
+    position: relative
+    margin 15px -7px 0 -7px
+
+.add__display__text
+.add__display__duration
+    font-size font-size-ridic
+    min-height: 1em
+    color white
+    text-align center
+
+.add__display__duration
+    position: absolute
+    top: 100%
+    left: 7px
+    margin-top: 15px
+    font-size: 4vw
+
+.add__shift__time,
+.add__shift__to
+    font-size 6.5vw
+    display inline-block
+
+.add__display__time__border
+    display inline-block
+    padding 7px
+    border-radius 3px
+    transition: 20ms background ease-in-out
+
+    &:active
+        background darken(white, 7.5%)
+
+        .add__shift__time
+            border-color: darken(grey, 10%)
+
+.add__shift__time
+    padding 0 1px 3px 1px
+    border 2px none grey
+    border-bottom-style dashed
+    transition border 40ms ease-in-out
+
+    &.add__shift__time--active
+        border-color black
+
+    &.add__shift__time--invalid
+        color: color-danger !important
+
+.add__shift__to
+    padding 0 2.5vw
+    font-size dyn-font-size-base
+    position relative
+    top -2px
+
+.debug
+    font-size 12px
+
+
+.keypad__accessories
+    position: absolute
+    bottom: 100%
+    left: 0
+    right: 0
+    text-align: center
+    font-size: 0
+
+.add__from-camera
+    position: relative
+    min-width: 50%
+    text-align: center
+    display: inline-block
+
+.add__from-camera__btn
+    border-radius: 4px 4px 0 0
+    border: 1px solid
+    border-bottom: none
+    background: #eee
+    font-size: 14px;
+    padding: 10px 5px
+    transition: all 25ms ease-in-out
+    outline: none !important
+    width: 100%
+
+    &:active
+        background: #FC5151
+        color: white
+        border-color: darken(#FC5151, 15%)
+        outline: none !important
+
+.add__from-camera__input
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    opacity: 0
+
+.camyes
+    position: absolute
+    top: 50%
+    left: 0
+    right: 0
+    padding: 0 20px
+    transform: translateY(-50%)
+
+.camyes__icon
+    margin-bottom: 15px
+    .fa { color: brand-blue }
+
+.camyes__heading
+    font-weight: 500

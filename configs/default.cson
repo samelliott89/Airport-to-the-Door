@@ -1,0 +1,148 @@
+{
+    appIdentifier: 'com.samelliotsam.workerappDev'
+    appVersion: '1.0'
+    appDisplayName: 'Qantas'
+    description: 'Qantas to the door'
+    author:
+        name: 'Sam Killin & Sam Elliott'
+    iosIcons: {
+        base: 'buildAssets/dev-icon'
+        sizes: [
+            { name: "Icon-Small.png",       width: "29", height: "29" }
+            { name: "Icon-Small@2x.png",    width: "58", height: "58" }
+            { name: "Icon-Small@3x.png",    width: "87", height: "87" }
+
+            { name: "Icon-Small-40.png",    width: "40", height: "40" }
+            { name: "Icon-Small-40@2x.png", width: "80", height: "80" }
+            { name: "Icon-Small-40@3x.png", width: "120", height: "120" }
+
+            { name: "Icon-Small-50.png",    width: "50", height: "50" }
+            { name: "Icon-Small-50@2x.png", width: "100", height: "100" }
+
+            { name: "Icon.png",             width: "57", height: "57" }
+            { name: "Icon@2x.png",          width: "114", height: "114" }
+
+            { name: "Icon-60.png",          width: "60", height: "60" }
+            { name: "Icon-60@2x.png",       width: "120", height: "120" }
+            { name: "Icon-60@3x.png",       width: "180", height: "180" }
+
+            { name: "Icon-72.png",          width: "72", height: "72" }
+            { name: "Icon-72@2x.png",       width: "144", height: "144" }
+
+            { name: "Icon-76.png",          width: "76", height: "76" }
+            { name: "Icon-76@2x.png",       width: "152", height: "152" }
+        ]
+    }
+    iosSplash: {
+        base: 'buildAssets/splash'
+        sizes: [
+            { name: "Default.png",                   width: "320",   height: "480"  }
+            { name: "Default@2x.png",                width: "640",   height: "640"  }
+            { name: "Default-568h@2x.png",           width: "640",   height: "1136" }
+            { name: "Default-667h@2x.png",           width: "750",   height: "1334" }
+            { name: "Default-Portrait-736h@3x.png",  width: "1242",  height: "2208" }
+            { name: "Default-Landscape-736h@3x.png", width: "2208",  height: "1242" }
+        ]
+    }
+
+    androidIcons: {
+        base: 'buildAssets/android-icons-prod'
+        sizes: [
+            { name: "xxxhdpi.png", density: "xxxhdpi",}
+            { name: "xxhdpi.png",  density: "xxhdpi", }
+            { name: "xhdpi.png",   density: "xhdpi",  }
+            { name: "hdpi.png",    density: "hdpi",   }
+            { name: "mdpi.png",    density: "mdpi",   }
+        ]
+    }
+
+    preferences:
+        "EnableViewportScale": "true"
+        "TopActivityIndicator": "white"
+        "GapBetwenPages": "2"
+        "DisallowOverscroll": "true"
+        "StatusBarStyle": "blackopaque"
+        "target-device": "handset"
+        "StatusBarBackgroundColor": "#FFFFFF"
+        "orientation": "portrait"
+
+    features: [
+        "http://api.phonegap.com/1.0/battery"
+        "http://api.phonegap.com/1.0/camera"
+        "http://api.phonegap.com/1.0/contacts"
+        "http://api.phonegap.com/1.0/file"
+        "http://api.phonegap.com/1.0/geolocation"
+        "http://api.phonegap.com/1.0/media"
+        "http://api.phonegap.com/1.0/network"
+        "http://api.phonegap.com/1.0/notification"
+    ]
+
+    mainPage: "index.html"
+    networkWhitelist: ["*"]
+
+    # Tells build not to load hotfix script
+    loadHotfix: false
+
+    cacheBust: false
+
+    build:
+        minifyAssets: false
+        serverPort: 5014
+        liveReloadPort: 35729
+        jsDependencies: [
+            './src/lib/jquery-2.1.3.js'
+            './src/lib/jquery.visible.js'
+
+            './src/lib/onsen/js/angular/angular.js'
+            './src/lib/angular-resource.js'
+            './src/lib/onsen/js/onsenui.js'
+            './src/lib/angular-resource.js'
+            './src/lib/angular-cookie.js'
+            './src/lib/angular-animate.js'
+            './src/lib/angularjs-geolocation.min.js'
+            './node_modules/ng-file-upload/dist/angular-file-upload.js'
+            './src/lib/underscore.js'
+            './src/lib/moment.js'
+            './src/lib/phoneFormat.js'
+            './src/lib/pubnub-3.7.4.min.js'
+            './src/lib/fastclick.js'
+        ]
+
+    s3Region: 'ap-southeast-2'
+    s3AccessKeyId: 'AKIAIRFKF4NMFFOBHQRA'
+    s3SecretAccessKey: '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'
+    s3WebAppBucketName: 'robby-web-mobile-app-dev'
+    s3CacheTime: 60 * 60 * 24 * 365 # One year (!!!)
+
+    # Google Maps JS API
+    googleMapsApiKey: 'AIzaSyABDfiu8acm8wNzM_XfHRTfxjwf2pv-Y6I'
+
+    ##
+    # __Public Values__
+    # Only items in this list will be made 'public' in config.json and index.html
+    ##
+    publicConfigKeys: [
+        'apiBase'
+        'appVersion'
+        'segmentioKey'
+        'uploadcarePublicKey'
+        'googleTimeZoneApiKey'
+        'prefetchAngularTemplates'
+        'androidStoreURL'
+        'appleStoreURL'
+        'defaultShiftReminderTime'
+    ]
+
+    apiBase: 'http://localhost:5012'
+    segmentioKey: 'qUNYwC2RrEWiBfZkMaQynZCTs4UTgrrL'
+    uploadcarePublicKey: 'd7f59e4c0193cf7a0608'
+    googleTimeZoneApiKey: 'AIzaSyDjl5OGPbHU3TGF16rEfdgf0C4GSvDDzto'
+    androidStoreURL: 'https://play.google.com/store/apps/details?id=com.samelliotsam.workerapp'
+    appleStoreURL: 'https://itunes.apple.com/app/id988221518'
+    prefetchAngularTemplates: [
+        'templates/dialogs/addShiftsDialog.html'
+        'templates/editShiftsCtrl.html'
+    defaultShiftReminderTime: 1 # 1 minute
+
+    ]
+}

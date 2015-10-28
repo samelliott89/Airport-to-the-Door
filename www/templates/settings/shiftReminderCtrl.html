@@ -1,0 +1,23 @@
+<ons-page ng-controller="settingsShiftReminderCtrl as srmd">>
+
+    <ons-toolbar>
+        <div class="left">
+            <ons-back-button>Settings</ons-back-button>
+        </div>
+        <div class="center">Shift reminder</div>
+    </ons-toolbar>
+
+    <ons-list>
+        <ons-list-header class="blank-header"><!-- Blank on purpose --></ons-list-header>
+
+        <ons-list-item modifier="tappable" ng-repeat="opt in srmd.options">
+            <label class="radio-button radio-button--list-item">
+                {{opt.label}}
+                <input type="radio" value="{{opt.value}}" ng-model="srmd.shiftReminderValue">
+                <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+            </label>
+        </ons-list-item>
+
+    </ons-list>
+
+</ons-page>

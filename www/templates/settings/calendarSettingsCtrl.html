@@ -1,0 +1,27 @@
+<ons-page ng-controller="EditProfileCtrl as eprf" id="EditProfileCtrl">
+
+    <ons-toolbar>
+        <div class="left">
+            <ons-toolbar-button ng-click="nav.back()">
+                Close
+            </ons-toolbar-button>
+        </div>
+        <div class="center">Edit Profile</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="eprf.submitUser()">Done</ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+
+    <ons-list-header class="blank-header">Calendar Settings</ons-list-header>
+
+    <ons-list-item class="input-field--edit">
+        <ons-icon class="list-icon" icon="ion-ios7-calendar-outline" size="25px" style="padding: 5px 5px 5px 0;"></ons-icon>
+        <input class="text-input" type="text" placeholder="Calendar name" ng-model="eprf.calendarName">
+    </ons-list-item>
+
+    <ons-list-item class="input-field--edit">
+        <ons-icon class="list-icon" icon="ion-ios7-calendar-outline" size="25px" style="padding: 5px 5px 5px 0;"></ons-icon>
+        <input class="text-input" type="text" placeholder="Event title" ng-model="eprf.calendarTitle">
+    </ons-list-item>
+
+</ons-page>
