@@ -1,6 +1,6 @@
-# PhoneGap ShiftsApp
+# PhoneGap AirportTTDoor
 
-This is the ShiftsApp as a (mostly) cross-platform PhoneGap app, using OnsenUI for UI niceness.
+This is the AirportTTDoor as a (mostly) cross-platform PhoneGap app, using OnsenUI for UI niceness.
 
 ## Getting started
 
@@ -17,6 +17,9 @@ For quick development, you can use Gulp to run the app in your web browser. By d
 
     gulp
 
+Recommend using 'gulp --watch' for on going development
+
+    gulp --watch
 
 ## Configs
 
