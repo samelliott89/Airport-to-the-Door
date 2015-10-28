@@ -2,41 +2,29 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'MapCtrl', ($scope, auth, nav) ->
 
-    # @zoom = 8 # Default zoom on load
+    intialZoomLevel = 8
+    # fallBackLocation random for now
+    fallBackLocation = '-33.8909257, 151.1959506'
+    defaultMapType = google.maps.MapTypeId.TERRAIN
 
-    # mapPrefs = [
-    #   {
-    #     featureType: 'administrative'
-    #     elementType: 'labels'
-    #     stylers: [ { visibility: 'off' } ]
-    #   },
-    #   {
-    #     featureType: 'poi'
-    #     elementType: 'labels'
-    #     stylers: [ { visibility: 'off' } ]
-    #   },
-    #   {
-    #     featureType: 'water'
-    #     elementType: 'labels'
-    #     stylers: [ { visibility: 'off' } ]
-    #   },
-    #   {
-    #     featureType: 'road'
-    #     elementType: 'labels'
-    #     stylers: [ { visibility: 'off' } ]
-    #   }
-    # ]
-
-    # $scope.mapOptions =
-    #     center: (-34.397, 150.644)
-    #     zoom: 8
-    #     mapTypeId: 'mapPrefs'
+    # Initialise google map
+    $scope.googleMap =
+        zoom: intialZoomLevel
+        center: fallBackLocation
+        options:
+            mapTypeId: defaultMapType
+            streetViewControl: false
+            panControl: false
+            disableDefaultUI: true
+            zoomControl: true
+            disableDoubleClickZoom: true
+            minZoom: 0
+        control: {}
 
     @updateCurrentLocation = ->
-        console.log 'update location'
+        console.log 'getting users current location'
 
     @proceed = ->
-      console.log 'proceed being called'
-      nav.goto 'contactCtrl'
+        nav.goto 'contactCtrl'
 
     return
