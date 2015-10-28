@@ -11,8 +11,9 @@
             </div>
         </ons-toolbar>
 
-        <!-- Google map set with defauls -->
-        <map class="map animated fadeIn fade-in-slow" center="-34.397, 150.644" zoom="8"></map>
+        <!-- Google map set from $scope -->
+        <ui-gmap-google-map center="googleMap.center" zoom="googleMap.zoom" options="googleMap.options"
+            control="googleMap.control" events="mapEvents" data-tap-disabled="true">
 
         <div class="search-bar">
             <input type="search" class="search-input search-input-map">
