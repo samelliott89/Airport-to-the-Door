@@ -770,11 +770,28 @@
   qantasApp = angular.module('qantasApp');
 
   qantasApp.controller('MapCtrl', function($scope, auth, nav) {
+    var defaultMapType, fallBackLocation, intialZoomLevel;
+    intialZoomLevel = 8;
+    fallBackLocation = '-33.8909257, 151.1959506';
+    defaultMapType = google.maps.MapTypeId.TERRAIN;
+    $scope.googleMap = {
+      zoom: intialZoomLevel,
+      center: fallBackLocation,
+      options: {
+        mapTypeId: defaultMapType,
+        streetViewControl: false,
+        panControl: false,
+        disableDefaultUI: true,
+        zoomControl: true,
+        disableDoubleClickZoom: true,
+        minZoom: 0
+      },
+      control: {}
+    };
     this.updateCurrentLocation = function() {
-      return console.log('update location');
+      return console.log('getting users current location');
     };
     this.proceed = function() {
-      console.log('proceed being called');
       return nav.goto('contactCtrl');
     };
   });
@@ -914,35 +931,11 @@
 }).call(this);
 
 (function() {
-  var qantasApp,
-    indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
+  var qantasApp;
 
   qantasApp = angular.module('qantasApp');
 
-  qantasApp.controller('SidemenuCtrl', function($scope, $http, $window, nav, pg, storage, auth) {
-    this.links = storage.get('sidemenuLinks');
-    $http.get(config.apiBase + '/v1').success((function(_this) {
-      return function(data) {
-        _this.links = _.filter(data.links, function(link) {
-          var ref;
-          if (link.enabledPlatforms === void 0) {
-            return true;
-          } else {
-            return ref = window.platform, indexOf.call(link.enabledPlatforms, ref) >= 0;
-          }
-        });
-        return storage.set('sidemenuLinks', _this.links);
-      };
-    })(this));
-    this.openLink = function(arg) {
-      var href;
-      href = arg.href;
-      if (href.slice(0, 4) === 'http') {
-        return nav.openInAppBrowser(href);
-      } else {
-        return $window.open(href);
-      }
-    };
+  qantasApp.controller('SidemenuCtrl', function($scope, $http, $window, nav, pg, auth) {
     this.logout = function() {
       nav.resetTo('flightNumberCtrl');
       return auth.logout();
@@ -952,14 +945,18 @@
       if (window.isNativeAndroid) {
         msg = auth.currentUser.displayName + ' invited you to join Atum. Download the app from the Play Store.';
         link = config.androidStoreURL;
-      } else {
+      } else if (window.isNativeiOS) {
         msg = auth.currentUser.displayName + ' invited you to join Atum. Download the app from the App Store.';
         link = config.appleStoreURL;
+      } else {
+        console.error('This is not supported on web');
       }
-      return pg.openShareSheet({
-        msg: msg,
-        link: link
-      });
+      if (window.isNativeAndroid || window.isNativeiOS) {
+        return pg.openShareSheet({
+          msg: msg,
+          link: link
+        });
+      }
     };
   });
 
