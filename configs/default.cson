@@ -133,7 +133,7 @@
         'defaultShiftReminderTime'
     ]
 
-    apiBase: 'http://localhost:5012'
+    apiBase: 'http://localhost:8090'
     segmentioKey: 'qUNYwC2RrEWiBfZkMaQynZCTs4UTgrrL'
     uploadcarePublicKey: 'd7f59e4c0193cf7a0608'
     googleTimeZoneApiKey: 'AIzaSyDjl5OGPbHU3TGF16rEfdgf0C4GSvDDzto'
