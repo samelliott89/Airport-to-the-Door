@@ -5,13 +5,14 @@ qantasApp.factory 'authInterceptor', ($rootScope, $q, storage, nav) ->
 
         if window.templateHashes?[req.url]
             req.url = "#{req.url}?rel=#{window.templateHashes[req.url]}"
+            console.log 'req', req.url
 
         req.headers ?= {}
-        token = storage.get 'authToken'
+        token = storage.get 'auth_token'
         isApiCall = req.url.indexOf(config.apiBase) is 0
 
         if token and isApiCall
-            req.headers.Authorization = 'Bearer ' + token
+            req.headers.Authorization = token
 
         req
 
