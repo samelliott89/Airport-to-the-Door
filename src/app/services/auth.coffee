@@ -1,18 +1,22 @@
 qantasApp = angular.module 'qantasApp'
 
 qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserResource) ->
+    # Set some variables for this factory and create a new user
     window.pg = pg
     factory = { currentUser: new UserResource() }
+    console.log 'UserResource', factory.currentUser
     $rootScope.currentUser = factory.currentUser
 
     factory.hasTrait = (trait) ->
         factory.currentUser.traits?[trait] is true
 
+    # Set some variables for this factory and create a new user
     factory.start = ->
-        token = storage.get 'authToken'
+        # Check is user has an authToken
+        token = storage.get 'auth_token'
         return unless token
 
-        userInfo = storage.get('userInfo') or {}
+        userInfo = storage.get('user_info') or {}
         _.extend factory.currentUser, userInfo
 
         $http.get "#{config.apiBase}/api"
@@ -48,24 +52,24 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
 
         postLogin = (resp) ->
             _.extend factory.currentUser, resp.data.user
-            storage.set 'userInfo', factory.currentUser
-            storage.set 'authToken', resp.data.token
+            storage.set 'user_info', factory.currentUser
+            storage.set 'auth_token', resp.auth_token
             dfd.resolve factory.currentUser
             $rootScope.$broadcast 'login', factory.currentUser
 
-        $http.post "#{config.apiBase}/v1/auth/login", credentials
+        $http.post "#{config.apiBase}/v1/", credentials
             .then postLogin
             .catch dfd.reject
 
         return dfd.promise
 
     factory.register = (credentials) ->
-        $http.post "#{config.apiBase}/v1/auth/register", credentials
+        $http.post "#{config.apiBase}/signup", credentials
 
     factory.logout = (preventBroadcast) ->
         storage.clearAll()
         factory.currentUser = new UserResource()
-        $rootScope.$broadcast 'logout', factory.currentUser  unless preventBroadcast
+        $rootScope.$broadcast 'logout', factory.currentUser unless preventBroadcast
         return factory.currentUser
 
     factory.isAuthenticated = ->
