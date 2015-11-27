@@ -10,9 +10,9 @@ qantasApp.factory 'selectNextShift', (auth) -> (feed) ->
     for week in feed
         for shift in week.shifts
             if shift.isDayOff or
-               shift.ownerID isnt auth.currentUser.id or
-               shift.end < now
-                continue
+                shift.ownerID isnt auth.currentUser.id or
+                shift.end < now
+                    continue
 
             if now > shift.start and now < shift.end
                 # We're in the middle of this shift now
