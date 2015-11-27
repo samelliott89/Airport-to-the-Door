@@ -53,20 +53,25 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav) 
             .catch lolHandleErrors
 
     @registerSubmit = =>
-        return   if inProgress
+        return if inProgress
         inProgress = true
 
         credentials =
+            given_name: @given_name
+            surname: @surname
             email: @email
-            displayName: @displayName
             password: @password
+
+        console.log 'preparing credentials', credentials
 
         window.registerUserModal.show()
 
         auth.register credentials
             .then (data) ->
+                consolelog 'response', data
                 auth.login credentials
             .then (user) ->
+                console.log 'user', user
 
                 setTimeout (->
                     analytics.track 'App Register'

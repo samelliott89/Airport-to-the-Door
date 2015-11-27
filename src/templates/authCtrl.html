@@ -55,10 +55,17 @@
                         <!-- TODO: replace floatfield with a directive -->
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.displayName"
-                                    type="text" placeholder="Your name" id="RegisterText">
-                            <label for="RegisterText">Your name</label>
+                            <input class="text-input text-input--underbar" ng-model="wlcm.given_name"
+                                    type="text" placeholder="First name" id="RegisterText">
+                            <label for="RegisterText">First name</label>
                         </div>
+
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.surname"
+                                    type="text" placeholder="Last name" id="RegisterText">
+                            <label for="RegisterText">Last name</label>
+                        </div>
+
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" ng-model="wlcm.email"
                                     type="email" placeholder="Email" id="RegisterEmail">

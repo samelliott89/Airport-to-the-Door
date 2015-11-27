@@ -77,7 +77,7 @@ qantasApp.factory 'calendar', ($http, $q, $rootScope, auth, prefs, pg, ShiftReso
                         #factory.addShiftsToCalendar()
                         console.log 'Calendar Cleared!'
                         ),(err) ->
-                        console.log err
+                            console.log err
                         #factory.addShiftsToCalendar()
                 'No thanks': ->
                     factory.addShiftsToCalendar()
@@ -111,8 +111,8 @@ qantasApp.factory 'calendar', ($http, $q, $rootScope, auth, prefs, pg, ShiftReso
                     if eventIndex < events.length
                         _removeSequentially events
                     ), (err) ->
-                    console.log err
-            _removeSequentially events
+                        console.log err
+                _removeSequentially events
             dfd.resolve()
 
         _findError = (err) ->
@@ -270,7 +270,7 @@ qantasApp.factory 'calendar', ($http, $q, $rootScope, auth, prefs, pg, ShiftReso
                 if shiftIndex < shifts.length
                     _addSequentially shifts
                 ), (err) ->
-                console.log err
+                    console.log err
         _addSequentially shifts
 
     factory.saveEntry = (shift) ->
