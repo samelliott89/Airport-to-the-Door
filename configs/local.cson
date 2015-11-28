@@ -1,1 +1,4 @@
-{build: useLiveReload: true }
+{
+  apiBase: 'http://localhost:5000/query',
+  useLiveReload: true
+}
