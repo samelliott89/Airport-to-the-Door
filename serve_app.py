@@ -11,7 +11,7 @@ import requests
 import traceback
 
 _STATIC_ASSET_PATH = sys.argv[1]
-_BASE_URL = 'http://localhost:8090'
+_BASE_URL = 'http://localhost:7070'
 
 flask_app = Flask(__name__)
 
