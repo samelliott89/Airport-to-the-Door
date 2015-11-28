@@ -4,7 +4,6 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
     # Set some variables for this factory and create a new user
     window.pg = pg
     factory = { currentUser: new UserResource() }
-    console.log 'UserResource', factory.currentUser
     $rootScope.currentUser = factory.currentUser
 
     factory.hasTrait = (trait) ->
@@ -18,17 +17,10 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
 
         userInfo = storage.get('user_info') or {}
         _.extend factory.currentUser, userInfo
+        _.extend factory.currentUser, userInfo, resp.data.user
+        storage.set 'userInfo', factory.currentUser
 
-        $http.get "#{config.apiBase}/api"
-            .then (resp) ->
-                unless resp.data.isAuthenticated
-                    factory.logout()
-                    return
-
-                _.extend factory.currentUser, userInfo, resp.data.user
-                storage.set 'userInfo', factory.currentUser
-
-                $http.get "#{config.apiBase}/v1/users/#{factory.currentUser.id}"
+        $http.get "#{config.apiBase}/users/#{factory.currentUser.id}"
             .then (resp) ->
                 _.extend factory.currentUser, userInfo, resp.data.user
                 storage.set 'userInfo', factory.currentUser
@@ -57,7 +49,7 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
             dfd.resolve factory.currentUser
             $rootScope.$broadcast 'login', factory.currentUser
 
-        $http.post "#{config.apiBase}/v1/", credentials
+        $http.post "#{config.apiBase}/login", credentials
             .then postLogin
             .catch dfd.reject
 
