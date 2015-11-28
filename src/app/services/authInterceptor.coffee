@@ -12,7 +12,7 @@ qantasApp.factory 'authInterceptor', ($rootScope, $q, storage, nav) ->
         isApiCall = req.url.indexOf(config.apiBase) is 0
 
         if token and isApiCall
-            req.headers.Authorization = token
+            req.headers.Authentification = 'Bearer ' + token
 
         req
 
