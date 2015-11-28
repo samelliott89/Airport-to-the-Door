@@ -68,7 +68,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav) 
 
         auth.register credentials
             .then (data) ->
-                consolelog 'response', data
+                console.log 'response', data
                 auth.login credentials
             .then (user) ->
                 console.log 'user', user
