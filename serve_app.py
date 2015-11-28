@@ -29,39 +29,31 @@ def build_proxy_request(method):
 
 @flask_app.route('/query/<path:path>', methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 def reverse_proxy(path):
-  try:
-    # build request components
-    method = request.method
-    url = _BASE_URL + '/' + path
-    headers = { each[0] : each[1] for each in request.headers }
-    body = request.data
-    query_params = { param : request.args.get(param) for param in request.args }
+  # build request components
+  method = request.method
+  url = _BASE_URL + '/' + path
+  headers = { each[0] : each[1] for each in request.headers }
+  body = request.data
+  query_params = { param : request.args.get(param) for param in request.args }
 
-    # make request to service
-    proxy_req = build_proxy_request(method)
-    proxy_res = proxy_req(url, data=body, headers=headers, params=query_params)
+  # make request to service
+  proxy_req = build_proxy_request(method)
+  proxy_res = proxy_req(url, data=body, headers=headers, params=query_params)
 
-    # parse service response
-    status = proxy_res.status_code
-    body = proxy_res.text
-    headers = { param : proxy_res.headers.get(param) for param in proxy_res.headers }
+  # parse service response
+  status = proxy_res.status_code
+  body = proxy_res.text
+  headers = { param : proxy_res.headers.get(param) for param in proxy_res.headers }
 
-    # form response to client
-    res = Response(body)
-    res.status_code = status
-    res.headers = headers
-    return res
-  except Exception as e:
-    print(traceback.format_exc())
-    return str(e), 500
+  # form response to client
+  res = Response(body)
+  res.status_code = status
+  res.headers = headers
+  return res
 
 @flask_app.route('/<path:filename>')
 def static_assets(filename):
-  try:
-    return send_from_directory(_STATIC_ASSET_PATH, filename)
-  except Exception as e:
-    print(traceback.format_exc())
-    return str(e), 500
+  return send_from_directory(_STATIC_ASSET_PATH, filename)
 
 @flask_app.route('/')
 def root():
