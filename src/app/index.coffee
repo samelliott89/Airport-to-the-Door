@@ -99,6 +99,8 @@ qantasApp.run ($rootScope, $location, $timeout, auth, nav) ->
     $rootScope.auth = auth
 
     ons.ready ->
+        # auth.checkApi()
+        console.log 'checked Api'
         auth.start()
         # Important: this controls the first page the user sees
         # If you never do this, it'll get stuck on a blank page
