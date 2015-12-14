@@ -6,9 +6,16 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
     factory = { currentUser: new UserResource() }
     $rootScope.currentUser = factory.currentUser
 
+    # factory.checkApi = ->
+    #     $http.get "#{config.apiBase}/health/check"
+    #         .then (resp) ->
+    #             if resp.message = 'Ok'
+    #                 console.log 'server is', resp.message
+    #             else
+    #                 console.log 'Api is not ok'
+
     factory.hasTrait = (trait) ->
         factory.currentUser.traits?[trait] is true
-
     # Set some variables for this factory and create a new user
     factory.start = ->
         # Check is user has an authToken
