@@ -10,7 +10,7 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
       # Check if API health check is ok
         $http.get "#{config.apiBase}/health/check"
             .then (resp) ->
-                if resp.message = 'Ok'
+                if resp.message == 'Ok'
                     console.log 'Server is', resp.message
                 else
                     pg.alert {msg, title: 'There seems to be a problem, please try again later.'}
@@ -21,7 +21,8 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
     # Set some variables for this factory and create a new user
     factory.start = ->
         # Check is API is health is 'Ok'
-        factory.checkApi()
+        apiIsOk = factory.checkApi().then(resp) = 'Ok'
+        retun unless apiIsOk
 
         # Check is user has an authToken
         token = storage.get 'auth_token'
