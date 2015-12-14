@@ -5,7 +5,6 @@ qantasApp.factory 'authInterceptor', ($rootScope, $q, storage, nav) ->
 
         if window.templateHashes?[req.url]
             req.url = "#{req.url}?rel=#{window.templateHashes[req.url]}"
-            console.log 'req', req.url
 
         req.headers ?= {}
         token = storage.get 'auth_token'
