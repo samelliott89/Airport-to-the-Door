@@ -38,6 +38,7 @@ def reverse_proxy(path):
 
   # make request to service
   proxy_req = build_proxy_request(method)
+  del headers['Content-Length']
   proxy_res = proxy_req(url, data=body, headers=headers, params=query_params)
 
   # parse service response
