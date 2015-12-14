@@ -61,14 +61,14 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
             dfd.resolve factory.currentUser
             $rootScope.$broadcast 'login', factory.currentUser
 
-        $http.post "#{config.apiBase}/login", credentials
+        $http.post "#{config.apiBase}/auth/login", credentials
             .then postLogin
             .catch dfd.reject
 
         return dfd.promise
 
     factory.register = (credentials) ->
-        $http.post "#{config.apiBase}/signup", credentials
+        $http.post "#{config.apiBase}/auth/signup", credentials
 
     factory.logout = (preventBroadcast) ->
         storage.clearAll()
