@@ -7,7 +7,7 @@ qantasApp = angular.module 'qantasApp', [
     'ngAnimate'
     'angularFileUpload'
     'geolocation'
-    'ngMap'
+    # 'ngMap'
 ]
 
 # Implement fast click on the documentbody
@@ -63,7 +63,6 @@ qantasApp.run ($q, $timeout) ->
             dfd.resolve()
     )
 
-
 # Bunch of first-run one-liners
 qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, prefs, analyticsSetup, templatePrefetch) ->
     # Hide necessary elements
@@ -99,7 +98,6 @@ qantasApp.run ($rootScope, $location, $timeout, auth, nav) ->
     $rootScope.auth = auth
 
     ons.ready ->
-        # auth.checkApi()
         console.log 'checked Api'
         auth.start()
         # Important: this controls the first page the user sees
