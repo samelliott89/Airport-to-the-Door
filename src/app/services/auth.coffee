@@ -13,7 +13,6 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
 
         # Check is user has an authToken
         token = storage.get 'auth_token'
-        console.log 'token - ', token
         return unless token
 
         userInfo = storage.get('user_info') or {}
@@ -21,8 +20,6 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
 
         $http.get "#{config.apiBase}/health/check"
             .then (status) ->
-                console.log 'status', status.data
-                console.log 'message', status.data.message
                 unless status.data.message == 'Ok'
                     factory.logout()
                     return
