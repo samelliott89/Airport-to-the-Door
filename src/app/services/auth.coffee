@@ -20,9 +20,6 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
         factory.currentUser.traits?[trait] is true
     # Set some variables for this factory and create a new user
     factory.start = ->
-        # Check is API is health is 'Ok'
-        apiIsOk = factory.checkApi().then(resp) = 'Ok'
-        retun unless apiIsOk
 
         # Check is user has an authToken
         token = storage.get 'auth_token'
