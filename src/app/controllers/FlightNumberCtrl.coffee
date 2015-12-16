@@ -1,6 +1,6 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'FlightNumberCtrl', ($http, auth, nav, storage) ->
+qantasApp.controller 'FlightNumberCtrl', ($http, auth, nav, storage, FlightResource) ->
 
     # Function to hide keyboard after regex for flight number is satisifed
     hideKeyboard = ->

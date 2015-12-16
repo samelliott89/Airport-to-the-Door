@@ -2,7 +2,7 @@
     appIdentifier: 'com.qantas.tothedoor'
     appDisplayName: 'Qantas'
     iosIcons: {  base: 'buildAssets/prod-icon' }
-    apiBase: 'https://api.getshifts.co'
+    apiBase: 'http://attd.io'
     uploadcarePublicKey: '8c6e1e1c8b0b12e3f95e'
     segmentioKey: '3Rgz7IJLmgdHKYvYCjmNaBiDN8LHMTo0'
     cloudfrontDistributionId: 'EZRZ0HKGHQ5J1'

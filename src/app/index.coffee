@@ -7,7 +7,7 @@ qantasApp = angular.module 'qantasApp', [
     'ngAnimate'
     'angularFileUpload'
     'geolocation'
-    'ngMap'
+    # 'ngMap'
 ]
 
 # Implement fast click on the documentbody
@@ -62,7 +62,6 @@ qantasApp.run ($q, $timeout) ->
         else
             dfd.resolve()
     )
-
 
 # Bunch of first-run one-liners
 qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, prefs, analyticsSetup, templatePrefetch) ->

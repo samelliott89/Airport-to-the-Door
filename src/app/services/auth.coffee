@@ -8,22 +8,28 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
 
     factory.hasTrait = (trait) ->
         factory.currentUser.traits?[trait] is true
-
     # Set some variables for this factory and create a new user
     factory.start = ->
+
         # Check is user has an authToken
         token = storage.get 'auth_token'
         return unless token
 
         userInfo = storage.get('user_info') or {}
         _.extend factory.currentUser, userInfo
-        _.extend factory.currentUser, userInfo, resp.data.user
-        storage.set 'userInfo', factory.currentUser
 
-        $http.get "#{config.apiBase}/users/#{factory.currentUser.id}"
+        $http.get "#{config.apiBase}/health/check"
+            .then (status) ->
+                unless status.data.message == 'Ok'
+                    factory.logout()
+                    return
+
+                storage.set 'user_info', factory.currentUser
+
+        $http.get "#{config.apiBase}/users/#{factory.currentUser.user_id}"
             .then (resp) ->
-                _.extend factory.currentUser, userInfo, resp.data.user
-                storage.set 'userInfo', factory.currentUser
+                _.extend factory.currentUser, userInfo, resp.data
+                storage.set 'user_info', factory.currentUser
                 $rootScope.$broadcast 'login', factory.currentUser
                 return
             .catch (err) ->
@@ -43,20 +49,20 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
         dfd = $q.defer()
 
         postLogin = (resp) ->
-            _.extend factory.currentUser, resp.data.user
+            _.extend factory.currentUser, resp.data
             storage.set 'user_info', factory.currentUser
-            storage.set 'auth_token', resp.auth_token
+            storage.set 'auth_token', resp.data.auth_token
             dfd.resolve factory.currentUser
             $rootScope.$broadcast 'login', factory.currentUser
 
-        $http.post "#{config.apiBase}/login", credentials
+        $http.post "#{config.apiBase}/auth/login", credentials
             .then postLogin
             .catch dfd.reject
 
         return dfd.promise
 
     factory.register = (credentials) ->
-        $http.post "#{config.apiBase}/signup", credentials
+        $http.post "#{config.apiBase}/auth/signup", credentials
 
     factory.logout = (preventBroadcast) ->
         storage.clearAll()
@@ -65,6 +71,6 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
         return factory.currentUser
 
     factory.isAuthenticated = ->
-        !!factory.currentUser.id
+        !!factory.currentUser.user_id
 
     return factory
