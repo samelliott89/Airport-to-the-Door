@@ -8,7 +8,6 @@ androidHome = process.env.ANDROID_HOME
 
 run = ->
     [task, config] = argv._
-    config ?= 'local'
     func = $[task]
 
     if func
