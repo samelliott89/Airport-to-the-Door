@@ -1,7 +1,7 @@
 qantasApp = angular.module 'qantasApp'
 
 qantasApp.factory 'UserResource', ($resource, transform) ->
-    $resource "#{config.apiBase}/v1/users/:id", {id: '@id'},
+    $resource "#{config.apiBase}/users/:userId", {userId: '@userId'},
 
         get:
             method: 'get'
