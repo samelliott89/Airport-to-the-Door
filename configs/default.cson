@@ -1,5 +1,5 @@
 {
-    appIdentifier: 'com.samelliotsam.workerappDev'
+    appIdentifier: 'io.attd.qantasapp'
     appVersion: '1.0'
     appDisplayName: 'Qantas'
     description: 'Qantas to the door'
