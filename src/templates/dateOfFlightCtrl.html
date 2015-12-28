@@ -1,9 +1,7 @@
-<!-- <ons-page ng-controller="DateOfFlightCtrl as date">
+<ons-page ng-controller="DateOfFlightCtrl as date">
     <ons-toolbar>
         <div class="left">
-            <ons-toolbar-button ng-click="date.back()">
-                <ons-icon icon="ion-ios7-arrow-back" size="28px" fixed-width="false"></ons-icon>
-            </ons-toolbar-button>
+            <shifts-left-button></shifts-left-button>
         </div>
 
         <div class="center">
@@ -11,7 +9,7 @@
         </div>
 
         <div class="right">
-            <ons-toolbar-button ng-click="date.moveToNext()">Next</ons-toolbar-button>
+            <ons-toolbar-button ng-click="date.findFlights()">Next</ons-toolbar-button>
         </div>
     </ons-toolbar>
 
@@ -39,50 +37,4 @@
 
     </div>
 
-</ons-page> -->
-
-<div ng-controller="FlightNumberCtrl as fnum">
-    <ons-page>
-        <ons-toolbar>
-            <div class="left">
-                <shifts-left-button></shifts-left-button>
-            </div>
-
-            <div class="center">Flight Number</div>
-
-            <div class="right">
-                <ons-toolbar-button ng-show="fnum.flightNumber" ng-click="fnum.submitFlightNumber(flightNumber)">
-                    Next
-                </ons-toolbar-button>
-            </div>
-        </ons-toolbar>
-
-        <div class="padd text-muted text-center" ng-class="{ 'padding-top-success': fnum.flightNumber }">
-            <ons-icon icon="ion-earth" class="icon-center" size="30px" ng-if="!fnum.flightNumber"></ons-icon>
-            <ons-icon icon="ion-ios7-checkmark-outline" class="icon-center icon-success icon-bounce" size="60px" ng-if="fnum.flightNumber"></ons-icon>
-            <p ng-if="!fnum.flightNumber">Enter your flight number so we can find a ride for you to the airport</p>
-
-            <div class="login-form login-form--login padd-top-xl" ng-animate=" 'animate' " ng-if="!fnum.flightNumber">
-                <form ng-submit="wlcm.loginSubmit()" autocomplete="off">
-                    <input style="display:none" type="text" name="fakeusernameremembered"/>
-                    <input style="display:none" type="password" name="fakepasswordremembered"/>
-                    <span style="font-size: 30px;">QF</span>
-                    <div class="floatfield">
-                        <input class="text-input text-input--underbar" ng-model="fnum.flightNumber" pattern="\d{4,5}"
-                            type="text" placeholder="Flight number" id="FlightNumber">
-                        <label for="FlightNumber">Flight number</label>
-                    </div>
-                </form>
-            </div>
-
-            <div class="animated fadeIn fade-in-slow" ng-if="fnum.flightNumber">
-                <p class="text-success">QF{{fnum.flightNumber}}</p>
-                <p>Sydney - San Francisco</p>
-                <p class="text-sm">Tap on next to proceed</p>
-                <ons-button class="button--clear margin-top button-cyclinder" ng-click="fnum.clear()">Back</ons-button>
-            </div>
-
-        </div>
-
-    </ons-page>
-</div>
+</ons-page>
