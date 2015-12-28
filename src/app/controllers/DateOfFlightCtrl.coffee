@@ -117,12 +117,14 @@ _pluralize = (num, string, suffix = 's') ->
 
 # DATE OF FLIGHT CONTROLLER BEGINS
 
-qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage) ->
+qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage, angularMoment) ->
 
     @selectDay = (index) =>
         # todo: ensure selected day in week is in view
         @selectedDayIndex = index
         @selectedDay = @schedule[index]
+        console.log @selectedDay.day
+        storage.set 'flightDate', @selectedDay
         @selectedField = 'start'
         @justChangedField = true
 
@@ -256,27 +258,23 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
 
         eventName = if @shiftToEdit? then 'Edit' else 'Add'
 
-    # Beginning of new functions!!!
-
     # Remove function after submitting date works with API
-    @moveToNext = ->
-        nav.goto 'rideCountCtrl'
-        console.log 'date of flight', @date
-        storage.set 'dateOfFlight', @date
+    formatDate = (day) ->
+        console.log 'formatDate being called'
+        year = day.angularMoment().format("MMM Do YY")
+        console.log 'year', year
+
+    @findFlights = ->
+        selectedDay = storage.get 'flightDate'
+        console.log 'selected day', selectedDay
+        day = @selectedDay.day
+        console.log 'day', day
+        formatDate(day)
+        # FlightResource.get(), {}
+        # nav.goto 'listOfFlightsCtrl'
 
     @back = ->
-        nav.resetTo 'flightNumberCtrl'
-
-    # creates random HEX color for borders for dates
-
-    HEXES = [
-        '#8A8B47'
-        '#478B81'
-        '#8B477F'
-        '#8B4747'
-    ]
-
-    @HEX = HEXES[Math.round(Math.random() * (HEXES.length - 1))]
+        nav.back()
 
     # On run
     @isEditing = false
