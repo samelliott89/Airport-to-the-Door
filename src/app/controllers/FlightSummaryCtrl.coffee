@@ -5,7 +5,7 @@ qantasApp.controller 'FlightSummaryCtrl', ($http, auth, nav, storage) ->
     # flightNumber, 'QF1234'
     @flightNumber = storage.get 'flightNumber'
     # flightDate, 'Tuesday 24th October'
-    @flightDate = storage.get 'flightDate'
+    @flightDate = storage.get 'flight_date'
     # Dummy lat,long for now
     @latLong =
         location:

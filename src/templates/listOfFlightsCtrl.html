@@ -1,0 +1,28 @@
+<div ng-controller="ListOfFlightsCtrl as list">
+    <ons-page>
+        <ons-toolbar>
+            <div class="left">
+                <shifts-left-button></shifts-left-button>
+            </div>
+
+            <div class="center">Choose your flight</div>
+
+            <div class="right">
+                <ons-toolbar-button ng-click="">
+                    Next
+                </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+        <ons-list>
+            <ons-list-header>Flights</ons-list-header>
+
+            <ons-list-item modifier="chevron" ng-repeat="flight in list.flights">
+                <div class="prop-desc">
+                    {{flight.title}}
+                </div>
+            </ons-list-item>
+        </ons-list>
+
+    </ons-page>
+</div>

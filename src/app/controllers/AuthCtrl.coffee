@@ -30,7 +30,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav) 
         pg.alert {title: title, msg: message}
 
     @loginSubmit = =>
-        return   if inProgress
+        return if inProgress
         inProgress = true
         @errors = null
 

@@ -72,7 +72,7 @@ qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, prefs, 
     DialogView.registerAnimator 'iosAlertStyle', new IOSAlertDialogAnimator()
 
     # Sync preferences
-    $rootScope.$on 'login', prefs.$fetch
+    # $rootScope.$on 'login', prefs.$fetch
 
     # Prefetch necessary templates
     $timeout templatePrefetch.run, 1000, false

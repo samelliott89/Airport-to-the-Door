@@ -8,6 +8,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "angular-moment": "^0.10.3",
     "coffee-script": "^1.8.0",
     "colors": "^1.0.3",
     "cson": "^3.0.1",
@@ -35,6 +36,7 @@
     "gulp-uglify": "^1.1.0",
     "gulp-util": "^3.0.4",
     "lodash": "^2.4.1",
+    "moment": "^2.10.6",
     "ng-file-upload": "^3.1.2",
     "rimraf": "^2.2.8",
     "tiny-lr": "^0.1.4",
