@@ -115,16 +115,18 @@ _pluralize = (num, string, suffix = 's') ->
 
     return output
 
+###
 # DATE OF FLIGHT CONTROLLER BEGINS
+###
 
-qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage, angularMoment) ->
+qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage, FlightResource) ->
 
     @selectDay = (index) =>
         # todo: ensure selected day in week is in view
         @selectedDayIndex = index
         @selectedDay = @schedule[index]
         console.log @selectedDay.day
-        storage.set 'flightDate', @selectedDay
+        storage.set 'flight_date', @selectedDay
         @selectedField = 'start'
         @justChangedField = true
 
@@ -258,20 +260,18 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
 
         eventName = if @shiftToEdit? then 'Edit' else 'Add'
 
-    # Remove function after submitting date works with API
-    formatDate = (day) ->
-        console.log 'formatDate being called'
-        year = day.angularMoment().format("MMM Do YY")
-        console.log 'year', year
-
     @findFlights = ->
-        selectedDay = storage.get 'flightDate'
-        console.log 'selected day', selectedDay
-        day = @selectedDay.day
-        console.log 'day', day
-        formatDate(day)
-        # FlightResource.get(), {}
-        # nav.goto 'listOfFlightsCtrl'
+        # get the selected day from local storage
+        selectedDate = storage.get 'flight_date'
+        # set the day key from selectedDate object
+        selectedDay = selectedDate.day
+        # format date for API
+        formatDay = moment(selectedDay).format("DD-MM-YYYY").toString()
+        airport = 'syd'
+        FlightResource.getForDateAndAirport {date: formatDay, airport: airport}
+            .$promise.then (flights) ->
+                nav.goto 'listOfFlightsCtrl'
+                console.log 'flights are', flights
 
     @back = ->
         nav.back()
