@@ -2,8 +2,7 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'ListOfFlightsCtrl', ($http, auth, nav, storage) ->
 
-    console.log 'ListOfFlightsCtrl has loaded'
-
+    # static list of flights, remove once server returns all flights on day
     @flights = [
       {
         title: 'QF1234'
@@ -22,7 +21,5 @@ qantasApp.controller 'ListOfFlightsCtrl', ($http, auth, nav, storage) ->
         leavingIn: 'Leaving in 20 mins'
       }
     ]
-
-    console.log 'flights', @flights
 
     return
