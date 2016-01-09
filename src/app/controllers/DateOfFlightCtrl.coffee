@@ -261,17 +261,27 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         eventName = if @shiftToEdit? then 'Edit' else 'Add'
 
     @findFlights = ->
+        window.findingFlightsModal.show()
         # get the selected day from local storage
         selectedDate = storage.get 'flight_date'
         # set the day key from selectedDate object
         selectedDay = selectedDate.day
         # format date for API
-        formatDay = moment(selectedDay).format("DD-MM-YYYY").toString()
-        airport = 'syd'
+        formatDay = moment(selectedDay).format('DD-MM-YYYY').toString()
+        # set default Airport for API
+        airport = 'SYD'
+        # call resource and pass parameters
         FlightResource.getForDateAndAirport {date: formatDay, airport: airport}
             .$promise.then (flights) ->
+                # set list of flights into local storage
+                storage.set 'listOfFlights', flights
+            .catch (err) ->
+                alert 'An error has occured', err
+            .finally ->
+                window.findingFlightsModal.hide()
+                # go to list of flights
                 nav.goto 'listOfFlightsCtrl'
-                console.log 'flights are', flights
+
 
     @back = ->
         nav.back()
