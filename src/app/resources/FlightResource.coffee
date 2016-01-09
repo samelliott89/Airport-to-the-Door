@@ -4,7 +4,7 @@ qantasApp.factory 'FlightResource', ($resource, transform) ->
     $resource "#{config.apiBase}/flights/:date", {date: '@date', airport: '@airport'},
 
     # example API calls
-    # GET: '/flights/10-11-2012/airport/syd
+    # GET: '/flights/10-11-2012/airport/syd'
     # GET with a date and fligt numbers as parameters:
     #
         get:
