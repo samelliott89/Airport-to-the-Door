@@ -266,7 +266,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         # set the day key from selectedDate object
         selectedDay = selectedDate.day
         # format date for API
-        formatDay = moment(selectedDay).format("DD-MM-YYYY").toString()
+        formatDay = moment(selectedDay).format('DD-MM-YYYY').toString()
         airport = 'syd'
         FlightResource.getForDateAndAirport {date: formatDay, airport: airport}
             .$promise.then (flights) ->
