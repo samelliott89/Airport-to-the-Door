@@ -8,10 +8,11 @@
             <div class="right"></div>
         </ons-toolbar>
         <div class="card text-center">
-            <div class="card-name">{{summ.flightNumber}}</div>
-            <div class="card-desc">Sydney - San Francisco
+            <div class="card-name">{{summ.flight.flight_number}}</div>
+            <div class="card-desc">{{summ.flight.departure_airport}} - San Francisco
                 <br>Now time to find you a ride!</div>
-                <ons-button class="button--clear margin-top button-cyclinder" ng-click="summ.findRide()">Find Ride</ons-button>
+            <div class="card-desc">Leaving at {{summ.flight.local_departure_datetime}}</div>
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="summ.findRide()">Find Ride</ons-button>
         </div>
     </ons-page>
 </div>
