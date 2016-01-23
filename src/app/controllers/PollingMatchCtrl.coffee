@@ -1,5 +1,5 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'PollingMatchCtrl', () ->
+qantasApp.controller 'PollingMatchCtrl', ($http) ->
 
     return
