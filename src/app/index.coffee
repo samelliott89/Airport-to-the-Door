@@ -12,7 +12,6 @@ qantasApp = angular.module 'qantasApp', [
 
 # Implement fast click on the documentbody
 qantasApp.run ->
-
     document.addEventListener 'deviceready', ->
         if 'addEventListener' of document
             document.addEventListener 'DOMContentLoaded', (->
