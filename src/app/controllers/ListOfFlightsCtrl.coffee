@@ -6,7 +6,6 @@ qantasApp.controller 'ListOfFlightsCtrl', ($http, auth, nav, storage) ->
 
     setup = ->
         @flights = storage.get 'listOfFlights'
-        @flightsAvailable = @flights.length
         @isLoading = false
 
     @goToFlightSummary = (selectedFlight) ->
