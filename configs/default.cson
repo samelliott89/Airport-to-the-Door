@@ -1,5 +1,5 @@
 {
-    appIdentifier: 'io.attd.qantasapp'
+    appIdentifier: 'com.attd.qantasapp'
     appVersion: '1.0'
     appDisplayName: 'Qantas'
     description: 'Qantas to the door'
@@ -140,9 +140,9 @@
     androidStoreURL: 'https://play.google.com/store/apps/details?id=com.samelliotsam.workerapp'
     appleStoreURL: 'https://itunes.apple.com/app/id988221518'
     prefetchAngularTemplates: [
-        'templates/editProfilCtrl.html'
+        'templates/editProfileCtrl.html',
         'templates/mapCtrl.html'
+    ]
     defaultShiftReminderTime: 1 # 1 minute
 
-    ]
 }

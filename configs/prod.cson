@@ -1,5 +1,5 @@
 {
-    appIdentifier: 'io.attd.qantasapp'
+    appIdentifier: 'com.attd.qantasapp'
     appDisplayName: 'Qantas'
     iosIcons: {  base: 'buildAssets/prod-icon' }
     apiBase: 'http://attd.io'
