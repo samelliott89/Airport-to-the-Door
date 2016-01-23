@@ -8,6 +8,7 @@ androidHome = process.env.ANDROID_HOME
 
 run = ->
     [task, config] = argv._
+    config ?= 'local'
     func = $[task]
 
     if func
@@ -44,7 +45,6 @@ gulp = (task, config) ->
 
 installPlugins = ->
     plugins = [
-        'org.apache.cordova.camera'
         'org.apache.cordova.console'
         'org.apache.cordova.dialogs'
         'org.apache.cordova.statusbar'
@@ -54,7 +54,7 @@ installPlugins = ->
         'nl.x-services.plugins.socialsharing'
         'de.appplant.cordova.plugin.badge@0.6.1'
         'https://github.com/Shifts/cordova-plugin-inappbrowser.git'
-        'https://github.com/NorthMcCormick/cordova-plugin-local-notifications'
+        # 'https://github.com/NorthMcCormick/cordova-plugin-local-notifications'
         'https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git'
         'https://github.com/whiteoctober/cordova-plugin-app-version.git'
         'https://github.com/EddyVerbruggen/Calendar-PhoneGap-Plugin.git'
