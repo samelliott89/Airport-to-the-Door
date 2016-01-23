@@ -1,22 +1,22 @@
 <ons-page modifier="menu-page" ng-controller="SidemenuCtrl as menu">
     <ons-toolbar modifier="transparent"></ons-toolbar>
-
     <ons-list class="menu-list">
-        <ons-list-item class="menu-item" ng-click="nav.resetTo('flightNumberCtrl')">
+        <ons-list-item class="menu-item" ng-click="nav.resetTo('dateOfFlight')">
             <ons-icon icon="ion-ios7-clock" style="font-size: 25px;"></ons-icon>
             My Flight
         </ons-list-item>
-
         <ons-list-item class="menu-item" ng-click="menu.email()">
             <ons-icon icon="ion-ios7-email" style="font-size: 32px;"></ons-icon>
             Email Us
         </ons-list-item>
-
         <ons-list-item class="bottom-menu-item" ng-click="menu.shareSheet()">
             <ons-icon icon="ion-ios7-upload-outline" style="font-size: 32px;"></ons-icon>
             Invite People
         </ons-list-item>
-
+        <ons-list-item class="bottom-menu-item" ng-click="nav.resetTo('pollingMatchCtrl')">
+            <ons-icon icon="ion-ios7-pulse" style="font-size: 32px;"></ons-icon>
+            Polling
+        </ons-list-item>
         <ons-list-item class="bottom-menu-item" ng-click="menu.logout()">
             <ons-icon icon="ion-log-out" style="font-size: 32px;"></ons-icon>
             Log out
