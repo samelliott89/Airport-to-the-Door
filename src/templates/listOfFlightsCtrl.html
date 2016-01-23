@@ -8,14 +8,14 @@
             <div class="center">Flight<span ng-if="list.flights.length != 1">s</span></div>
 
         </ons-toolbar>
-<!--
+
         <div class="card text-center animated fadeIn" ng-if="!list.flightsAvailable">
             <div class="card-name">Sorry no flights were found for this date.</div>
             <div class="card-desc">Please select a different date.</div>
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="list.back()">Go Back</ons-button>
-        </div> -->
+        </div>
 
-        <ons-list class="flight-list animated fadeIn">
+        <ons-list class="flight-list animated fadeIn" ng-if="list.flightsAvailable">
             <ons-list-header>Please select a flight</ons-list-header>
             <ons-list-item modifier="chevron" ng-repeat="flight in list.flights" ng-click="list.goToFlightSummary(flight)">
                 <ons-row>
