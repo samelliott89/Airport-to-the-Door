@@ -15,7 +15,7 @@
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="list.back()">Go Back</ons-button>
         </div>
 
-        <ons-list class="animated fadeIn" ng-if="list.flightsAvailable">
+        <ons-list class="flight-list animated fadeIn" ng-if="list.flightsAvailable">
             <ons-list-header>Please select a flight</ons-list-header>
             <ons-list-item modifier="chevron" ng-repeat="flight in list.flights" ng-click="list.goToFlightSummary(flight)">
                 <ons-row>

@@ -270,6 +270,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         formatDay = moment(selectedDay).format('DD-MM-YYYY').toString()
         # set default Airport for API
         airport = 'SYD'
+        $('.flight-list').addClass('animated fadeInDown')
         # call resource and pass parameters
         FlightResource.getForDateAndAirport {date: formatDay, airport: airport}
             .$promise.then (flights) ->
