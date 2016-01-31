@@ -84,7 +84,7 @@ qantasApp.run ($rootScope, localNotifications) ->
     $rootScope.isNativeiOSEmulator = window.isNativeiOSEmulator
 
     document.addEventListener 'deviceready', ->
-        return unless window.cordova.plugins.notification.badge
+        return unless window.cordova?.plugins?.notification?.badge?
 
         window.cordova.plugins.notification.badge.hasPermission (granted) ->
             return unless granted

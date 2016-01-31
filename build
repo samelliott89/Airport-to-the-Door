@@ -51,6 +51,7 @@ installPlugins = ->
         'org.apache.cordova.statusbar'
         'org.apache.cordova.geolocation'
         'org.apache.cordova.file-transfer'
+        'cordova-plugin-device',
         # 'org.apache.cordova.globalization'
         'nl.x-services.plugins.socialsharing'
         # Need to sort this one out 'de.appplant.cordova.plugin.badge@0.6.1'
