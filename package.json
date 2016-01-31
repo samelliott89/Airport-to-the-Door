@@ -11,6 +11,7 @@
     "angular-moment": "^0.10.3",
     "coffee-script": "^1.8.0",
     "colors": "^1.0.3",
+    "cordova": "^6.0.0",
     "cson": "^3.0.1",
     "ecstatic": "^0.5.6",
     "event-stream": "^3.1.7",

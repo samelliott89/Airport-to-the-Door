@@ -5,6 +5,7 @@ argv = require('yargs').argv
 require 'colors'
 
 androidHome = process.env.ANDROID_HOME
+$cordova = './node_modules/.bin/cordova'
 
 run = ->
     [task, config] = argv._
@@ -63,13 +64,13 @@ installPlugins = ->
     ]
 
     for plugin in plugins
-        sh "cordova plugin add #{plugin}"
+        sh "#{$cordova} plugin add #{plugin}"
 
 print = (msg, color='cyan') ->
     console.log '[builder] '.gray + msg[color]
 
 cleanPlatforms = (platform) ->
-    sh "./platforms/#{platform}/cordova/clean", "Cleaning old #{platform} builds"
+    sh "./platforms/#{platform}/cordova/clean", "Cleaning old #{platform} builds", {failOK: true}
 
 buildToDevice = (config, platform, runOnly) ->
 
@@ -78,7 +79,7 @@ buildToDevice = (config, platform, runOnly) ->
     unless runOnly
         gulp 'build', config
 
-    sh "cordova run #{platform} --device --justlaunch", "Compiling to #{platform} device"
+    sh "#{$cordova} run #{platform} --device --justlaunch", "Compiling to #{platform} device"
 
 ###
 ## Define tasks below!
@@ -90,8 +91,8 @@ $ =
         sh 'npm install'
         sh 'mkdir platforms'
         sh 'echo "{build: useLiveReload: true }" > configs/local.cson'
-        sh 'cordova platform add ios'
-        sh 'cordova platform add android'
+        sh "#{$cordova} platform add ios"
+        sh "#{$cordova} platform add android"
         gulp 'build', config
         installPlugins()
 
@@ -101,7 +102,7 @@ $ =
     emulate: (config) ->
         cleanPlatforms 'ios'
         gulp 'build', config
-        sh 'cordova emulate ios',  "Compiling to ios device"
+        sh "#{$cordova} emulate ios",  "Compiling to iOS device"
 
         print 'Done!', 'green'
 
@@ -131,7 +132,7 @@ $ =
 
         $.setup 'prod'
         gulp 'build', 'prod'
-        sh 'cordova build --release ios', "Compiling to iOS for release"
+        sh "#{$cordova} build --release ios", "Compiling to iOS for release"
 
         console.log ''
         # print 'Installing Crashlytics'
@@ -150,7 +151,7 @@ $ =
 
         $.setup 'prod'
         gulp 'build', 'prod'
-        sh 'cordova build --release android'
+        sh "#{$cordova} build --release android"
 
         buildPath = './platforms/android/ant-build'
         finalApkPath = "#{buildPath}/robby-app-release-signed.apk"
