@@ -53,7 +53,7 @@ installPlugins = ->
         'org.apache.cordova.file-transfer'
         # 'org.apache.cordova.globalization'
         'nl.x-services.plugins.socialsharing'
-        'de.appplant.cordova.plugin.badge@0.6.1'
+        # Need to sort this one out 'de.appplant.cordova.plugin.badge@0.6.1'
         'https://github.com/Shifts/cordova-plugin-inappbrowser.git'
         # 'https://github.com/NorthMcCormick/cordova-plugin-local-notifications'
         'https://github.com/EddyVerbruggen/cordova-plugin-actionsheet.git'
