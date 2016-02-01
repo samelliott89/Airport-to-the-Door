@@ -1,5 +1,5 @@
 {
-    appIdentifier: 'com.attd.qantasappTest'
+    appIdentifier: 'io.attd.qantasappTest'
     appDisplayName: 'QantasTest'
     apiBase: 'http://staging.attd.io'
     defaultShiftReminderTime: 1 # 1 minute
