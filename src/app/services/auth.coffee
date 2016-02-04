@@ -17,14 +17,7 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
 
         userInfo = storage.get('user_info') or {}
         _.extend factory.currentUser, userInfo
-
-        $http.get "#{config.apiBase}/health/check"
-            .then (status) ->
-                unless status.data.message == 'Ok'
-                    factory.logout()
-                    return
-
-                storage.set 'user_info', factory.currentUser
+        storage.set 'user_info', factory.currentUser
 
         $http.get "#{config.apiBase}/users/#{factory.currentUser.user_id}"
             .then (resp) ->
