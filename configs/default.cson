@@ -92,7 +92,6 @@
         jsDependencies: [
             './src/lib/jquery-2.1.3.js'
             './src/lib/jquery.visible.js'
-
             './src/lib/onsen/js/angular/angular.js'
             './src/lib/angular-resource.js'
             './src/lib/onsen/js/onsenui.js'
