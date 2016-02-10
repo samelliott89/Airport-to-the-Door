@@ -44,7 +44,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
         @errors = null
 
         credentials =
-            phone_number: @number
+            phone_number: @phone
             email: @email
             password: @password
             # hard coded in until we find
@@ -70,10 +70,10 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
         inProgress = true
 
         credentials =
-            phone_number: @number
-            phone_locale: 'AU'
             given_name: @given_name
             surname: @surname
+            phone_number: @phone
+            phone_locale: 'AU'
             email: @email
             password: @password
 
