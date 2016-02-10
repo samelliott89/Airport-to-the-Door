@@ -65,8 +65,6 @@ getFiles = (dir, files_) ->
 
     files_
 
-# console.log getFiles './www'
-
 getTemplateHashes = ->
     hashes = {}
     files = getFiles "#{DEST}/templates"
