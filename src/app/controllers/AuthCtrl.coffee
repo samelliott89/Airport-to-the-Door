@@ -8,9 +8,9 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
     window.editProfile = this
 
     @checkNumber = ->
-        @isValidNumber = phoneValidation.isNumberValid @user.phone
-        @user.phone = phoneValidation.formatPhoneNumber @user.phone
-        phoneValidation.selectedCountry.phoneNumber = @user.phone
+        @isValidNumber = phoneValidation.isNumberValid @phone
+        @phone = phoneValidation.formatPhoneNumber @phone
+        phoneValidation.selectedCountry.phoneNumber = @phone
 
     # Prevent the side menu from appearing
     ons.ready ->
