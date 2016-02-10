@@ -1265,8 +1265,6 @@ qantasApp.factory 'phoneValidation', ($http, $q, $rootScope, auth, prefs) ->
             formatE164 'us', number
 
     factory.isNumberValid = (number) ->
-        console.log 'Number:'
-        console.log number
         if prefs.countryISO?
             if isValidNumber(number, prefs.countryISO)
                 return true
