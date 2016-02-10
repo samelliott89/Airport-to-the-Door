@@ -86,8 +86,8 @@
                             <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-danger" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="false"></ons-icon>
                         </div>
 
-                        <input class="text-input text-input--underbar" name="phone" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
-                            placeholder="{{wlcm.selectedCountry.phoneNumber}}" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
+                        <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
+                            placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" ng-model="wlcm.email"
