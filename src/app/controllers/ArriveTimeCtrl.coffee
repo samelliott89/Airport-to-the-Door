@@ -5,8 +5,9 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
     jqLite = angular.element
 
     selectedFlight = storage.get 'flightObj'
-    rawTime = selectedFlight.utc_departure_time
-    @finalTime = moment(@rawTime).format('MMMM Do YYYY, h:mm:ss')
+    localTime = selectedFlight.local_departure_time
+    # @finalTime = moment(localTime).format('MMMM Do YYYY, h:mm:ss')
+    @finalTime = moment(localTime).endOf('day').fromNow()
     console.log '@finalTime flight time is', @finalTime
 
     @submitValue = (value) ->
