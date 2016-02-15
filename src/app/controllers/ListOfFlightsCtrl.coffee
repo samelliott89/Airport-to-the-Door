@@ -6,7 +6,8 @@ qantasApp.controller 'ListOfFlightsCtrl', ($http, auth, nav, storage) ->
     @flightsAvailable = @flights.length
 
     @goToFlightSummary = (selectedFlight) ->
+        console.log selectedFlight
         storage.set 'flightObj', selectedFlight
-        nav.goto 'flightSummaryCtrl'
+        nav.goto 'arriveTimeCtrl'
 
   return
