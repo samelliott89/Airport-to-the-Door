@@ -14,9 +14,8 @@ qantasApp.controller 'RideCountCtrl', ($http, auth, nav, storage) ->
         ), 300
 
     @submitCount = ->
-        console.log 'submitting ride count number to API', @value
         storage.set 'rideCount', @value
-        nav.goto 'flightSummaryCtrl'
+        nav.goto 'mapCtrl'
 
     @clearValue = ->
         @value = null
