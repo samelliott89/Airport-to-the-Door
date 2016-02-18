@@ -92,9 +92,14 @@ qantasApp.run ($rootScope, localNotifications) ->
         $rootScope.$on 'login',  -> localNotifications.syncOnShiftChanges()
         $rootScope.$on 'logout', -> localNotifications.clearAll()
 
-qantasApp.run ($rootScope, $location, $timeout, auth, nav) ->
+qantasApp.run ($rootScope, $location, $timeout, auth, nav, matchCheck) ->
     $rootScope.nav = nav
     $rootScope.auth = auth
+    $rootScope.matchCheck = matchCheck
+
+    # Add match check here to check if
+    # there is or is not a match currently
+    # awaiting the user
 
     ons.ready ->
         auth.start()

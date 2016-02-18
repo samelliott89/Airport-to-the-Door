@@ -125,7 +125,6 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         # todo: ensure selected day in week is in view
         @selectedDayIndex = index
         @selectedDay = @schedule[index]
-        console.log @selectedDay.day
         storage.set 'flight_date', @selectedDay
         @selectedField = 'start'
         @justChangedField = true
@@ -266,6 +265,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         selectedDate = storage.get 'flight_date'
         # set the day key from selectedDate object
         selectedDay = selectedDate.day
+        console.log selectedDay
         # format date for API
         formatDay = moment(selectedDay).format('DD-MM-YYYY').toString()
         # set default Airport for API

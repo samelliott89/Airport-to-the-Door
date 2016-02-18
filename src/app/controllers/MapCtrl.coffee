@@ -1,6 +1,6 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'MapCtrl', ($scope, auth, nav) ->
+qantasApp.controller 'MapCtrl', ($scope, auth, nav, MatchResource) ->
 
     intialZoomLevel = 8
     # fallBackLocation random for now
@@ -24,7 +24,21 @@ qantasApp.controller 'MapCtrl', ($scope, auth, nav) ->
     @updateCurrentLocation = ->
         console.log 'getting users current location'
 
-    @proceed = ->
-        nav.goto 'contactCtrl'
+    @requestMatch = ->
+
+        request =
+            pickup_latitude: -33.8650,
+            pickup_longitude: 151.2094,
+            flight_number: 'QFA1',
+            airport: 'SYD',
+            arrival_datetime: '20-02-2016_09-00-00'
+
+        console.log 'pre-request is', request
+
+        MatchResource.requestMatch {request: request}
+            .$promise.then (match) ->
+                console.log 'match is', match
+            .catch (err) ->
+                console.log 'err is', err
 
     return
