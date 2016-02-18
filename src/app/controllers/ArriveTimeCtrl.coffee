@@ -7,7 +7,7 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
     selectedFlight = storage.get 'flightObj'
     localTime = selectedFlight.local_departure_time
     # @finalTime = moment(localTime).format('MMMM Do YYYY, h:mm:ss')
-    @finalTime = moment(localTime).endOf('day').fromNow()
+    @finalTime = moment(localTime).calendar()
     console.log '@finalTime flight time is', @finalTime
 
     @submitValue = (value) ->
@@ -17,13 +17,17 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         $('.buttonThree').addClass('animated bounceOut')
         $('.buttonFour').addClass('animated bounceOut')
         $('.textOne').addClass('animated bounceOutUp')
+        $('.textTwo').addClass('animated bounceOutDown')
         setTimeout (->
             $('.removeElement').hide()
         ), 500
 
+        # storage.set 'minutesBefore', @value
+        # nav.goto 'rideCountCtrl'
+
     @submitAmount = ->
-        storage.set 'rideCount', @value
-        nav.goto 'flightSummaryCtrl'
+        storage.set 'minutesBefore', @value
+        nav.goto 'rideCountCtrl'
 
     @clearValue = ->
         @value = null
