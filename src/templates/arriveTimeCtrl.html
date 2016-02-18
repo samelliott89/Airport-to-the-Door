@@ -6,7 +6,7 @@
             </div>
             <div class="center">Arrival Time</div>
             <div class="right">
-                <ons-toolbar-button ng-show="arri.value" ng-click="arri.submitCount()">
+                <ons-toolbar-button ng-show="arri.value" ng-click="arri.submitAmount()">
                     Next
                 </ons-toolbar-button>
             </div>
@@ -18,28 +18,21 @@
                 would you like to arrive at the airport?</p>
             </div>
 
-            <div class="textOne text-muted text-center">
-                <p>You're selected flight is scheduled to leave in
-                at <span class="strong">{{arri.finalTime}}</span></p>
-            </div>
-
             <div class="text-center">
                 <ons-button class="buttonOne button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(60)">1</ons-button>
                 <ons-button class="buttonTwo button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(120)">2</ons-button>
             </div>
+
             <div class="text-center">
                 <ons-button class="buttonThree button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(180)">3</ons-button>
                 <ons-button class="buttonFour button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue()">4</ons-button>
             </div>
-        </div>
 
-        <div class="padd text-muted text-center animated fadeIn fade-in-slow">
-            <div ng-show="arri.value">
-                <ons-icon icon="ion-ios7-checkmark-outline" class="icon-center icon-success icon-bounce" size="60px"></ons-icon>
-                <p class="text-success" style="text-transform: uppercase;">{{arri.value}} riding</p>
-                <p ng-show="arri.value == 1">You want to arrive at the airport by {{}}</p>
-                <ons-button class="button--clear margin-top button-cyclinder" ng-click="arri.clearValue()">Back</ons-button>
+            <div class="textTwo text-muted padd text-center">
+                <p>You're selected flight is scheduled to leave in
+                at <span class="strong">{{arri.finalTime}}</span></p>
             </div>
+
         </div>
     </ons-page>
 </div>
