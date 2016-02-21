@@ -26,16 +26,14 @@ qantasApp.controller 'MapCtrl', ($scope, auth, nav, MatchResource) ->
 
     @requestMatch = ->
 
-        request =
+        mockRequest =
             pickup_latitude: -33.8650,
             pickup_longitude: 151.2094,
             flight_number: 'QFA1',
             airport: 'SYD',
             arrival_datetime: '20-02-2016_09-00-00'
 
-        console.log 'pre-request is', request
-
-        MatchResource.requestMatch {request: request}
+        MatchResource.requestMatch mockRequest
             .$promise.then (match) ->
                 console.log 'match is', match
             .catch (err) ->
