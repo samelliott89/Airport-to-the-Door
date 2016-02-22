@@ -2,33 +2,21 @@
     <ons-page>
         <ons-toolbar>
             <div class="left">
-                <shifts-left-button></shifts-left-button>
+                <ons-toolbar-button ng-click="nav.goBack()">
+                    Close
+                </ons-toolbar-button>
             </div>
-
-            <div class="center">
-                Finding you a match...
+            <div class="center">Finding a match</div>
+            <div class="right">
+                <ons-toolbar-button ng-click="poll.goBack()">Done</ons-toolbar-button>
             </div>
-
-            <div class="right"></div>
         </ons-toolbar>
-        <folding-cube-spinner ng-click="poll.cancelMatch()"></folding-cube-spinner>
-        <div class="auth-form-container">
-            <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Cancel</ons-button>
+        <folding-cube-spinner></folding-cube-spinner>
+        <div class="card text-center">
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.rejectProposedMatch()">Cancel</ons-button>
         </div>
-    </ons-page>
-</div>
-<ons-page>
-    <ons-toolbar modifier="transparent">
-        <div class="left"></div>
-        <div class="center">Finding a match</div>
-        <div class="right"></div>
-    </ons-toolbar>
-    <div class="card text-center">
-        <div class="card-name">{{summ.flight.flight_number}}</div>
-        <div class="card-desc">{{summ.flight.departure_airport}} - San Francisco
+        <!--             <div class="card-name">{{poll.flight.flight_number}}</div>
             <br>Now time to find you a ride!</div>
-        <div class="card-desc">Leaving at {{summ.flight.local_departure_datetime}}</div>
-        <ons-button class="button--clear margin-top button-cyclinder" ng-click="summ.findRide()">Find Ride</ons-button>
-    </div>
-</ons-page>
+        <div class="card-desc">Leaving at {{poll.flight.local_departure_datetime}}</div> -->
+    </ons-page>
 </div>
