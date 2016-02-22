@@ -17,15 +17,15 @@ qantasApp.factory 'MatchResource', ($resource, transform) ->
 
         acceptProposedMatch:
             method: 'post'
-            url: "#{config.apiBase}/match/match/request/accept"
+            url: "#{config.apiBase}/match/request/accept"
             transformResponse: transform.response 'match'
 
         cancelMatch:
             method: 'post'
-            url: "#{config.apiBase}/match/match/request/cancel"
-            transformResponse: transform.response 'null'
+            url: "#{config.apiBase}/match/cancel"
+            transformResponse: transform.response null
 
         rejectProposedMatch:
             method: 'post'
-            url: "#{config.apiBase}/match/match/request/reject"
-            transformResponse: transform.response 'match'
+            url: "#{config.apiBase}/match/request/reject"
+            transformResponse: transform.response null
