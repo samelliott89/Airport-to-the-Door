@@ -7,7 +7,7 @@ qantasApp = angular.module 'qantasApp', [
     'ngAnimate'
     'angularFileUpload'
     'geolocation'
-    # 'ngMap'
+    'ngMap'
 ]
 
 # Implement fast click on the documentbody
