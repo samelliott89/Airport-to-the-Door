@@ -12,8 +12,10 @@
         </ons-toolbar>
 
         <!-- Google map set from $scope -->
-        <ui-gmap-google-map center="googleMap.center" zoom="googleMap.zoom" options="googleMap.options"
-            control="googleMap.control" events="mapEvents" data-tap-disabled="true">
+        <!-- <ng-map class="map" center="[40.74, -74.18]"></ng-map> -->
+
+        <ng-map class="map" center="map.center" zoom="map.zoom" options="map.options"
+            control="map.control" setZoom="map.setZoom" events="mapEvents" disable-default-u-i="true"></ng-map>
 
         <div class="search-bar">
             <input type="search" class="search-input search-input-map">
@@ -24,7 +26,7 @@
         </button>
 
         <div class="map-back-button">
-            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="map.requestMatch()">Find ride</ons-button>
+            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="map.requestMatch()">Find match</ons-button>
         </div>
 
     </ons-page>
