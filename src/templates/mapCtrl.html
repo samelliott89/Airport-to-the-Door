@@ -1,4 +1,4 @@
-<div ng-controller="MapCtrl as map">
+<div ng-controller="MapCtrl as mapv">
 
     <ons-page>
         <ons-toolbar>
@@ -6,27 +6,25 @@
                 <shifts-left-button></shifts-left-button>
             </div>
             <div class="center">Map</div>
-            <div class="right">
-                <ons-toolbar-button ng-click="map.proceed()">Next</ons-toolbar-button>
-            </div>
-        </ons-toolbar>
+
+            </ons-toolbar>
 
         <!-- Google map set from $scope -->
-        <!-- <ng-map class="map" center="[40.74, -74.18]"></ng-map> -->
-
-        <ng-map class="map" center="map.center" zoom="map.zoom" options="map.options"
-            control="map.control" setZoom="map.setZoom" events="mapEvents" disable-default-u-i="true"></ng-map>
+<!--         <ng-map class="map" center="map.center"></ng-map>
+ -->
+        <!-- <ng-map class="map" center="map.center" zoom="map.zoom" set-zoom="map.setZoom" options="map.options"></ng-map> -->
 
         <div class="search-bar">
-            <input type="search" class="search-input search-input-map">
+            <input type="search" class="search-input search-input-map" ng-model="mapv.currentLocation">
         </div>
 
-        <button class="location-finder" ng-click="map.updateCurrentLocation()">
+        <button class="location-finder" ng-click="mapv.updateCurrentLocation()">
             <ion-icon class="ion-navigate" style="font-size:"></ion-icon>
         </button>
 
         <div class="map-back-button">
-            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="map.requestMatch()">Find match</ons-button>
+            <ons-button class="button--clear margin-top button-cyclinder button--map"
+                ng-click="mapv.requestMatch()">Find match</ons-button>
         </div>
 
     </ons-page>
