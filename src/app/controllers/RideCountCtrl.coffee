@@ -13,15 +13,13 @@ qantasApp.controller 'RideCountCtrl', ($http, auth, nav, storage) ->
             $('.removeElement').hide()
         ), 300
 
-    @submitCount = ->
         storage.set 'rideCount', @value
+
+    @submitCount = ->
         nav.goto 'mapCtrl'
 
     @clearValue = ->
         @value = null
         nav.resetTo 'rideCountCtrl'
-
-    # Use this method to combine all the storage keys to one object to post to server
-    # finalObj = _.extend({}, firstObj, secondObj)
 
     return
