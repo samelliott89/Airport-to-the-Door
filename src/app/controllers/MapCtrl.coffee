@@ -2,25 +2,26 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'MapCtrl', ($scope, auth, nav, MatchResource, NgMap) ->
 
-    intialZoomLevel = 8
+    intialZoomLevel = 9
     # fallBackLocation random for now
-    fallBackLocation = '-33.8909257, 151.1959506'
+    fallBackLocation = '[-33.8895885. 151.1897138]'
     defaultMapType = google.maps.MapTypeId.TERRAIN
+    $scope.map = {}
 
-    NgMap.getMap().then (map) ->
-        $scope.map =
-            zoom: intialZoomLevel
-            setZoom: 8
-            center: fallBackLocation
-            options:
-                mapTypeId: defaultMapType
-                streetViewControl: false
-                panControl: false
-                disableDefaultUI: true
-                zoomControl: true
-                disableDoubleClickZoom: true
-                minZoom: 0
-            control: {}
+    # $scope.map =
+    #     zoom: intialZoomLevel
+    #     center: fallBackLocation
+    #     setZoom: 8
+        # options =
+        #     mapTypeId: 'TERRAIN'
+        #     streetViewControl: false
+        #     panControl: false
+        #     disableDefaultUI: true
+        #     zoomControl: true
+        #     disableDoubleClickZoom: true
+        #     zoom: 8
+        #     setZoom: 8
+        # control: {}
 
     @updateCurrentLocation = ->
         console.log 'getting users current location'
@@ -35,7 +36,7 @@ qantasApp.controller 'MapCtrl', ($scope, auth, nav, MatchResource, NgMap) ->
 
         MatchResource.requestMatch mockRequest
             .$promise.then (match) ->
-                nav.goto 'pollingMatchCtrl'
+                nav.goto 'pollingMatchCtrl',
                 console.log 'match is', match
             .catch (err) ->
                 console.log 'err is', err
