@@ -3,12 +3,12 @@ qantasApp = angular.module 'qantasApp'
 qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
 
     jqLite = angular.element
-
     selectedFlight = storage.get 'flightObj'
     localTime = selectedFlight.local_departure_time
-    # @finalTime = moment(localTime).format('MMMM Do YYYY, h:mm:ss')
-    @finalTime = moment(localTime).calendar()
-    console.log '@finalTime flight time is', @finalTime
+    friendlyTime = moment('DD-MM-YYYY_HH-MM-SS', localTime, true)
+    formatTime = new Date(friendlyTime)
+    @finalTime = moment(formatTime).format('MMMM Do YYYY, h:mm:ss a')
+    @timeRemaining = moment(@finalTime).startOf('hour').fromNow()
 
     @submitValue = (value) ->
         @value = value
@@ -22,19 +22,14 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
             $('.removeElement').hide()
         ), 500
 
-        # storage.set 'minutesBefore', @value
-        # nav.goto 'rideCountCtrl'
+        storage.set 'minutesBefore', @value
 
     @submitAmount = ->
-        storage.set 'minutesBefore', @value
         nav.goto 'rideCountCtrl'
 
     @clearValue = ->
         @value = null
         nav.resetTo 'arriveTimeCtrl'
-
-    # Use this method to combine all the storage keys to one object to post to server
-    # finalObj = _.extend({}, firstObj, secondObj)
 
     return
 
