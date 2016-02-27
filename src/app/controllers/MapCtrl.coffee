@@ -1,27 +1,11 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'MapCtrl', ($scope, auth, nav, MatchResource, NgMap) ->
+qantasApp.controller 'MapCtrl', ($scope, auth, nav, MatchResource) ->
 
     intialZoomLevel = 9
     # fallBackLocation random for now
     fallBackLocation = '[-33.8895885. 151.1897138]'
     defaultMapType = google.maps.MapTypeId.TERRAIN
-    $scope.map = {}
-
-    # $scope.map =
-    #     zoom: intialZoomLevel
-    #     center: fallBackLocation
-    #     setZoom: 8
-        # options =
-        #     mapTypeId: 'TERRAIN'
-        #     streetViewControl: false
-        #     panControl: false
-        #     disableDefaultUI: true
-        #     zoomControl: true
-        #     disableDoubleClickZoom: true
-        #     zoom: 8
-        #     setZoom: 8
-        # control: {}
 
     @updateCurrentLocation = ->
         console.log 'getting users current location'
