@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "angular-google-maps": "^2.3.2",
+    "angular-leaflet-directive": "^0.10.0",
     "angular-moment": "^0.10.3",
     "coffee-script": "^1.8.0",
     "colors": "^1.0.3",
