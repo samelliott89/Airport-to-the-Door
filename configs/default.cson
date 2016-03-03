@@ -105,6 +105,7 @@
             './src/lib/phoneFormat.js'
             './src/lib/pubnub-3.7.4.min.js'
             './src/lib/fastclick.js'
+            './src/lib/google-leaflet.js'
         ]
 
     s3Region: 'ap-southeast-2'
