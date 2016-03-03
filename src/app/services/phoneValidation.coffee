@@ -1282,8 +1282,8 @@ qantasApp.factory 'phoneValidation', ($http, $q, $rootScope, auth, prefs) ->
             factory.selectedCountry.countryISO = prefs.countryISO
             factory.selectedCountry.phoneNumber = factory.getExampleNumber(prefs.countryISO)
         else
-            factory.selectedCountry.countryISO = 'us'
-            factory.selectedCountry.phoneNumber = factory.getExampleNumber('us')
+            factory.selectedCountry.countryISO = 'au'
+            factory.selectedCountry.phoneNumber = factory.getExampleNumber('au')
 
 
     return factory
