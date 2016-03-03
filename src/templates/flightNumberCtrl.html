@@ -19,7 +19,7 @@
             <ons-icon icon="ion-ios7-checkmark-outline" class="icon-center icon-success icon-bounce" size="60px" ng-if="fnum.flightNumber"></ons-icon>
             <p ng-if="!fnum.flightNumber">Enter your flight number so we can find a ride for you to the airport</p>
 
-            <div class="login-form login-form--login padd-top-xl" ng-animate=" 'animate' " ng-if="!fnum.flightNumber">
+            <div class="login-form login-form--login padd-top-xl" ng-if="!fnum.flightNumber">
                 <form ng-submit="wlcm.loginSubmit()" autocomplete="off">
                     <input style="display:none" type="text" name="fakeusernameremembered"/>
                     <input style="display:none" type="password" name="fakepasswordremembered"/>
