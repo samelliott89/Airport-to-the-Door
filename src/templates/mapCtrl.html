@@ -9,10 +9,7 @@
 
             </ons-toolbar>
 
-        <!-- Google map set from $scope -->
-<!--         <ng-map class="map" center="map.center"></ng-map>
- -->
-        <!-- <ng-map class="map" center="map.center" zoom="map.zoom" set-zoom="map.setZoom" options="map.options"></ng-map> -->
+        <leaflet class="map animated fadeIn" lf-center="berlin" layers="layers" markers="markers" height="480px" width="100%"></leaflet>
 
         <div class="search-bar">
             <input type="search" class="search-input search-input-map" ng-model="mapv.currentLocation">
