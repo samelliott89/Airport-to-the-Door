@@ -32,3 +32,4 @@ platforms
 merges
 plugins
 www
+*.xml

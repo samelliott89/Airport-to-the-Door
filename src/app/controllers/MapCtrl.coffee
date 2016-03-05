@@ -1,40 +1,91 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource) ->
+qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg, leafletData) ->
 
-    intialZoomLevel = 9
+    intialZoomLevel = 14
     # fallBackLocation random for now
-    fallBackLocation = '[-33.8895885. 151.1897138]'
-    # defaultMapType = google.maps.MapTypeId.TERRAIN
-    # ###
+    fallBackLat = -33.85
+    fallBackLng = 151.20
+    @buttonLoading = true
+
+    # set defaults for map load
     angular.extend $scope,
-        berlin:
-            lat: 52.52
-            lng: 13.40
-            zoom: 14
-        markers:
-            m1:
-                lat: 52.52
-                lng: 13.40
+        sydney:
+            lat: fallBackLat
+            lng: fallBackLng
+            zoom: intialZoomLevel
+        # markers:
+        #     m1:
+        #         lat: 52.52
+        #         lng: 13.40
         layers:
             baselayers:
-                googleTerrain:
-                    name: 'Google Terrain'
-                    layerType: 'TERRAIN'
-                    type: 'google'
-                googleHybrid:
-                    name: 'Google Hybrid'
-                    layerType: 'HYBRID'
-                    type: 'google'
                 googleRoadmap:
                     name: 'Google Streets'
                     layerType: 'ROADMAP'
                     type: 'google'
+        defaults:
+            scrollWheelZoom: false
 
-    @updateCurrentLocation = ->
-        console.log 'getting users current location'
+    _checkIfMatchExists = ->
+        MatchResource.getMatch()
+            .$promise.then (match) ->
+                if match
+                    @matchExists = true
+                else
+                    @matchExists = false
+                @buttonLoading = false
+                console.log 'match exists', @matchExists
+                console.log 'got match', match
+            .catch (err) ->
+                console.log 'err is', err
+                pg.alert {title: 'Error', msg: 'An error occured'}
 
-    @requestMatch = ->
+     # create the map
+     # with the following params
+    _createMap = ->
+        # fetch the map object
+        leafletData.getMap().then (map) ->
+
+            # create a marker
+            L.circle([51.508, -0.11], 500, {
+                color: 'red',
+                fillColor: '#f03',
+                fillOpacity: 0.5
+            }).addTo(map)
+
+            # get the locate object
+            # and set some params
+            L.control.locate(
+                position: 'bottomright' # set the location of the control
+                follow: true
+                drawCircle: true # controls whether a circle is drawn that shows the uncertainty about the location
+                setView: true # automatically sets the map view to the user's location, enabled if `follow` is true
+
+                # on location error, throw a message
+                #
+                onLocationError: (err) ->
+
+                    pg.alert {title: 'Error', msg: err.message}
+
+                    return
+
+                locateOptions:
+                    enableHighAccuracy: true
+
+                ).addTo(map)
+
+    # cancel request function
+    @cancelRequest = ->
+        MatchResource.rejectProposedMatch()
+            .$promise.then (res) ->
+                console.log 'response is', res
+                pg.alert {title: 'Canceled', msg: 'Your request was canceled'}
+            .catch (err) ->
+                console.log 'err is', err
+                pg.alert {title: 'Error', msg: 'A request already exists'}
+
+    @sendRequest = ->
         mockRequest =
             pickup_latitude: -33.8650,
             pickup_longitude: 151.2094,
@@ -48,5 +99,12 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource) ->
                 console.log 'match is', match
             .catch (err) ->
                 console.log 'err is', err
+                pg.alert {title: 'Error', msg: 'A request already exists'}
+
+    # execute create map
+    # and check for existing match
+    #
+    _createMap()
+    _checkIfMatchExists()
 
     return
