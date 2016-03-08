@@ -8,7 +8,7 @@
 
             <div class="auth-form-container">
 
-                <div class="pre-login-form margin-btm" ng-if="!wlcm.toShow" ng-animate=" 'animate' ">
+                <div class="pre-login-form margin-btm animated fadeIn" ng-if="!wlcm.toShow" ng-animate=" 'animate' ">
                     <p style="font-size: 16px"><strong>Qantas to the door</strong> is the easiest way for Qantas passengers to<br/>get from where they are to where they want to be.</p>
 
                     <ons-button modifier="large" class="button--clear button-cyclinder" type="button" ng-click="wlcm.toShow = 'reg'">Register</ons-button>
@@ -35,14 +35,14 @@
                                 type="password" placeholder="Password" id="LoginPassword">
                             <label for="LoginPassword">Password</label>
                         </div>
-
+<!--
                         <div class="padd-top-lg" ng-switch="wlcm.isValidNumber">
                             <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-success" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="true"></ons-icon>
                             <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-danger" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="false"></ons-icon>
                         </div>
-
+ -->
                         <input class="text-input text-input--underbar" name="phone" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
-                            placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
+                            placeholder="+61437634569" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
 
                         <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.loginSubmit()">Log in</ons-button>
 
@@ -80,11 +80,11 @@
                                     type="text" placeholder="Last name" id="RegisterText">
                             <label for="RegisterText">Last name</label>
                         </div>
-
+<!--
                         <div ng-switch="wlcm.isValidNumber">
                             <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-success" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="true"></ons-icon>
                             <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-danger" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="false"></ons-icon>
-                        </div>
+                        </div> -->
 
                         <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
                             placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
