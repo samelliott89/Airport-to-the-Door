@@ -25,9 +25,8 @@
                         <input style="display:none" type="password" name="fakepasswordremembered"/>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.email"
-                                type="email" placeholder="Email" id="LoginEmail">
-                            <label for="LoginEmail">Email</label>
+                            <input class="text-input text-input--underbar" name="phone" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
+                                placeholder="+61412345678" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
                         </div>
 
                         <div class="floatfield">
@@ -41,8 +40,6 @@
                             <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-danger" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="false"></ons-icon>
                         </div>
  -->
-                        <input class="text-input text-input--underbar" name="phone" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
-                            placeholder="+61437634569" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
 
                         <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.loginSubmit()">Log in</ons-button>
 
@@ -51,8 +48,9 @@
                     <p>
                         <ons-button modifier="large--quiet" class="button--bs" type="button"
                             ng-click="wlcm.toShow = 'reg'">Haven't registered yet?</ons-button>
-                        <ons-button modifier="large--quiet" class="button--bs" type="button"
-                            ng-click="nav.setRootPage('resetPasswordCtrl', {animation: 'lift'})">Forgotten password?</ons-button>
+
+<!--                         <ons-button modifier="large--quiet" class="button--bs" type="button"
+                            ng-click="nav.setRootPage('resetPasswordCtrl', {animation: 'lift'})">Forgotten password?</ons-button> -->
                     </p>
                 </div>
 
@@ -86,8 +84,10 @@
                             <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-danger" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="false"></ons-icon>
                         </div> -->
 
-                        <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
-                            placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
+                                placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
+                        </div>
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" ng-model="wlcm.email"
@@ -100,11 +100,13 @@
                                     type="password" placeholder="Password" id="RegisterPassword">
                             <label for="RegisterPassword">Password</label>
                         </div>
+
                         <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.registerSubmit()">Register</ons-button>
+
                     </form>
 
-                    <p>
-                        <ons-button modifier="large--quiet" class="button--bs" type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
+                    <p><ons-button modifier="large--quiet" class="button--bs"
+                        type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
 <!--
                         <p class="text-center small">
                             By registering, you agree to our

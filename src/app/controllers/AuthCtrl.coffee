@@ -45,7 +45,6 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
 
         credentials =
             phone_number: @phone
-            email: @email
             password: @password
             # hard coded in until we find
             # a work around for this
