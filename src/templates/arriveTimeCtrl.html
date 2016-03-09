@@ -19,20 +19,32 @@
             </div>
 
             <div class="text-center">
-                <ons-button class="buttonOne button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(30)">1/2</ons-button>
-                <ons-button class="buttonTwo button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(60)">1</ons-button>
+                <ons-button class="buttonOne button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(30)">&frac12;</ons-button>
+                <ons-button class="buttonTwo button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(60)">
+                    <span class="special-pad">1</span></ons-button>
             </div>
 
             <div class="text-center">
-                <ons-button class="buttonThree button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(120)">2</ons-button>
-                <ons-button class="buttonFour button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(180)">3</ons-button>
+                <ons-button class="buttonThree button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(120)">
+                    <span class="special-pad">2</span></ons-button>
+                <ons-button class="buttonFour button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(180)">
+                    <span class="special-pad">3</span></ons-button>
             </div>
 
             <div class="textTwo text-muted padd text-center">
-                <p>You're selected flight is scheduled to at <span class="strong">{{arri.formatTime}}</span></p>
-                <span class="small">{{arri.timeRemaining}}</span></p>
+                <p>Flight <span class="semi-bold">{{arri.selectedFlightNumber}}</span> is scheduled to leave at <span class="strong">{{arri.formatTime}}</span></p>
+                <span class="small">{{arri.timeUntilFlight}}</span></p>
             </div>
-
         </div>
+
+        <div class="padd text-muted text-center animated fadeIn fade-in-slow">
+            <div ng-show="arri.value">
+                <ons-icon icon="ion-ios7-checkmark-outline" class="icon-center icon-success icon-bounce" size="60px"></ons-icon>
+                <p>Flight <span class="semi-bold">{{arri.selectedFlightNumber}}</span> is scheduled to leave at <span class="strong">{{arri.formatTime}}</span></p>
+                <p>You will arrive at the airport {{arri.timeBefore}} before your flight.</p>
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="arri.clearValue()">Back</ons-button>
+            </div>
+        </div>
+
     </ons-page>
 </div>

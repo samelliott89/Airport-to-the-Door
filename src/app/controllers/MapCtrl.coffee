@@ -6,7 +6,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
     # fallBackLocation random for now
     fallBackLat = -33.85
     fallBackLng = 151.20
-    @buttonLoading = true
+    @isLoading = false
 
     # set defaults for map load
     angular.extend $scope,
@@ -30,13 +30,18 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
     _checkIfMatchExists = ->
         MatchResource.getMatch()
             .$promise.then (match) ->
-                if match
+                # temporary state
+                # for returned match
+                # can't test locally
+                matchExists = true
+                if matchExists = true
                     @matchExists = true
                 else
                     @matchExists = false
-                @buttonLoading = false
+                @isLoading = true
                 console.log 'match exists', @matchExists
                 console.log 'got match', match
+                console.log 'isLoading', @isLoading
             .catch (err) ->
                 console.log 'err is', err
                 pg.alert {title: 'Error', msg: 'An error occured'}
@@ -82,8 +87,8 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 console.log 'response is', res
                 pg.alert {title: 'Canceled', msg: 'Your request was canceled'}
             .catch (err) ->
-                console.log 'err is', err
-                pg.alert {title: 'Error', msg: 'A request already exists'}
+                console.log 'err is', err.message
+                pg.alert {title: 'Error', msg: err.message}
 
     @sendRequest = ->
         mockRequest =
@@ -98,13 +103,14 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 nav.goto 'pollingMatchCtrl',
                 console.log 'match is', match
             .catch (err) ->
-                console.log 'err is', err
-                pg.alert {title: 'Error', msg: 'A request already exists'}
+                console.log 'err is', err.message
+                pg.alert {title: 'Error', msg: err.message }
 
     # execute create map
-    # and check for existing match
-    #
     _createMap()
+    # check if match exists
     _checkIfMatchExists()
+
+    console.log 'final isLoading', @isLoading
 
     return
