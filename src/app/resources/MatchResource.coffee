@@ -11,14 +11,14 @@ qantasApp.factory 'MatchResource', ($resource, transform) ->
             method: 'post'
             transformResponse: transform.response 'match'
 
+        # TODO: Ask about transform response
         getMatch:
             method: 'get'
-            transformResponse: transform.response 'match'
 
         acceptProposedMatch:
             method: 'post'
             url: "#{config.apiBase}/match/request/accept"
-            transformResponse: transform.response 'match'
+            transformResponse: transform.response 'acceptedMatch'
 
         cancelMatch:
             method: 'post'
