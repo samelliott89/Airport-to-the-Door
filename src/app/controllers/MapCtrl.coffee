@@ -27,23 +27,32 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         defaults:
             scrollWheelZoom: false
 
+    _requestStatusHandler = (requestStatus) ->
+        if requestStatus == 'REQUESTED'
+            @requestStatus = requestStatus
+            nav.goto 'pollingMatchCtrl'
+            console.log requestStatus
+        else if requestStatus == 'PROPOSAL'
+            console.log requestStatus
+            # go do something
+            @requestStatus = requestStatus
+        else if requestStatus == 'ACCEPTED'
+            console.log requestStatus
+            @requestStatus = requestStatus
+            # go do something
+        else if requestStatus == 'CONFIRMED'
+            console.log requestStatus
+            @requestStatus = requestStatus
+            # go do something
+
     _checkIfMatchExists = ->
         MatchResource.getMatch()
-            .$promise.then (match) ->
-                # temporary state
-                # for returned match
-                # can't test locally
-                matchExists = true
-                if matchExists = true
-                    @matchExists = true
-                else
-                    @matchExists = false
+            .$promise.then (res) ->
+                requestStatus = res.status
+                _requestStatusHandler(requestStatus)
                 @isLoading = true
-                console.log 'match exists', @matchExists
-                console.log 'got match', match
-                console.log 'isLoading', @isLoading
             .catch (err) ->
-                console.log 'err is', err
+                console.log 'err status is', err.status, err.message
                 pg.alert {title: 'Error', msg: 'An error occured'}
 
      # create the map
@@ -53,7 +62,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         leafletData.getMap().then (map) ->
 
             # create a marker
-            L.circle([51.508, -0.11], 500, {
+            L.circle([fallBackLat, fallBackLng], 500, {
                 color: 'red',
                 fillColor: '#f03',
                 fillOpacity: 0.5
@@ -82,7 +91,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
     # cancel request function
     @cancelRequest = ->
-        MatchResource.rejectProposedMatch()
+        MatchResource.cancelMatch()
             .$promise.then (res) ->
                 console.log 'response is', res
                 pg.alert {title: 'Canceled', msg: 'Your request was canceled'}
@@ -91,6 +100,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 pg.alert {title: 'Error', msg: err.message}
 
     @sendRequest = ->
+
         mockRequest =
             pickup_latitude: -33.8650,
             pickup_longitude: 151.2094,
@@ -100,17 +110,17 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
         MatchResource.requestMatch mockRequest
             .$promise.then (match) ->
-                nav.goto 'pollingMatchCtrl',
+                nav.goto 'pollingMatchCtrl'
                 console.log 'match is', match
             .catch (err) ->
-                console.log 'err is', err.message
-                pg.alert {title: 'Error', msg: err.message }
+                console.log 'err is', err
+                pg.alert {title: 'Error', msg: err.status }
 
     # execute create map
     _createMap()
     # check if match exists
     _checkIfMatchExists()
 
-    console.log 'final isLoading', @isLoading
+    console.log 'final isLoading at bottom of script', @isLoading
 
     return
