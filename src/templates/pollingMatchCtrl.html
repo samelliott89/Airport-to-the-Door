@@ -11,12 +11,16 @@
                 <ons-toolbar-button ng-click="poll.goBack()">Done</ons-toolbar-button>
             </div>
         </ons-toolbar>
-        <folding-cube-spinner></folding-cube-spinner>
+<!--         <folding-cube-spinner></folding-cube-spinner>
+ -->        <div class="card text-center" ng-if="!isLoading">
+            <pre>{{poll.requestStatus}}</pre>
+            <p ng-show="poll.requestStatus === 'REQUESTED'">We're looking for someone to match you with.<br>We'll let you know when we do!</p>
+            <p ng-show="poll.requestStatus === 'PROPOSAL'">PROPOSAL</p>
+            <p ng-show="poll.requestStatus === 'ACCEPTED'">ACCEPTED</p>
+            <p ng-show="poll.requestStatus === 'CONFIRMED'">CONFIRMED</p>
+        </div>
         <div class="card text-center">
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.rejectProposedMatch()">Cancel</ons-button>
         </div>
-        <!--             <div class="card-name">{{poll.flight.flight_number}}</div>
-            <br>Now time to find you a ride!</div>
-        <div class="card-desc">Leaving at {{poll.flight.local_departure_datetime}}</div> -->
     </ons-page>
 </div>
