@@ -9,17 +9,27 @@
 
         </ons-toolbar>
 
-        <form class="search-panel" ng-class="{'search-panel--has-text': srch.searchTerm}">
+        <!-- search bar -->
+
+        <form class="search-panel" ng-class="{'search-panel--has-text': srch.searchTerm}" ng-if="list.flightsAvailable">
             <div class="search-panel__field search-input" ng-click="srch.focus('searchInput')">
-                <input class="search-panel__input" type="text" placeholder="Search for flight number" required ng-model="searchString" autofocus>
+                <input class="search-panel__input" type="text" placeholder="Search for flight number" required ng-model="searchString">
             </div>
         </form>
+
+        <!-- end search bar -->
+
+        <!-- screen shown when no flights are found -->
 
         <div class="card text-center animated fadeIn" ng-if="!list.flightsAvailable">
             <div class="card-name">Sorry no flights were found for this date.</div>
             <div class="card-desc">Please select a different date.</div>
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="nav.back()">Go Back</ons-button>
         </div>
+
+        <!-- end of screen shown when no flights are found -->
+
+        <!-- list of flights shown when no flights are found -->
 
         <ons-list class="flight-list animated fadeIn" ng-if="list.flightsAvailable">
             <ons-list-header>Please select a flight</ons-list-header>
@@ -37,6 +47,8 @@
                 </ons-row>
             </ons-list-item>
         </ons-list>
+
+        <!-- end of list of flights shown when no flights are found -->
 
     </ons-page>
 </div>
