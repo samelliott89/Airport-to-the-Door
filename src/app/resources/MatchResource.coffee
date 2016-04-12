@@ -11,7 +11,6 @@ qantasApp.factory 'MatchResource', ($resource, transform) ->
             method: 'post'
             transformResponse: transform.response 'match'
 
-        # TODO: Ask about transform response
         getMatch:
             method: 'get'
 
