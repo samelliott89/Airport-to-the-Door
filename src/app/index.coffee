@@ -2,12 +2,12 @@ window.isCordova = window.hasOwnProperty('cordova')
 
 qantasApp = angular.module 'qantasApp', [
     'onsen'
+    'leaflet-directive'
     'ngResource'
     'ipCookie'
     'ngAnimate'
     'angularFileUpload'
     'geolocation'
-    'leaflet-directive'
 ]
 
 # Implement fast click on the documentbody
