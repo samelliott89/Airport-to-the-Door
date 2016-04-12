@@ -14,10 +14,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             lat: fallBackLat
             lng: fallBackLng
             zoom: intialZoomLevel
-        # markers:
-        #     m1:
-        #         lat: 52.52
-        #         lng: 13.40
         layers:
             baselayers:
                 googleRoadmap:
@@ -28,22 +24,26 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             scrollWheelZoom: false
 
     _requestStatusHandler = (requestStatus) ->
+        @matchExists = true
         if requestStatus == 'REQUESTED'
             @requestStatus = requestStatus
             nav.goto 'pollingMatchCtrl'
             console.log requestStatus
+
         else if requestStatus == 'PROPOSAL'
             console.log requestStatus
-            # go do something
+            nav.goto 'pollingMatchCtrl'
             @requestStatus = requestStatus
+
         else if requestStatus == 'ACCEPTED'
             console.log requestStatus
             @requestStatus = requestStatus
-            # go do something
+            nav.goto 'pollingMatchCtrl'
+
         else if requestStatus == 'CONFIRMED'
             console.log requestStatus
             @requestStatus = requestStatus
-            # go do something
+            nav.goto 'pollingMatchCtrl'
 
     _checkIfMatchExists = ->
         MatchResource.getMatch()
@@ -52,8 +52,14 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 _requestStatusHandler(requestStatus)
                 @isLoading = true
             .catch (err) ->
-                console.log 'err status is', err.status, err.message
-                pg.alert {title: 'Error', msg: 'An error occured'}
+                if err.status == 404
+                    @requestStatus = 'NO MATCH FOUND'
+                    @matchExists = false
+                    console.log @requestStatus
+                    console.log 'err status is', err.status, err.message
+                else
+                    pg.alert {title: 'Error', msg: 'An error occured'}
+                    console.log 'err status is', err.status, err.message
 
      # create the map
      # with the following params
@@ -64,8 +70,8 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             # create a marker
             L.circle([fallBackLat, fallBackLng], 500, {
                 color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5
+                fillColor: '#FFFFFF',
+                fillOpacity: 0.6
             }).addTo(map)
 
             # get the locate object
@@ -75,19 +81,45 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 follow: true
                 drawCircle: true # controls whether a circle is drawn that shows the uncertainty about the location
                 setView: true # automatically sets the map view to the user's location, enabled if `follow` is true
+                markerClass: L.circleMarker
+                circlePadding: [20, 20] #padding around accuracy circle, value is passed to setBounds
+
+                onLocationFound: (location) ->
+
+                    console.log 'latlng are', location.latlng
 
                 # on location error, throw a message
-                #
                 onLocationError: (err) ->
 
                     pg.alert {title: 'Error', msg: err.message}
-
-                    return
 
                 locateOptions:
                     enableHighAccuracy: true
 
                 ).addTo(map)
+
+    _hideElementsOnMap = ->
+        # get elements from map
+        mapIconToHide = document.querySelector('.leaflet-control-locate')
+        zoomeIconToHide = document.querySelector('.leaflet-control-zoom')
+        streetIconToHide = document.querySelector('.leaflet-control-layers')
+
+        iconsToHide = [
+            mapIconToHide,
+            zoomeIconToHide,
+            streetIconToHide
+        ]
+
+        # placeholder to fix L object
+        # not loading on first load
+        if mapIconToHide != null
+            for icon in iconsToHide
+                icon.style.visibility = 'hidden'
+
+    @updateCurrentLocation = ->
+        document.querySelector('.leaflet-bar-part').click()
+
+        return true
 
     # cancel request function
     @cancelRequest = ->
@@ -100,7 +132,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 pg.alert {title: 'Error', msg: err.message}
 
     @sendRequest = ->
-
         mockRequest =
             pickup_latitude: -33.8650,
             pickup_longitude: 151.2094,
@@ -116,11 +147,16 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 console.log 'err is', err
                 pg.alert {title: 'Error', msg: err.status }
 
-    # execute create map
-    _createMap()
     # check if match exists
     _checkIfMatchExists()
-
-    console.log 'final isLoading at bottom of script', @isLoading
+    # execute create map
+    _createMap()
+    # hide all elements on map
+    # with timeout to allow map locate
+    # object to load
+    setTimeout (->
+        _hideElementsOnMap()
+        return
+    ), 300
 
     return
