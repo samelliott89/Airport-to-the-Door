@@ -7,8 +7,9 @@ qantasApp.factory 'ReverseGeocodeResource', ($resource, transform) ->
     # GET: '/flights/10-11-2012/airport/syd'
     # GET with lat and long as parameters:
     #
-        get:
+        getAddress:
             method: 'get'
+            url: "#{config.apiBase}/geocode/reverse/latitude/:latitude/longitude/:longitude"
 
     # returns
     # "address": "3 Denham Street" or null
