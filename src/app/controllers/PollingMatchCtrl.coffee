@@ -9,6 +9,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, MatchResource, nav) ->
             # no need for a handler as logic
             # will be held in template
             @requestStatus = match.status
+            console.log 'match status on polling view', @requestStatus
             @isLoading = false
         .catch (err) ->
             console.log 'err status is', err.status, err.message
@@ -20,7 +21,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, MatchResource, nav) ->
     @rejectProposedMatch = ->
         MatchResource.cancelMatch()
             .$promise.then (res) ->
-                console.log 'res is', res
+                console.log 'canceled match is', res
             .catch (err) ->
                 console.log 'err is', err
             .finally ->
