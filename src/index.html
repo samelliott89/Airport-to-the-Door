@@ -25,8 +25,6 @@
             window.config = <%% config %%>;
         </script>
 
-        <script src="cordova.js"></script>
-
         <script>
             window.templateHashes = <%% templateHashes %%>;
         </script>
@@ -70,6 +68,12 @@
                 <ons-icon icon="ion-loading-c" spin="true"></ons-icon>
                 <br><br>
                 Found some people for you...
+            </ons-modal>
+
+            <ons-modal var="findingLocationModal">
+                <ons-icon icon="ion-loading-c" spin="true"></ons-icon>
+                <br><br>
+                Looking for your location...
             </ons-modal>
 
             <ons-modal var="findingFlightsModal">
