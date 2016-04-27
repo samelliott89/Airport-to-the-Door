@@ -13,14 +13,18 @@
         </ons-toolbar>
         <folding-cube-spinner></folding-cube-spinner>
         <div class="card text-center" ng-if="!isLoading">
-            <pre>{{poll.requestStatus}}</pre>
-            <p ng-show="poll.requestStatus === 'REQUESTED'">We're looking for someone to match you with.<br>We'll let you know when we do!</p>
-            <p ng-show="poll.requestStatus === 'PROPOSAL'">PROPOSAL</p>
-            <p ng-show="poll.requestStatus === 'ACCEPTED'">ACCEPTED</p>
-            <p ng-show="poll.requestStatus === 'CONFIRMED'">CONFIRMED</p>
+            <p ng-show="requestStatus === 'REQUESTED'">We're looking for someone to match you with.<br>We'll let you know when we do!</p>
+            <p ng-show="requestStatus === 'PROPOSAL'">We've found someone, just waiting for a reply.</p>
+            <p ng-show="requestStatus === 'ACCEPTED'">Your match has accepted your proposal.</p>
+            <p ng-show="requestStatus === 'CONFIRMED'">You have a confimed match.</p>
+            <p ng-show="requestStatus === 'NO MATCH FOUND'">NO MATCH FOUND</p>
         </div>
-        <div class="card text-center" ng-show="poll.requestStatus !== 'CONFIRMED' || poll.requestStatus !== 'ACCEPTED'">
+        <div class="card text-center" ng-show="requestStatus !== 'CONFIRMED' || requestStatus !== 'ACCEPTED'">
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.rejectProposedMatch()">Cancel</ons-button>
+        </div>
+
+        <div class="card text-center" ng-show="requestStatus === 'NO MATCH FOUND'">
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.goBack()">Go back</ons-button>
         </div>
     </ons-page>
 </div>
