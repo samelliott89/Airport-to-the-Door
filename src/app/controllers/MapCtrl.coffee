@@ -4,6 +4,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
     intialZoomLevel = 14
     # fallBackLocation random for now
+    # update to get location on load
     fallBackLat = -33.85
     fallBackLng = 151.20
     @isLoading = false
@@ -13,8 +14,8 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         lat: fallBackLat
         lng: fallBackLng
 
-    # test
-    @reverseGeoCodeLookupString = 'hello'
+    # default reverse string
+    $scope.reverseGeoCodeLookupString = fallBackLat + ', ' + fallBackLng
 
     # set defaults for map load
     angular.extend $scope,
@@ -42,44 +43,40 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 console.log 'address', response.address
                 # if null is returned, default to
                 # the orignal lat, lng of the user
-                if response is null
-                    @reverseGeoCodeLookupString = @lat + ' , ' + @lng
+                if response is null or undefined
+                    console.log 'ReverseGeocodeResource is either null or undefined', response
+                    # therefore defualt to the lat and long values passed into the function
+                    $scope.reverseGeoCodeLookupString = @lat + ', ' + @lng
+                    # then update all the bindings on the scope object
+                    $scope.apply
+                    console.log 'no reverseGeoCodeLookupString, so defualting to empty lat,lng', $scope.reverseGeoCodeLookupString
                 else
-                    @reverseGeoCodeLookupString = response.address
-                    console.log '@reverseGeoCodeLookupString', @reverseGeoCodeLookupString
+                    $scope.reverseGeoCodeLookupString = response.address
+                    # return the address and bind to reverse geocode scope value
+                    $scope.apply
+                    # then update all the bindings on the scope object
+                    console.log '@reverseGeoCodeLookupString', $scope.reverseGeoCodeLookupString
             .catch (err) ->
                 pg.alert {title: 'Error', msg: 'An error occured'}
-                console.log 'err status is', err.status, err.message
+                console.log 'err status is', err.status
 
     # a funcion that deals with the current
-    # status of a TIDY THIS UP
+    # status of the request
     _requestStatusHandler = (requestStatus) ->
+
         @matchExists = true
 
-        if requestStatus == 'REQUESTED'
-            @requestStatus = requestStatus
+        if requestStatus == 'REQUESTED' or 'PROPOSAL' or 'ACCEPTED'
             nav.goto 'pollingMatchCtrl'
             console.log requestStatus
-
-        else if requestStatus == 'PROPOSAL'
-            console.log requestStatus
-            nav.goto 'pollingMatchCtrl'
-            @requestStatus = requestStatus
-
-        else if requestStatus == 'ACCEPTED'
-            console.log requestStatus
-            @requestStatus = requestStatus
-            nav.goto 'pollingMatchCtrl'
-
-        else if requestStatus == 'CONFIRMED'
-            console.log requestStatus
-            @requestStatus = requestStatus
-            nav.goto 'pollingMatchCtrl'
 
     _updateCurrentUserPoint = (location) ->
         usersCurrentLocation =
             lat: location.latlng.lat
             lng: location.latlng.lng
+
+        console.log 'updating users location', usersCurrentLocation
+        # window.findingLocationModal.hide()
 
     # function that updates the circle and marker on the map when the user updates their location
     _updateMarkerAndCircle = (location, map) ->
@@ -87,6 +84,12 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         console.log 'radius', radius
         L.marker(location.latlng).addTo(map).bindPopup('You are within ' + radius + ' meters from this location').openPopup()
         L.circle(location.latlng, radius).addTo map
+
+    # deletes the marker and circle layers
+    _deleteMarkerAndCircle = (map) ->
+        console.log 'deleting marker and circle'
+        map.removeLayer(L.marker)
+        map.removeLayer(L.circle)
 
     _checkIfMatchExists = ->
         MatchResource.getMatch()
@@ -110,10 +113,10 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         # fetch the map object
         leafletData.getMap().then (map) ->
 
-            # create a marker
+            # create a circle marker with default values
             L.circleMarker([fallBackLat, fallBackLng],
-                color: '#FFFFFF'
-                fillColor: '#FFFFFF'
+                color: '#353752'
+                fillColor: '#353752'
             ).addTo(map)
 
             # get the locate object
@@ -129,22 +132,26 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                     enableHighAccuracy: true
 
                 onLocationFound = (location) ->
-                    window.findingLocationModal.hide()
 
+                    # window.findingLocationModal.hide()
+                    # console.log 'hiding findingLocationModal'
                     # fetch the user friendly location
                     # and update it
                     _reverseGeoCodeLookup(location)
+
+                    ##
                     # update the user location
                     # in local storage
                     _updateCurrentUserPoint(location)
 
+                    #delete marker and circle objects
+                    # so that they don't create new ones
+                    # everytime _updateMarkerAndCircle is called
+                    _deleteMarkerAndCircle(map)
+
                     # update the marker and circle object
+                    #
                     _updateMarkerAndCircle(location, map)
-
-                    # radius = location.accuracy / 2
-                    # L.marker(location.latlng).addTo(map).bindPopup('You are within ' + radius + ' meters from this point').openPopup()
-                    # L.circle(location.latlng, radius).addTo map
-
                 map.on('locationfound', onLocationFound)
 
                 # on location error, throw a message
@@ -177,7 +184,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
     @updateCurrentLocation = ->
         document.querySelector('.leaflet-bar-part').click()
-        window.findingLocationModal.show()
+        # window.findingLocationModal.show()
 
         return true
 
@@ -192,7 +199,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 pg.alert {title: 'Error', msg: err.message}
 
     @sendRequest = ->
-
+        # get the flight object from storage
         flightToMatch = storage.get 'flightObj'
 
         flightNumber = flightToMatch.flight_number
@@ -229,6 +236,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         _hideElementsOnMap()
 
         return
-    ), 300
+    ), 200
 
     return
