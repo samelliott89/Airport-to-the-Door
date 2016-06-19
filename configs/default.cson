@@ -58,12 +58,13 @@
 
     preferences:
         "EnableViewportScale": "true"
+        "StatusBarOverlaysWebView": "true"
         "TopActivityIndicator": "white"
         "GapBetwenPages": "2"
         "DisallowOverscroll": "true"
-        "StatusBarStyle": "blackopaque"
-        "target-device": "handset"
         "StatusBarBackgroundColor": "#FFFFFF"
+        "StatusBarStyle": "lightcontent"
+        "target-device": "handset"
         "orientation": "portrait"
 
     features: [
