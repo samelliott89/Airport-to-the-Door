@@ -283,7 +283,6 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
                 # go to list of flights
                 nav.goto 'listOfFlightsCtrl'
 
-
     @back = ->
         nav.back()
 
