@@ -10,7 +10,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav) ->
         .$promise.then (match) ->
             if (match.status == 'REQUESTED')
                 $scope.viewRequestTitleStatus = 'Finding match...'
-                $scope.viewRequestMessage = 'We are looking for someone to match you with. We will ll let you know when we find someone!'
+                $scope.viewRequestMessage = 'We are looking for someone to match you with. We will let you know when we find someone!'
 
             else if (match.status == 'PROPOSAL')
                 $scope.viewRequestTitleStatus = 'Waiting...'
