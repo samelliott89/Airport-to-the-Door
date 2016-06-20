@@ -1,10 +1,10 @@
 <div ng-controller="PollingMatchCtrl as poll">
     <ons-page>
         <ons-toolbar>
-            <div class="left"><ons-toolbar-button ng-click="nav.goBack()">Close</ons-toolbar-button></div>
-            <div class="center">{{viewRequestTitleStatus}}</div>
-            <div class="right"><ons-toolbar-button ng-click="poll.goBack()">Done</ons-toolbar-button></div>
-        </ons-toolbar>
+<!--             <div class="left"><ons-toolbar-button ng-click="nav.goBack()">Close</ons-toolbar-button></div>
+ -->            <div class="center">{{viewRequestTitleStatus}}</div>
+<!--             <div class="right"><ons-toolbar-button ng-click="poll.goBack()">Done</ons-toolbar-button></div>
+ -->        </ons-toolbar>
 
         <folding-cube-spinner></folding-cube-spinner>
         <div class="card padd text-muted text-center" ng-if="!isLoading">
@@ -12,7 +12,7 @@
         </div>
 
         <!-- button state request status is NOT confirmed or accepted -->
-        <div class="card text-center" ng-show="scope.requestStatus !== 'CONFIRMED' || requestStatus !== 'ACCEPTED'">
+        <div class="card text-center" ng-show="requestStatus !== 'CONFIRMED' || requestStatus !== 'ACCEPTED'">
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.rejectProposedMatch()">Cancel</ons-button>
         </div>
 
