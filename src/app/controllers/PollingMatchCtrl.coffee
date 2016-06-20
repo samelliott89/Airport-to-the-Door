@@ -3,8 +3,6 @@ qantasApp = angular.module 'qantasApp'
 qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav) ->
 
     @isLoading = true
-    @viewRequestTitleStatus = ''
-    @viewRequestMessage = ''
 
     MatchResource.getMatch()
         .$promise.then (match) ->
