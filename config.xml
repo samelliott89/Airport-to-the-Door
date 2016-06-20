@@ -40,12 +40,13 @@
     </platform>
 
         <preference name="EnableViewportScale" value="true"/>
+        <preference name="StatusBarOverlaysWebView" value="true"/>
         <preference name="TopActivityIndicator" value="white"/>
         <preference name="GapBetwenPages" value="2"/>
         <preference name="DisallowOverscroll" value="true"/>
-        <preference name="StatusBarStyle" value="blackopaque"/>
-        <preference name="target-device" value="handset"/>
         <preference name="StatusBarBackgroundColor" value="#FFFFFF"/>
+        <preference name="StatusBarStyle" value="lightcontent"/>
+        <preference name="target-device" value="handset"/>
         <preference name="orientation" value="portrait"/>
 
         <feature name="http://api.phonegap.com/1.0/battery"/>
