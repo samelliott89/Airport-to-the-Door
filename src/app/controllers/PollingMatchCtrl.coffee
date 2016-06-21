@@ -3,7 +3,6 @@ qantasApp = angular.module 'qantasApp'
 qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav, requestStatusCheck) ->
 
     $scope.request = requestStatusCheck.getRequest()
-    console.log 'testing request', $scope.request
     # update bindings
     $scope.$apply
 
