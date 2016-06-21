@@ -92,7 +92,7 @@ qantasApp.run ($rootScope, localNotifications) ->
         $rootScope.$on 'login',  -> localNotifications.syncOnShiftChanges()
         $rootScope.$on 'logout', -> localNotifications.clearAll()
 
-qantasApp.run ($rootScope, $location, $timeout, auth, nav) ->
+qantasApp.run ($rootScope, $location, $timeout, auth, nav, MatchResource) ->
     $rootScope.nav = nav
     $rootScope.auth = auth
 
@@ -101,7 +101,24 @@ qantasApp.run ($rootScope, $location, $timeout, auth, nav) ->
         # Important: this controls the first page the user sees
         # If you never do this, it'll get stuck on a blank page
         if auth.isAuthenticated()
-            nav.setRootPage 'navigator'
+            # check on run for request setting
+            MatchResource.getMatch()
+                .$promise.then (match) ->
+
+                    $rootScope.requestStatus = match.status
+                    nav.setRootPage 'pollingMatchCtrl'
+                    console.log 'match status', $rootScope.requestStatus
+
+                .catch (err) ->
+                    if err.status == 404
+                        $rootScope.requestStatus = 'NO_MATCH_FOUND'
+                        nav.setRootPage 'navigator'
+                        console.log 'requestStatus', $rootScope.requestStatus
+
+                    else
+                        pg.alert {title: 'Error', msg: 'An error occured'}
+                        console.log 'err status is', err.status
+
         else
             nav.setRootPage 'authCtrl'
 
