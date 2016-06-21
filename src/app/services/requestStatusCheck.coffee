@@ -29,7 +29,7 @@ qantasApp.factory 'requestStatusCheck', (MatchResource) ->
                         request.subTitle = 'Your match has accepted your proposal.'
 
                     else if (request.status == 'CONFIRMED')
-                        request.title = 'Waiting...'
+                        request.title = 'Congratulations'
                         request.subTitle = 'We have found someone, we are just waiting for a reply.'
 
                     # the proposed user as part of request
