@@ -116,7 +116,6 @@ qantasApp.run ($rootScope, $location, $timeout, auth, nav, MatchResource) ->
                         console.log 'requestStatus', $rootScope.requestStatus
 
                     else
-                        pg.alert {title: 'Error', msg: 'An error occured'}
                         console.log 'err status is', err.status
 
         else
