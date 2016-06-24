@@ -208,7 +208,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         pickupLongitude = usersCurrentLocation.lng
 
         # TODO: update this to pull from local storage
-        arrivalDateTime = '22-06-2016_09-00-00'
+        arrivalDateTime = '23-06-2016_10-00-00'
 
         mockRequest =
             pickup_latitude: pickupLatitude
