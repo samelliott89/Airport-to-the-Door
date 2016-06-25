@@ -1,6 +1,18 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'SidemenuCtrl', ($scope, $http, $window, nav, pg, auth) ->
+qantasApp.controller 'SidemenuCtrl', ($scope, $http, $window, nav, pg, auth, requestStatusCheck) ->
+
+    requestStatusCheck.getRequest()
+        .then (request) ->
+            if request.status == 'NO_MATCH_FOUND'
+                console.log 'request.status', request.status
+                $scope.showPollingView = false
+                $scope.$apply
+
+            else
+                console.log 'request.status', request.status
+                $scope.showPollingView = false
+                $scope.$apply
 
     @logout = ->
         nav.resetTo 'flightNumberCtrl'
