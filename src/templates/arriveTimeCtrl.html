@@ -32,15 +32,15 @@
             </div>
 
             <div class="textTwo text-muted padd text-center">
-                <p>Flight <span class="semi-bold">{{arri.selectedFlightNumber}}</span> is scheduled to leave at <span class="strong">{{arri.formatTime}}</span></p>
-                <span class="small">{{arri.timeUntilFlight}}</span></p>
+                <p>Flight <span class="semi-bold">{{arri.selectedFlightNumber}}</span> is scheduled to leave on <span class="strong">{{arri.formattedDateOfFlight}}</span></p>
+                <span class="small">{{arri.relativeTimeUntilFlight}}</span></p>
             </div>
         </div>
 
         <div class="padd text-muted text-center animated fadeIn fade-in-slow">
             <div ng-show="arri.value">
                 <ons-icon icon="ion-ios7-checkmark-outline" class="icon-center icon-success icon-bounce" size="60px"></ons-icon>
-                <p>Flight <span class="semi-bold">{{arri.selectedFlightNumber}}</span> is scheduled to leave at <span class="strong">{{arri.formatTime}}</span></p>
+                <p>Flight <span class="semi-bold">{{arri.selectedFlightNumber}}</span> is scheduled to leave at <span class="strong">{{arri.formattedDateOfFlight}}</span></p>
                 <p>You will arrive at the airport {{arri.timeBefore}} before your flight.</p>
                 <ons-button class="button--clear margin-top button-cyclinder" ng-click="arri.clearValue()">Back</ons-button>
             </div>
