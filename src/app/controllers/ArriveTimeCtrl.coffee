@@ -1,23 +1,13 @@
 qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
-
-    jqLite = angular.element
-
     selectedFlight = storage.get 'flightObj'
     @selectedFlightNumber = selectedFlight.flight_number
-    localTime = selectedFlight.local_departure_time
 
-    friendlyTime = moment(localTime, 'DD-MM-YYYY_HH-mm-ss')
-
-    formatTime = friendlyTime.toDate()
-
-    @finaltime = formatTime
-
-    @timeUntilFlight = moment(formatTime, 'YYYYMMDD').fromNow()
-
-    console.log 'friendlyTime', friendlyTime
-    console.log 'formatTime', formatTime
+    localDatetime = selectedFlight.local_departure_datetime
+    momentDatetime = moment(localDatetime, 'DD-MM-YYYY-HH-mm-ss')
+    @formattedTimeOfFlight = momentDatetime.format('h:mm a')
+    @relativeTimeUntilFlight = momentDatetime.fromNow()
 
     @submitValue = (value) ->
         @value = value
