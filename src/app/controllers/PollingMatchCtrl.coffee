@@ -1,11 +1,11 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav, requestStatusCheck) ->
+qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav, requestStatusCheck, storage) ->
 
     requestStatusCheck.getRequest()
         .then (request) ->
             $scope.request = request
-            if (request.status != 'NO_MATCH_FOUND')
+            if request.status != 'NO_MATCH_FOUND'
                 console.log 'flight', request.proposedFlight
                 console.log 'user', request.proposedUser
         .catch (err) ->
@@ -21,6 +21,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav, req
         MatchResource.cancelMatch()
             .$promise.then (res) ->
                 console.log 'canceled match is', res
+                # storage.clearAll()
             .catch (err) ->
                 console.log 'cancel match err is', err
             .finally ->
@@ -30,6 +31,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav, req
         MatchResource.rejectProposedMatch()
             .$promise.then (res) ->
                 console.log 'rejected proposed match is', res
+                # storage.clearAll()
             .catch (err) ->
                 console.log 'reject proposed match err is', err
             .finally ->
