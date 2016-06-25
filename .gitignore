@@ -33,3 +33,6 @@ merges
 plugins
 www
 *.xml
+
+# IntelliJ
+.idea/airportTTDoor.iml
