@@ -41,7 +41,7 @@
                     </ons-col>
                     <ons-col>
                         <span class="item-title">{{flight.flight_number}}</span>
-                        <span class="item-label">Flying from: {{flight.departure_airport}}</span>
+                        <span class="item-label">Leaving at: {{flight.local_departure_datetime | readableTime}}</span>
                         <p class="item-desc">{{flight.carrier}}</p>
                     </ons-col>
                 </ons-row>
