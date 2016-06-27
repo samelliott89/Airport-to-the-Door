@@ -9,8 +9,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav, req
             $scope.request = request
             @isLoading = false
             if request.status is not 'NO_MATCH_FOUND' or not 'REQUESTED'
-                console.log 'flight', request.proposedFlight
-                console.log 'user', request.proposedUser
+                console.log 'proposed', request.proposedFlight, request.proposedUser
         .catch (err) ->
             console.log 'an error occured', err
 
