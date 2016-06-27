@@ -6,7 +6,7 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
     @selectedFlightNumber = selectedFlight.flight_number
 
     localDatetime = selectedFlight.local_departure_datetime
-    momentDatetime = moment(localDatetime, 'DD-MM-YYYY-HH-mm-ss')
+    momentDatetime = moment(localDatetime, 'DD-MM-YYYY_HH-mm-ss')
     @formattedTimeOfFlight = momentDatetime.format('h:mm a')
     @relativeTimeUntilFlight = momentDatetime.fromNow()
 

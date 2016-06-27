@@ -206,9 +206,9 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
         # package up
         arrivalDateTime = flightToMatch.local_departure_datetime
-        momentDateTime = moment(arrivalDateTime, 'DD-MM-YYYY-HH-mm-ss')
+        momentDateTime = moment(arrivalDateTime, 'DD-MM-YYYY_HH-mm-ss')
         adjustedDateTime = moment(momentDateTime).add(minutesBefore, 'minutes')
-        finalDateTime = adjustedDateTime.format('DD-MM-YYYY-HH-mm-ss')
+        finalDateTime = adjustedDateTime.format('DD-MM-YYYY_HH-mm-ss')
 
         requestToBeSent =
             pickup_latitude: usersCurrentLocation.lat
