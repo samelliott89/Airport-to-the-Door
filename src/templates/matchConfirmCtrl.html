@@ -7,9 +7,9 @@
 
         <div class="card text-center">
             <div class="card-name">{{mach.request.flight_number}}</div>
-            <div class="card-desc">{{mach.request.airport}} - {{mach.request.airport}}
+            <div class="card-desc">Travelling from {{mach.request.airport}} to {{mach.request.airport}}
+            <div class="card-desc">Your flight is leaving at {{mach.request.arrival_datetime | readableTime}}</div>
                 <br>Now time to find you a ride!</div>
-            <div class="card-desc">Leaving at {{mach.request.arrival_datetime | readableTime}}</div>
         </div>
 
         <div class="card text-center">
