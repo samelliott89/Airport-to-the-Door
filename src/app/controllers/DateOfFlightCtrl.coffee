@@ -56,12 +56,14 @@ setTimeForDateObject = (date, timeObj) ->
     hours = keys[...(keys.length - 2)].join('') or '0'
     date.setHours makeHour hours, timeObj.period
     date.setMinutes parseInt(minutes) or 0
+
     return date
 
 setDayValidity = (day) ->
 
     if not hasShift day
         day.isValid = undefined
+
         return undefined
 
     times = ['start', 'end']
@@ -80,6 +82,7 @@ setDayValidity = (day) ->
             time.isValid = true
 
     day.isValid = isValid
+
     return isValid
 
 getLastNItems = (arr, n) -> arr.slice(Math.max(arr.length - n, 1))
@@ -125,7 +128,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         # todo: ensure selected day in week is in view
         @selectedDayIndex = index
         @selectedDay = @schedule[index]
-        storage.set 'flight_date', @selectedDay
+        storage.set 'flightDate', @selectedDay
         @selectedField = 'start'
         @justChangedField = true
 
@@ -249,6 +252,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         for day in @schedule when hasShift day
             unless (day.isValid is true) or (day.start.isValid is true) or (day.end.isValid is true)
                 pg.alert {msg: 'Please fix invalid shifts. Days must have valid 12 hour times.', title: 'Invalid Shifts'}
+
                 return
 
         window.addShiftsModal.show()
@@ -262,7 +266,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
     @findFlights = ->
         window.findingFlightsModal.show()
         # get the selected day from local storage
-        selectedDate = storage.get 'flight_date'
+        selectedDate = storage.get 'flightDate'
         # set the day key from selectedDate object
         selectedDay = selectedDate.day
         # format date for API
