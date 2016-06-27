@@ -91,8 +91,8 @@ gulp.task 'copy', ->
         # ['./sourcePath',                        './destPath']
         ['./src/templates/**/*',                  "#{DEST}/templates"]
         ['./src/assets/**/*',                     DEST]
-        ['./src/lib/onsen/css/font_awesome/**/*', "#{DEST}/font_awesome"]
-        ['./src/lib/onsen/css/ionicons/**/*',     "#{DEST}/ionicons"]
+        ['./node_modules/onsenui/css/font_awesome/**/*', "#{DEST}/font_awesome"]
+        ['./node_modules/onsenui/css/ionicons/**/*',     "#{DEST}/ionicons"]
     ]
 
     streams = tasks.map (task) -> gulp.src(task[0]).pipe gulp.dest task[1]
