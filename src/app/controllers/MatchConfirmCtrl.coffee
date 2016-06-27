@@ -4,8 +4,6 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, MatchResource) ->
 
     @request = nav.getParams 'request'
 
-    console.log 'request is', @request
-
     @confirmRequest = ->
         MatchResource.requestMatch @request
             .$promise.then (match) ->
