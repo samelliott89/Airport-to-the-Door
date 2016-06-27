@@ -1,6 +1,7 @@
 qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
+
     selectedFlight = storage.get 'flightObj'
     @selectedFlightNumber = selectedFlight.flight_number
 
@@ -33,13 +34,8 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
             @timeBefore = '3 hours'
 
     @submitAmount = ->
-
         flightTime = selectedFlight.local_departure_datetime
         minutesBefore = storage.get 'minutesBefore'
-
-        # add these two values together and then
-        # set in object as arrivalTime
-
         nav.goto 'rideCountCtrl'
 
     @clearValue = ->
