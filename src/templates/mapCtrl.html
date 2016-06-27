@@ -20,14 +20,8 @@
             <ion-icon class="ion-navigate" style="font-size:"></ion-icon>
         </button>
 
-        <div class="map-back-button" ng-show="mapv.matchExists && !mapv.isLoading">
-            <ons-button class="button--clear margin-top button-cyclinder button--map"
-                ng-click="mapv.cancelRequest()">Cancel request</ons-button>
-        </div>
-
         <div class="map-back-button" ng-show="!mapv.matchExists && !mapv.isLoading">
-            <ons-button class="button--clear margin-top button-cyclinder button--map"
-                ng-click="mapv.sendRequest()">Find match</ons-button>
+            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="mapv.sendRequest()">Find match</ons-button>
         </div>
 
         <div class="map-back-button" ng-show="mapv.isLoading">

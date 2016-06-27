@@ -2,39 +2,38 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'PollingMatchCtrl', ($http, $scope, MatchResource, nav, requestStatusCheck, storage) ->
 
+    @isLoading = true
+
     requestStatusCheck.getRequest()
         .then (request) ->
             $scope.request = request
-            if request.status != 'NO_MATCH_FOUND'
-                console.log 'flight', request.proposedFlight
-                console.log 'user', request.proposedUser
+            @isLoading = false
+            if request.status is not 'NO_MATCH_FOUND' or not 'REQUESTED'
+                console.log 'proposed', request.proposedFlight, request.proposedUser
         .catch (err) ->
             console.log 'an error occured', err
 
         # update bindings
         $scope.$apply
 
-    @goBack = ->
-        nav.setRootPage 'navigator'
-
     @cancelMatch = ->
         MatchResource.cancelMatch()
             .$promise.then (res) ->
                 console.log 'canceled match is', res
-                # storage.clearAll()
             .catch (err) ->
                 console.log 'cancel match err is', err
             .finally ->
+                storage.clearFlightData()
                 nav.setRootPage 'navigator'
 
     @rejectProposedMatch = ->
         MatchResource.rejectProposedMatch()
             .$promise.then (res) ->
                 console.log 'rejected proposed match is', res
-                # storage.clearAll()
             .catch (err) ->
                 console.log 'reject proposed match err is', err
             .finally ->
+                storage.clearFlightData()
                 nav.setRootPage 'navigator'
 
     @acceptProposedMatch = ->

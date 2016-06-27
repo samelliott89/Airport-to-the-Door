@@ -7,7 +7,7 @@ qantasApp.directive 'shiftsWeekScroller', ($timeout) ->
     link: (scope, element, attrs) ->
 
         scope.$watch 'selectedDayIndex', (newValue, oldValue) ->
-            return  if newValue is oldValue
+            return if newValue is oldValue
 
             _do = ->
                 selectedDay = element.find('.week__day--selected')

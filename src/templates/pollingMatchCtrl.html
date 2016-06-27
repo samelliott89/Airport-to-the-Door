@@ -1,41 +1,43 @@
 <div ng-controller="PollingMatchCtrl as poll">
     <ons-page>
         <ons-toolbar>
-<!--             <div class="left"><ons-toolbar-button ng-click="poll.goBack()">Close</ons-toolbar-button></div>
- -->            <div class="center">{{request.title}}</div>
+            <div class="center">{{request.title}}</div>
         </ons-toolbar>
 
-        <folding-cube-spinner ng-show="request.status === 'REQUESTED' || request.status === 'PROPOSED' || request.status === 'ACCEPTED'"></folding-cube-spinner>
+        <div ng-if="!isLoading" class="animated fadeIn">
+            <folding-cube-spinner ng-show="request.status === 'REQUESTED' || request.status === 'PROPOSED' || request.status === 'ACCEPTED'"></folding-cube-spinner>
+            <confirm-animation ng-show="request.status === 'CONFIRMED' && request.status !== 'NO_MATCH_FOUND'"></confirm-animation>
+        </div>
 
-        <confirm-animation ng-show="request.status === 'CONFIRMED' && request.status !== 'NO_MATCH_FOUND'"></confirm-animation>
-
-        <div class="card padd text-muted text-center" ng-show="!isLoading">
+        <div class="card padd text-muted text-center" ng-if="!isLoading">
             <p>{{request.subTitle}}</p>
         </div>
 
-        <!-- button state request status is REQUESTED -->
-        <div class="card text-center" ng-show="request.status === 'REQUESTED'">
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Cancel request</ons-button>
-        </div>
+        <div ng-if="!isLoading">
+            <!-- button state request status is REQUESTED -->
+            <div class="card text-center animated fadeIn" ng-show="request.status === 'REQUESTED'">
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Cancel request</ons-button>
+            </div>
 
-        <!-- button state request status is PROPOSED -->
-        <div class="card text-center" ng-show="request.status === 'PROPOSED'">
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.acceptProposedMatch()">Accept</ons-button>
-        </div>
+            <!-- button state request status is PROPOSED -->
+            <div class="card text-center animated fadeIn" ng-show="request.status === 'PROPOSED'">
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.acceptProposedMatch()">Accept</ons-button>
+            </div>
 
-        <!-- button state if request status is ACCEPTED -->
-        <div class="card text-center" ng-show="request.status === 'ACCEPTED'">
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Accepted</ons-button>
-        </div>
+            <!-- button state if request status is ACCEPTED -->
+            <div class="card text-center animated fadeIn" ng-show="request.status === 'ACCEPTED'">
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Accepted</ons-button>
+            </div>
 
-        <!-- button state if request status is CONFIRMED -->
-        <div class="card text-center" ng-show="request.status === 'CONFIRMED'">
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Cancel</ons-button>
-        </div>
+            <!-- button state if request status is CONFIRMED -->
+            <div class="card text-center animated fadeIn" ng-show="request.status === 'CONFIRMED'">
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Cancel</ons-button>
+            </div>
 
-        <!-- button state if request status is NOT FOUND -->
-        <div class="card text-center" ng-show="request.status === 'NO_MATCH_FOUND'">
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.goBack()">Get started</ons-button>
+            <!-- button state if request status is NOT FOUND -->
+            <div class="card text-center animated fadeIn" ng-show="request.status === 'NO_MATCH_FOUND'">
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.goBack()">Get started</ons-button>
+            </div>
         </div>
 
     </ons-page>
