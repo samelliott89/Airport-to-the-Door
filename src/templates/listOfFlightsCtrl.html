@@ -11,9 +11,9 @@
 
         <!-- search bar -->
 
-        <form class="search-panel" ng-class="{'search-panel--has-text': srch.searchTerm}" ng-if="list.flightsAvailable">
-            <div class="search-panel__field search-input" ng-click="srch.focus('searchInput')">
-                <input class="search-panel__input" type="text" placeholder="Search for flight number" required ng-model="searchString">
+        <form class="search-panel">
+            <div class="search-panel__field search-input">
+                <input class="search-panel__input" type="text" placeholder="Search for flight number" ng-model="searchFilter">
             </div>
         </form>
 
@@ -33,7 +33,7 @@
 
         <ons-list class="flight-list animated fadeIn" ng-if="list.flightsAvailable">
             <ons-list-header>Please select a flight</ons-list-header>
-            <ons-list-item flight-list-item modifier="chevron" ng-repeat="flight in list.flights | orderBy: 'flight_number' | filter:searchString" ng-click="list.goToFlightSummary(flight)">
+            <ons-list-item flight-list-item modifier="chevron" ng-repeat="flight in list.flights | filter:searchFilter | orderBy: 'flight_number'" ng-click="list.goToFlightSummary(flight)">
                 <ons-row>
                     <ons-col width="80px">
                         <img ng-src="http://a3.mzstatic.com/au/r30/Purple69/v4/52/79/9e/52799eef-edf5-18e7-92a2-bd069da18ec9/icon175x175.png"
