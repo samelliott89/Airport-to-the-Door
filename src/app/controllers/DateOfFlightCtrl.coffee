@@ -124,6 +124,10 @@ _pluralize = (num, string, suffix = 's') ->
 
 qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage, FlightResource) ->
 
+    # clear all flight data in local storage
+    # and start with a clean slate
+    storage.clearFlightData()
+
     @selectDay = (index) =>
         # todo: ensure selected day in week is in view
         @selectedDayIndex = index
