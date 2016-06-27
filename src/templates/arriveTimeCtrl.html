@@ -39,9 +39,12 @@
 
         <div class="padd text-muted text-center animated fadeIn fade-in-slow">
             <div ng-show="arri.value">
+
                 <ons-icon icon="ion-ios7-checkmark-outline" class="icon-center icon-success icon-bounce" size="60px"></ons-icon>
+
                 <p>Flight <span class="semi-bold">{{arri.selectedFlightNumber}}</span> is scheduled to leave at <span class="strong">{{arri.formattedTimeOfFlight}}</span></p>
                 <p>You will arrive at the airport {{arri.timeBefore}} before your flight.</p>
+
                 <ons-button class="button--clear margin-top button-cyclinder" ng-click="arri.clearValue()">Back</ons-button>
             </div>
         </div>
