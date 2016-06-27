@@ -6,17 +6,15 @@ qantasApp.controller 'RideCountCtrl', ($http, auth, nav, storage) ->
 
     @submitValue = (value) ->
         @value = value
+        storage.set 'rideCount', @value
         $('.buttonOne').addClass('animated bounceOutLeft')
         $('.buttonTwo').addClass('animated bounceOutRight')
         $('.textOne').addClass('animated bounceOutRight')
+        # kind of fucking gross,
+        # but will come up with better way to use animations
         setTimeout (->
-            $('.removeElement').hide()
-        ), 300
-
-        storage.set 'rideCount', @value
-
-    @submitCount = ->
-        nav.goto 'mapCtrl'
+            nav.goto 'mapCtrl'
+        ), 400
 
     @clearValue = ->
         @value = null
