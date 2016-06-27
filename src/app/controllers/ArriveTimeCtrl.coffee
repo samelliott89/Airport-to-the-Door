@@ -18,9 +18,6 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         $('.buttonFour').addClass('animated bounceOut')
         $('.textOne').addClass('animated bounceOutUp')
         $('.textTwo').addClass('animated bounceOutDown')
-        setTimeout (->
-            $('.removeElement').hide()
-        ), 300
 
         storage.set 'minutesBefore', @value
 
@@ -33,10 +30,12 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         else if @value == 180
             @timeBefore = '3 hours'
 
-    @submitAmount = ->
-        flightTime = selectedFlight.local_departure_datetime
-        minutesBefore = storage.get 'minutesBefore'
-        nav.goto 'rideCountCtrl'
+        # kind of fucking gross,
+        # but will come up with better way to use animations
+        setTimeout (->
+            nav.goto 'rideCountCtrl'
+        ), 800
+
 
     @clearValue = ->
         @value = null
