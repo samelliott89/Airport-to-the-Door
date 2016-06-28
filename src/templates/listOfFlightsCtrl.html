@@ -11,7 +11,7 @@
 
         <!-- search bar -->
 
-        <form class="search-panel" ng-if="list.flightsAvailable">
+        <form class="search-panel" ng-class="(list.flightsAvailable > 0) ? 'visible' : ''">
             <div class="search-panel__field search-input">
                 <input class="search-panel__input" type="text" placeholder="Search for flight number" ng-model="searchFilter">
             </div>
@@ -35,16 +35,18 @@
             <ons-list-header>Please select a flight</ons-list-header>
             <ons-list-item flight-list-item modifier="chevron" ng-repeat="flight in list.flights | filter:searchFilter | orderBy: 'flight_number'" ng-click="list.goToFlightSummary(flight)">
                 <ons-row>
-                    <ons-col width="80px">
-                        <img ng-src="http://a3.mzstatic.com/au/r30/Purple69/v4/52/79/9e/52799eef-edf5-18e7-92a2-bd069da18ec9/icon175x175.png"
-                            class="item-thum animated fadeIn"></img>
-                    </ons-col>
-                    <ons-col>
-                        <span class="item-title">{{flight.flight_number}}</span>
-
-                        <span class="item-label">Leaving at: {{flight.local_departure_datetime | readableTime}}</span>
-                        <span class="item-label">for: {{flight.destination_airport_name}}</span>
-                        <p class="item-desc">{{flight.carrier}}</p>
+                    <img ng-src="http://a3.mzstatic.com/au/r30/Purple69/v4/52/79/9e/52799eef-edf5-18e7-92a2-bd069da18ec9/icon175x175.png"
+                        class="item-thum animated fadeIn"/>
+                    <ons-col class="item-content">
+                        <div class="item-title">
+                          {{flight.flight_number}}
+                        </div>
+                        <div class="item-desc">
+                          {{flight.carrier}}
+                        </div>
+                        <div class="item-label">
+                          {{flight.local_departure_datetime | readableTime}} to {{flight.destination_airport_name}}
+                        </div>
                     </ons-col>
                 </ons-row>
             </ons-list-item>
