@@ -11,7 +11,7 @@
 
         <!-- search bar -->
 
-        <form class="search-panel">
+        <form class="search-panel" ng-if="list.flightsAvailable">
             <div class="search-panel__field search-input">
                 <input class="search-panel__input" type="text" placeholder="Search for flight number" ng-model="searchFilter">
             </div>
@@ -41,7 +41,9 @@
                     </ons-col>
                     <ons-col>
                         <span class="item-title">{{flight.flight_number}}</span>
+
                         <span class="item-label">Leaving at: {{flight.local_departure_datetime | readableTime}}</span>
+                        <span class="item-label">for: {{flight.destination_airport_name}}</span>
                         <p class="item-desc">{{flight.carrier}}</p>
                     </ons-col>
                 </ons-row>
