@@ -2,20 +2,7 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, phoneValidationHelper) ->
     inProgress = false
-    addedDummyPhonePrefix = false
-    @isValidNumber = false
-
     window.editProfile = this
-
-    @onPhoneNumberChange = ->
-        @isValidNumber = phoneValidationHelper.isNumberValid @phone
-        # TODO(SK): This is a hack to prepopulate the phone input (once) until we reevaluate a better
-        # way of parsing/rendering phone numbers that doesn't rely on the horrendous phoneFormat lib
-        if not @phone && not addedDummyPhonePrefix
-            addedDummyPhonePrefix = true
-            @phone = '+61'
-        else
-            @phone = phoneValidationHelper.formatPhoneNumber @phone
 
     # Prevent the side menu from appearing
     ons.ready ->
