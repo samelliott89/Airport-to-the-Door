@@ -16,9 +16,9 @@
                 ng-model="reverseGeoCodeLookupString" ng-change="reverseGeoCodeLookupString">
         </div>
 
-        <button class="location-finder" ng-click="mapv.updateCurrentLocation()">
+        <ons-button class="location-finder" ng-click="mapv.updateCurrentLocation()">
             <ion-icon class="ion-navigate" style="font-size:"></ion-icon>
-        </button>
+        </ons-button>
 
         <div class="map-back-button" ng-show="!mapv.matchExists && !mapv.isLoading">
             <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="mapv.sendRequest()">Find match</ons-button>
