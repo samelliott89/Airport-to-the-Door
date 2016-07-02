@@ -11,7 +11,7 @@
 
         <!-- search bar -->
 
-        <form class="search-panel" ng-class="{'search-panel--has-text': srch.searchTerm}" ng-if="list.flightsAvailable">
+        <form class="search-panel animated bounceInRight" ng-class="{'search-panel--has-text': srch.searchTerm}" ng-if="list.flightsAvailable">
             <div class="search-panel__field search-input" ng-click="srch.focus('searchInput')">
                 <input class="search-panel__input" type="text" placeholder="Search for flight number" required ng-model="searchString">
             </div>
