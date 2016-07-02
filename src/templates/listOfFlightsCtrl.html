@@ -10,32 +10,27 @@
         </ons-toolbar>
 
         <!-- search bar -->
-
         <form class="search-panel" ng-class="(list.flightsAvailable > 0) ? 'visible' : ''">
             <div class="search-panel__field search-input">
                 <input class="search-panel__input" type="text" placeholder="Search for flight number" ng-model="searchFilter">
             </div>
         </form>
-
         <!-- end search bar -->
 
         <!-- screen shown when no flights are found -->
-
         <div class="card text-center animated fadeIn" ng-if="!list.flightsAvailable">
             <div class="card-name">Sorry no flights were found for this date.</div>
             <div class="card-desc">Please select a different date.</div>
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="nav.back()">Go Back</ons-button>
         </div>
-
         <!-- end of screen shown when no flights are found -->
 
         <!-- list of flights shown when no flights are found -->
-
         <ons-list class="flight-list animated fadeIn" ng-if="list.flightsAvailable">
             <ons-list-header>Please select a flight</ons-list-header>
             <ons-list-item flight-list-item modifier="chevron" ng-repeat="flight in list.flights | filter:searchFilter | orderBy: 'flight_number'" ng-click="list.goToFlightSummary(flight)">
                 <ons-row>
-                    <img ng-src="http://a3.mzstatic.com/au/r30/Purple69/v4/52/79/9e/52799eef-edf5-18e7-92a2-bd069da18ec9/icon175x175.png"
+                    <img src="qantas/qantas_logo.png"
                         class="item-thum animated fadeIn"/>
                     <ons-col class="item-content">
                         <div class="item-title">
@@ -51,7 +46,6 @@
                 </ons-row>
             </ons-list-item>
         </ons-list>
-
         <!-- end of list of flights shown when no flights are found -->
 
     </ons-page>

@@ -8,6 +8,7 @@ qantasApp.factory 'templatePrefetch', ($rootScope, $templateCache, $http, $q) ->
         window.config.prefetchAngularTemplates.forEach (templatePath) ->
 
             if $templateCache.get templatePath
+
                 return
 
             promise = promise

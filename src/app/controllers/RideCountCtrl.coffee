@@ -12,6 +12,7 @@ qantasApp.controller 'RideCountCtrl', ($http, auth, nav, storage) ->
         $('.textOne').addClass('animated bounceOutRight')
         # kind of fucking gross,
         # but will come up with better way to use animations
+        #
         setTimeout (->
             nav.goto 'mapCtrl'
         ), 400
