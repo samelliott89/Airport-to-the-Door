@@ -66,7 +66,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
         @matchExists = true
 
-        if requestStatus == 'REQUESTED' or 'PROPOSAL' or 'ACCEPTED'
+        if requestStatus == 'REQUESTED' or 'PROPOSAL' or 'ACCEPTED' or 'CONFIRMED'
             nav.goto 'pollingMatchCtrl'
             console.log requestStatus
 
@@ -199,31 +199,29 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 pg.alert {title: 'Error', msg: err.message}
 
     @sendRequest = ->
+
         # get the flight object from storage
         flightToMatch = storage.get 'flightObj'
+        minutesBefore = storage.get 'minutesBefore'
 
-        flightNumber = flightToMatch.flight_number
-        airport = flightToMatch.departure_airport
-        pickupLatitude = usersCurrentLocation.lat
-        pickupLongitude = usersCurrentLocation.lng
+        # package up
+        arrivalDateTime = flightToMatch.local_departure_datetime
+        momentDateTime = moment(arrivalDateTime, 'DD-MM-YYYY_HH-mm-ss')
+        adjustedDateTime = moment(momentDateTime).add(minutesBefore, 'minutes')
+        finalDateTime = adjustedDateTime.format('DD-MM-YYYY_HH-mm-ss')
 
-        # TODO: update this to pull from local storage
-        arrivalDateTime = '22-06-2016_09-00-00'
-
-        mockRequest =
-            pickup_latitude: pickupLatitude
-            pickup_longitude: pickupLongitude
-            flight_number: flightNumber
-            airport: 'SYD'
+        requestToBeSent =
+            pickup_latitude: usersCurrentLocation.lat
+            pickup_longitude: usersCurrentLocation.lat
+            flight_number: flightToMatch.flight_number
+            airport: flightToMatch.departure_airport or 'SYD'
+            # TODO (sk) update arrivalDateTime to finalDateTime when bug is fixed
+            # for moment.add()
             arrival_datetime: arrivalDateTime
 
-        MatchResource.requestMatch mockRequest
-            .$promise.then (match) ->
-                nav.goto 'pollingMatchCtrl'
-                console.log 'match is', match
-            .catch (err) ->
-                console.log 'err is', err
-                pg.alert {title: 'Error', msg: err.status }
+        # confirm with the user the details
+        # they've inputted
+        nav.goto 'matchConfirmCtrl', {request: requestToBeSent, animation: 'lift'}
 
     # check if match exists
     _checkIfMatchExists()

@@ -1,10 +1,9 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'EditProfileCtrl', ($rootScope, $scope, auth, nav, UserResource, prefs, phoneValidation) ->
+qantasApp.controller 'EditProfileCtrl', ($rootScope, $scope, auth, nav, UserResource, prefs, phoneValidationHelper) ->
 
     profileId = nav.getParams 'profileId'
     displayNameHasChanged = false
-    @selectedCountry = phoneValidation.selectedCountry
     @user = UserResource.get(id: profileId)
     @isValidNumber = false
 
@@ -16,9 +15,8 @@ qantasApp.controller 'EditProfileCtrl', ($rootScope, $scope, auth, nav, UserReso
             displayNameHasChanged = true
 
     @checkNumber = ->
-        @isValidNumber = phoneValidation.isNumberValid @user.phone
-        @user.phone = phoneValidation.formatPhoneNumber @user.phone
-        phoneValidation.selectedCountry.phoneNumber = @user.phone
+        @isValidNumber = phoneValidationHelper.isNumberValid @user.phone
+        @user.phone = phoneValidationHelper.formatPhoneNumber @user.phone
 
     @submitUser = ->
         window.editProfileModal.show()
@@ -34,7 +32,5 @@ qantasApp.controller 'EditProfileCtrl', ($rootScope, $scope, auth, nav, UserReso
                 alert 'An error has occured'
             .finally ->
                 window.editProfileModal.hide()
-
-    phoneValidation.setup()
 
     return

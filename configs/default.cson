@@ -91,21 +91,20 @@
         serverPort: 5014
         liveReloadPort: 35729
         jsDependencies: [
-            './src/lib/jquery-2.1.3.js'
-            './src/lib/jquery.visible.js'
-            './src/lib/onsen/js/angular/angular.js'
-            './src/lib/angular-resource.js'
-            './src/lib/onsen/js/onsenui.js'
-            './src/lib/angular-resource.js'
-            './src/lib/angular-cookie.js'
-            './src/lib/angular-animate.js'
-            './src/lib/angularjs-geolocation.min.js'
+            './node_modules/angular/angular.js'
+            './node_modules/jquery/dist/jquery.js'
+            './node_modules/angular-resource/angular-resource.js'
+            './node_modules/onsenui/js/onsenui.js'
+            './node_modules/angular-cookie/angular-cookie.js'
+            './node_modules/angular-animate/angular-animate.js'
+            './node_modules/angularjs-geolocation/dist/angularjs-geolocation.min.js'
             './node_modules/ng-file-upload/dist/angular-file-upload.js'
-            './src/lib/underscore.js'
-            './src/lib/moment.js'
-            './src/lib/phoneFormat.js'
-            './src/lib/pubnub-3.7.4.min.js'
-            './src/lib/fastclick.js'
+            './node_modules/underscore/underscore.js'
+            './node_modules/moment/min/moment.min.js'
+            './node_modules/phoneformat/phoneformat.min.js'
+            './node_modules/leaflet/dist/leaflet.js'
+            './node_modules/angular-leaflet-directive/dist/angular-leaflet-directive.js'
+            './node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.js'
             './src/lib/google-leaflet.js'
         ]
 
@@ -138,7 +137,7 @@
         'defaultShiftReminderTime'
     ]
 
-    apiBase: 'http://localhost:5000/query'
+    apiBase: 'http://localhost:7070'
     segmentioKey: 'qUNYwC2RrEWiBfZkMaQynZCTs4UTgrrL'
     uploadcarePublicKey: 'd7f59e4c0193cf7a0608'
     googleTimeZoneApiKey: 'AIzaSyDjl5OGPbHU3TGF16rEfdgf0C4GSvDDzto'

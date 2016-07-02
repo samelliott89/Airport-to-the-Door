@@ -1,16 +1,8 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, phoneValidation) ->
+qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, phoneValidationHelper) ->
     inProgress = false
-    @selectedCountry = phoneValidation.selectedCountry
-    @isValidNumber = false
-
     window.editProfile = this
-
-    @checkNumber = ->
-        @isValidNumber = phoneValidation.isNumberValid @phone
-        @phone = phoneValidation.formatPhoneNumber @phone
-        phoneValidation.selectedCountry.phoneNumber = @phone
 
     # Prevent the side menu from appearing
     ons.ready ->
@@ -100,7 +92,5 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
 
     @auth = auth
     @nav = nav
-
-    phoneValidation.setup()
 
     return

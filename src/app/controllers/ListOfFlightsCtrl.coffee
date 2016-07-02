@@ -9,4 +9,4 @@ qantasApp.controller 'ListOfFlightsCtrl', ($http, auth, nav, storage) ->
         storage.set 'flightObj', selectedFlight
         nav.goto 'arriveTimeCtrl'
 
-  return
+    return

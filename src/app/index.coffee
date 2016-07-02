@@ -104,16 +104,11 @@ qantasApp.run ($rootScope, $location, $timeout, auth, nav, MatchResource) ->
             # check on run for request setting
             MatchResource.getMatch()
                 .$promise.then (match) ->
-
-                    $rootScope.requestStatus = match.status
                     nav.setRootPage 'pollingMatchCtrl'
-                    console.log 'match status', $rootScope.requestStatus
 
                 .catch (err) ->
                     if err.status == 404
-                        $rootScope.requestStatus = 'NO_MATCH_FOUND'
                         nav.setRootPage 'navigator'
-                        console.log 'requestStatus', $rootScope.requestStatus
 
                     else
                         console.log 'err status is', err.status

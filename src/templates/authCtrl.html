@@ -78,7 +78,8 @@
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
-                                placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.checkNumber()">
+                                placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.onPhoneNumberChange()" ng-click="wlcm.onPhoneNumberChange()">
+                          <label for="RegisterText">Mobile number</label>
                         </div>
 
                         <div class="floatfield">

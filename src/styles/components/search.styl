@@ -1,9 +1,11 @@
 // Search input
 .search-panel
-    display: flex
     margin 11px 10px 2px 10px
-    overflow: hidden
+    display none
 
+.search-panel.visible {
+    display block
+}
 .search-panel__field
     flex: 1 0 100%
     position: relative

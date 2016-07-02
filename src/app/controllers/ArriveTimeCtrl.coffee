@@ -2,22 +2,13 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
 
-    jqLite = angular.element
-
     selectedFlight = storage.get 'flightObj'
     @selectedFlightNumber = selectedFlight.flight_number
-    localTime = selectedFlight.local_departure_time
 
-    friendlyTime = moment(localTime, 'DD-MM-YYYY_HH-mm-ss')
-
-    formatTime = friendlyTime.toDate()
-
-    @finaltime = formatTime
-
-    @timeUntilFlight = moment(formatTime, 'YYYYMMDD').fromNow()
-
-    console.log 'friendlyTime', friendlyTime
-    console.log 'formatTime', formatTime
+    localDatetime = selectedFlight.local_departure_datetime
+    momentDatetime = moment(localDatetime, 'DD-MM-YYYY_HH-mm-ss')
+    @formattedTimeOfFlight = momentDatetime.format('h:mm a')
+    @relativeTimeUntilFlight = momentDatetime.fromNow()
 
     @submitValue = (value) ->
         @value = value
@@ -27,9 +18,6 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         $('.buttonFour').addClass('animated bounceOut')
         $('.textOne').addClass('animated bounceOutUp')
         $('.textTwo').addClass('animated bounceOutDown')
-        setTimeout (->
-            $('.removeElement').hide()
-        ), 300
 
         storage.set 'minutesBefore', @value
 
@@ -42,15 +30,12 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         else if @value == 180
             @timeBefore = '3 hours'
 
-    @submitAmount = ->
+        # kind of fucking gross,
+        # but will come up with better way to use animations
+        setTimeout (->
+            nav.goto 'rideCountCtrl'
+        ), 800
 
-        flightTime = selectedFlight.local_departure_datetime
-        minutesBefore = storage.get 'minutesBefore'
-
-        # add these two values together and then
-        # set in object as arrivalTime
-
-        nav.goto 'rideCountCtrl'
 
     @clearValue = ->
         @value = null
