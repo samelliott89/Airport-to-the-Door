@@ -6,24 +6,21 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
     # fallBackLocation random for now
     # update to get location on load
-    fallBackLat = -33.85
-    fallBackLng = 151.20
+    defaultLat = -33.85
+    defaultLng = 151.20
     @isLoading = false
 
     # set defaults on load
     usersCurrentLocation =
-        lat: fallBackLat
-        lng: fallBackLng
-
-    # default reverse string
-    $scope.reverseGeoCodeLookupString = fallBackLat + ', ' + fallBackLng
+        lat: defaultLat
+        lng: defaultLng
 
     # set defaults for map load
     # that extend the angular scope
     angular.extend $scope,
-        sydney:
-            lat: fallBackLat
-            lng: fallBackLng
+        defaultLocation:
+            lat: defaultLat
+            lng: defaultLng
             zoom: intialZoomLevel
         layers:
             baselayers:
@@ -65,16 +62,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 pg.alert {title: 'Error', msg: 'An error occured'}
                 console.log 'err status is', err.status
 
-    # a funcion that deals with the current
-    # status of the request
-    _requestStatusHandler = (requestStatus) ->
-
-        @matchExists = true
-
-        if requestStatus == 'REQUESTED' or 'PROPOSAL' or 'ACCEPTED' or 'CONFIRMED'
-            nav.goto 'pollingMatchCtrl'
-            console.log requestStatus
-
     _updateCurrentUserPoint = (location) ->
         usersCurrentLocation =
             lat: location.latlng.lat
@@ -96,22 +83,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         map.removeLayer(L.marker)
         map.removeLayer(L.circle)
 
-    _checkIfMatchExists = ->
-        MatchResource.getMatch()
-            .$promise.then (res) ->
-                requestStatus = res.status
-                _requestStatusHandler(requestStatus)
-                @isLoading = true
-            .catch (err) ->
-                if err.status == 404
-                    @requestStatus = 'NO MATCH FOUND'
-                    @matchExists = false
-                    console.log @requestStatus
-                    console.log 'err status is', err.status, err.message
-                else
-                    pg.alert {title: 'Error', msg: 'An error occured'}
-                    console.log 'err status is', err.status, err.message
-
      # create the map
      # with the following params
     _createMap = ->
@@ -119,7 +90,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         leafletData.getMap().then (map) ->
 
             # create a circle marker with default values
-            L.circleMarker([fallBackLat, fallBackLng],
+            L.circleMarker([defaultLat, defaultLng],
                 color: '#353752'
                 fillColor: '#353752'
             ).addTo(map)
@@ -138,13 +109,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                     enableHighAccuracy: true
 
                 onLocationFound = (location) ->
-
-                    # window.findingLocationModal.hide()
-                    # console.log 'hiding findingLocationModal'
-                    # fetch the user friendly location
-                    # and update it
-                    _reverseGeoCodeLookup(location)
-
                     ##
                     # update the user location
                     # in local storage
@@ -240,8 +204,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         # they've inputted
         nav.goto 'matchConfirmCtrl', {request: requestToBeSent, animation: 'lift'}
 
-    # check if match exists
-    _checkIfMatchExists()
     # execute create map
     _createMap()
     # hide all elements on map
