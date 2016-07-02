@@ -12,24 +12,23 @@
     margin-left auto
     margin-right auto
     box-shadow rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px
-    height: 40px
+    height 40px
 
 .search-bar
     margin-top 10%
 
 .map-back-button
     position absolute
-    margin-left auto
-    margin-right auto
+    margin-left -106px
     margin-top 50px
-    right 31%
+    left 50%
     bottom 40px
 
 .location-finder
     position absolute
-    bottom 40px
+    bottom 42px
     right 20px
-    padding 11px 13px 9px 11px
+    padding 11px
     border-radius 100%
     text-align center
     background #353752
@@ -37,3 +36,24 @@
     color white
     border 1px solid white
     font-size 18px
+    line-height 0
+
+.location-finder ion-icon
+    padding-top 13px
+    height 44px
+    width 44px
+
+.map-pin
+    position absolute
+    /**
+     * The ion-location icon has arbitrary white space at the top + bottom of the icon glyph
+     * so we have to do some manual vertical positioning
+     **/
+    top calc(50% - 48px)
+    font-size 55px
+    line-height 0
+    left calc(50% - 25px)
+    color qantas-red-darker
+    pointer-events none
+    width 50px
+    text-align center
