@@ -12,12 +12,12 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
 
     @submitValue = (value) ->
         @value = value
-        $('.buttonOne').addClass('animated bounceOut')
-        $('.buttonTwo').addClass('animated bounceOut')
-        $('.buttonThree').addClass('animated bounceOut')
-        $('.buttonFour').addClass('animated bounceOut')
-        $('.textOne').addClass('animated bounceOutUp')
-        $('.textTwo').addClass('animated bounceOutDown')
+        $('.buttonOne').removeClass('rollIn').addClass('bounceOut')
+        $('.buttonTwo').removeClass('rollIn').addClass('bounceOut')
+        $('.buttonThree').removeClass('rollIn').addClass('bounceOut')
+        $('.buttonFour').removeClass('rollIn').addClass('bounceOut')
+        # $('.textOne').addClass('bounceOutUp')
+        # $('.textTwo').addClass('bounceOutDown')
 
         storage.set 'minutesBefore', @value
 

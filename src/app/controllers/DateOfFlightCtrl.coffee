@@ -122,7 +122,7 @@ _pluralize = (num, string, suffix = 's') ->
 # DATE OF FLIGHT CONTROLLER BEGINS
 ###
 
-qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage, FlightResource) ->
+qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage, FlightResource, month) ->
 
     # clear all flight data in local storage
     # and start with a clean slate
@@ -132,6 +132,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
         # todo: ensure selected day in week is in view
         @selectedDayIndex = index
         @selectedDay = @schedule[index]
+        @month = month(@selectedDay.day.getMonth())
         storage.set 'flightDate', @selectedDay
         @selectedField = 'start'
         @justChangedField = true
