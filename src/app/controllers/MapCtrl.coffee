@@ -3,6 +3,7 @@ qantasApp = angular.module 'qantasApp'
 qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg, leafletData, ReverseGeocodeResource, storage) ->
 
     intialZoomLevel = 14
+
     # fallBackLocation random for now
     # update to get location on load
     fallBackLat = -33.85
@@ -18,6 +19,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
     $scope.reverseGeoCodeLookupString = fallBackLat + ', ' + fallBackLng
 
     # set defaults for map load
+    # that extend the angular scope
     angular.extend $scope,
         sydney:
             lat: fallBackLat
@@ -47,15 +49,18 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                     console.log 'ReverseGeocodeResource is either null or undefined', response
                     # therefore defualt to the lat and long values passed into the function
                     $scope.reverseGeoCodeLookupString = @lat + ', ' + @lng
+
                     # then update all the bindings on the scope object
-                    $scope.apply
-                    console.log 'no reverseGeoCodeLookupString, so defualting to empty lat,lng', $scope.reverseGeoCodeLookupString
+                    $scope.$apply
+                    console.log 'no reverseGeoCodeLookupString, so defaulting to empty lat,lng', $scope.reverseGeoCodeLookupString
                 else
                     $scope.reverseGeoCodeLookupString = response.address
+
                     # return the address and bind to reverse geocode scope value
-                    $scope.apply
+                    $scope.$apply
                     # then update all the bindings on the scope object
                     console.log '@reverseGeoCodeLookupString', $scope.reverseGeoCodeLookupString
+
             .catch (err) ->
                 pg.alert {title: 'Error', msg: 'An error occured'}
                 console.log 'err status is', err.status
@@ -119,11 +124,12 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 fillColor: '#353752'
             ).addTo(map)
 
+            L.Icon.Default.imagePath = ''
+
             # get the locate object
             # and set some params
             L.control.locate(
                 position: 'bottomright' # set the location of the control
-                follow: true
                 drawCircle: true # controls whether a circle is drawn that shows the uncertainty about the location
                 setView: true # automatically sets the map view to the user's location, enabled if `follow` is true
                 markerClass: L.circleMarker
@@ -152,6 +158,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                     # update the marker and circle object
                     #
                     _updateMarkerAndCircle(location, map)
+
                 map.on('locationfound', onLocationFound)
 
                 # on location error, throw a message
@@ -163,6 +170,9 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
                 ).addTo(map)
 
+
+    # super massive hack
+    # that needs to be fixed
     _hideElementsOnMap = ->
         # get elements from map
         mapIconToHide = document.querySelector('.leaflet-control-locate')
@@ -183,7 +193,14 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                 icon.style.visibility = 'hidden'
 
     @updateCurrentLocation = ->
-        document.querySelector('.leaflet-bar-part').click()
+        button = document.querySelector('.leaflet-bar-part')
+
+        if button
+            console.log 'button is', button
+            button.click()
+
+        else
+            console.log 'no button'
         # window.findingLocationModal.show()
 
         return true
@@ -230,10 +247,17 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
     # hide all elements on map
     # with timeout to allow map locate
     # object to load
-    setTimeout (->
+    $(document).ready ->
+
+        console.log 'document ready'
         _hideElementsOnMap()
 
         return
-    ), 200
+    # setTimeout (->
+    #     _hideElementsOnMap()
+
+    #     return
+
+    # ), 200
 
     return
