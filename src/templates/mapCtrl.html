@@ -1,34 +1,22 @@
 <div ng-controller="MapCtrl as mapv">
-
     <ons-page>
         <ons-toolbar>
-            <div class="left">
+            <!--div class="left">
                 <shifts-left-button></shifts-left-button>
-            </div>
-            <div class="center">Map</div>
+            </div-->
+            <div class="center" ng-bind="pageTitle"></div>
+        </ons-toolbar>
+        <leaflet id="map" class="map animated fadeIn" lf-center="defaultLocation" layers="layers" markers="markers" height="480px" width="100%"></leaflet>
 
-            </ons-toolbar>
+        <ion-icon class="map-pin ion-location"></ion-icon>
 
-        <leaflet id="map" class="map animated fadeIn" lf-center="sydney" layers="layers" markers="markers" height="480px" width="100%"></leaflet>
-
-        <div class="search-bar">
-            <input type="search" class="search-input search-input-map"
-                ng-model="reverseGeoCodeLookupString" ng-change="reverseGeoCodeLookupString">
-        </div>
-
-        <ons-button class="location-finder" ng-click="mapv.updateCurrentLocation()">
-            <ion-icon class="ion-navigate" style="font-size:"></ion-icon>
+        <ons-button class="location-finder" ng-click="mapv.panToUserLocation()">
+            <ion-icon class="ion-navigate"></ion-icon>
         </ons-button>
 
-        <div class="map-back-button" ng-show="!mapv.matchExists && !mapv.isLoading">
-            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="mapv.sendRequest()">Find match</ons-button>
-        </div>
-
-        <div class="map-back-button" ng-show="mapv.isLoading">
-            <ons-button class="button--clear margin-top button-cyclinder button--map">
-            <ons-icon icon="ion-loading-c" spin="true"></ons-icon></ons-button>
+        <div class="map-back-button">
+            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="mapv.sendRequest()">Set Pickup Location</ons-button>
         </div>
 
     </ons-page>
-
 </div>
