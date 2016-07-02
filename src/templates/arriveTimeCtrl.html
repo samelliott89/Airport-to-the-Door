@@ -8,27 +8,26 @@
         </ons-toolbar>
 
         <div class="removeElement">
-            <div class="textOne padd text-muted text-center">
+            <div class="textOne padd text-muted text-center animated fadeIn">
                 <p>How many hours before your flight
                 would you like to arrive at the airport?</p>
             </div>
 
             <div class="text-center">
-                <ons-button class="buttonOne button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(30)">&frac12;</ons-button>
-                <ons-button class="buttonTwo button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(60)">
+                <ons-button class="buttonOne button--clear margin-top button-radius-thin margin-md animated rollIn" ng-click="arri.submitValue(30)">&frac12;</ons-button>
+                <ons-button class="buttonTwo button--clear margin-top button-radius-thin margin-md animated rollIn" ng-click="arri.submitValue(60)">
                     <span class="special-pad">1</span></ons-button>
             </div>
 
             <div class="text-center">
-                <ons-button class="buttonThree button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(120)">
+                <ons-button class="buttonThree button--clear margin-top button-radius-thin margin-md animated rollIn" ng-click="arri.submitValue(120)">
                     <span class="special-pad">2</span></ons-button>
-                <ons-button class="buttonFour button--clear margin-top button-radius-thin margin-md" ng-click="arri.submitValue(180)">
+                <ons-button class="buttonFour button--clear margin-top button-radius-thin margin-md animated rollIn" ng-click="arri.submitValue(180)">
                     <span class="special-pad">3</span></ons-button>
             </div>
 
-            <div class="textTwo text-muted padd text-center">
-                <p><span class="semi-bold">{{arri.selectedFlightNumber}}</span> leaves at <span class="strong">{{arri.formattedTimeOfFlight}}</span></p>
-                <p>{{arri.relativeTimeUntilFlight}}</p>
+            <div class="textTwo text-muted padd text-center animated fadeIn">
+                <p><span class="semi-bold">{{arri.selectedFlightNumber}}</span> leaves at <span class="strong">{{arri.formattedTimeOfFlight}}</span> <br>{{arri.relativeTimeUntilFlight}}</p>
             </div>
         </div>
 

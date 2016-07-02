@@ -7,9 +7,10 @@ qantasApp.controller 'RideCountCtrl', ($http, auth, nav, storage) ->
     @submitValue = (value) ->
         @value = value
         storage.set 'rideCount', @value
-        $('.buttonOne').addClass('animated bounceOutLeft')
-        $('.buttonTwo').addClass('animated bounceOutRight')
-        $('.textOne').addClass('animated bounceOutRight')
+        $('.buttonOne').removeClass('rollIn').addClass('bounceOutLeft')
+        $('.buttonTwo').removeClass('rollIn').addClass('bounceOutRight')
+        $('.textOne').removeClass('rollIn').addClass('bounceOutRight')
+
         # kind of fucking gross,
         # but will come up with better way to use animations
         #

@@ -5,7 +5,7 @@
                 <shifts-left-button></shifts-left-button>
             </div>
 
-            <div class="center">{{list.flights.length}} Flight<span ng-if="list.flights.length != 1">s</span></div>
+            <div class="center animated fadeIn">{{list.flights.length}} Flight<span ng-if="list.flights.length != 1">s</span></div>
 
         </ons-toolbar>
 
@@ -31,7 +31,7 @@
             <ons-list-item flight-list-item modifier="chevron" ng-repeat="flight in list.flights | filter:searchFilter | orderBy: 'flight_number'" ng-click="list.goToFlightSummary(flight)">
                 <ons-row>
                     <img src="qantas/qantas_logo.png"
-                        class="item-thum animated fadeIn"/>
+                        class="item-thum animated rollIn"/>
                     <ons-col class="item-content">
                         <div class="item-title">
                           {{flight.flight_number}}
