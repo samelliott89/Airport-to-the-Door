@@ -93,6 +93,7 @@ qantasApp.run ($rootScope, localNotifications) ->
         $rootScope.$on 'logout', -> localNotifications.clearAll()
 
 qantasApp.run ($rootScope, $location, $timeout, auth, nav, MatchResource) ->
+
     $rootScope.nav = nav
     $rootScope.auth = auth
 
