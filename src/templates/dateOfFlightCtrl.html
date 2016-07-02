@@ -13,7 +13,7 @@
         </div>
     </ons-toolbar>
 
-    <div class="add animated slideInDown">
+    <div class="add animated bounceInRight">
         <div class="add__week week-wrap" ng-if="!date.isEditing">
             <div class="week" shifts-week-scroller="date.selectedDayIndex">
                 <div class="week__day"
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="add__display text-muted text-center text-sm animated slideInUp">
+        <div class="add__display text-muted text-center text-sm animated slideInDown">
             <div class="add__display__text">{{date.selectedDay.day | date:'EEEE d'}}{{date.selectedDay.day | ordinal}} {{date.selectedDay.day | date:'MMM'}}</div>
             <p>Select the date that you are flying</p>
         </div>
