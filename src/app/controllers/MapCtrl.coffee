@@ -10,11 +10,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
     $scope.pageTitle = ''
 
-    # set defaults on load
-    usersCurrentLocation =
-        lat: DEFAULT_LAT
-        lng: DEFAULT_LNG
-
     # set defaults for map load
     # that extend the angular scope
     $scope.defaultLocation =
@@ -61,11 +56,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         # they've inputted
         nav.goto 'matchConfirmCtrl', {request: requestToBeSent, animation: 'lift'}
 
-    _onLocationFound = (result) ->
-        location = result.latlng
-        usersCurrentLocation =
-            lat: location.lat
-            lng: location.lng
+    _onLocationFound = ->
         _locate.start()
 
     _onLocationError = (err) ->
