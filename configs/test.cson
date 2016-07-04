@@ -1,7 +1,7 @@
 {
     appIdentifier: 'io.attd.qantasappTest'
     appDisplayName: 'QantasTest'
-    apiBase: 'http://staging.attd.io'
+    apiBase: 'http://api.staging.attd.io'
     defaultShiftReminderTime: 1 # 1 minute
 
     # Tells build to load hotfix script
