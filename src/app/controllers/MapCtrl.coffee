@@ -31,29 +31,13 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         if _locate
             _locate.start()
 
-    @sendRequest = ->
+    @onSetPickupLocation = ->
         flightToMatch = storage.get 'flightObj'
-        minutesBefore = storage.get 'minutesBefore'
-
-        flightDepartureDatetime = flightToMatch.local_departure_datetime
-        flightDepartureMoment = moment(flightDepartureDatetime, 'DD-MM-YYYY_HH-mm-ss')
-        arrivalMoment = moment(flightDepartureMoment).subtract(minutesBefore, 'minutes')
-        arrivalDateTime = arrivalMoment.format('DD-MM-YYYY_HH-mm-ss')
-
         center = _map.getCenter()
-        requestToBeSent =
-            pickup_latitude: center.lat
-            pickup_longitude: center.lng
-            flight_number: flightToMatch.flight_number
-            departure_airport: flightToMatch.departure_airport
-            departure_airport_name: flightToMatch.departure_airport_name
-            destination_airport: flightToMatch.destination_airport
-            destination_airport_name: flightToMatch.destination_airport_name
-            arrival_datetime: arrivalDateTime
 
         # confirm with the user the details
         # they've inputted
-        nav.goto 'matchConfirmCtrl', {request: requestToBeSent, animation: 'lift'}
+        nav.goto 'matchConfirmCtrl', {location: center, flight: flightToMatch, animation: 'lift'}
 
     _onLocationFound = ->
         _locate.start()
@@ -89,6 +73,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                     fillColor: '#3B5998'
                 locateOptions:
                     enableHighAccuracy: true
+                setView: 'once'
             )
 
             _locate.addTo(_map)
