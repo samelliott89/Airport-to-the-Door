@@ -20,7 +20,6 @@
     margin spacing * 2
 
 // lists
-
 .page--menu-page__content
   .list
     background-color transparent !important
@@ -31,10 +30,10 @@
   border-top 1px solid brand-blue !important
 
 .list__item--chevron:active
-  background-color qantas-red !important
+  background-color brand-blue-darker !important
 
 .list__item--chevron.flight-selected
-  background-color qantas-red-darker !important
+  background-color brand-blue-darker !important
 
 .list__header
   background-color brand-blue !important
@@ -72,6 +71,9 @@ page__content
 
 .padd
     padding spacing
+
+.padd-btm-md
+  padding-bottom spacing
 
 .padd-left-right
   padding 0 spacing
@@ -125,11 +127,12 @@ input, select, textarea
 .text-input:valid
   color white
 
+// buttons helpers
+
 .button:active
-  background-color: rgb(39, 41, 62) !important
+  background-color: brand-blue-darker !important
   opacity: 0.8 !important
 
-// buttons helpers
 .button--clear
     background none
     border 1px solid white
@@ -169,7 +172,6 @@ input, select, textarea
 .button-radius:active
     background-color white
     background white
-    color brand-green
 
 .button-thin
     font-size font-size-base
