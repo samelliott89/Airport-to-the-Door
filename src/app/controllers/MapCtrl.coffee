@@ -47,7 +47,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             flight_number: flightToMatch.flight_number
             departure_airport: flightToMatch.departure_airport
             departure_airport_name: flightToMatch.departure_airport_name
-            destination_airport_name: flightToMatch.destination_airport
+            destination_airport: flightToMatch.destination_airport
             destination_airport_name: flightToMatch.destination_airport_name
             arrival_datetime: arrivalDateTime
 
