@@ -41,6 +41,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         arrivalDateTime = arrivalMoment.format('DD-MM-YYYY_HH-mm-ss')
 
         center = _map.getCenter()
+
         requestToBeSent =
             pickup_latitude: center.lat
             pickup_longitude: center.lng
