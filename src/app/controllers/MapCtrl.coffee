@@ -32,24 +32,23 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             _locate.start()
 
     @sendRequest = ->
-# get the flight object from storage
         flightToMatch = storage.get 'flightObj'
         minutesBefore = storage.get 'minutesBefore'
 
-        # package up
-        arrivalDateTime = flightToMatch.local_departure_datetime
-        momentDateTime = moment(arrivalDateTime, 'DD-MM-YYYY_HH-mm-ss')
-        adjustedDateTime = moment(momentDateTime).add(minutesBefore, 'minutes')
-        finalDateTime = adjustedDateTime.format('DD-MM-YYYY_HH-mm-ss')
+        flightDepartureDatetime = flightToMatch.local_departure_datetime
+        flightDepartureMoment = moment(flightDepartureDatetime, 'DD-MM-YYYY_HH-mm-ss')
+        arrivalMoment = moment(flightDepartureMoment).subtract(minutesBefore, 'minutes')
+        arrivalDateTime = arrivalMoment.format('DD-MM-YYYY_HH-mm-ss')
 
         center = _map.getCenter()
         requestToBeSent =
             pickup_latitude: center.lat
             pickup_longitude: center.lng
             flight_number: flightToMatch.flight_number
-            airport: flightToMatch.departure_airport or 'SYD'
-# TODO (sk) update arrivalDateTime to finalDateTime when bug is fixed
-# for moment.add()
+            departure_airport: flightToMatch.departure_airport
+            departure_airport_name: flightToMatch.departure_airport_name
+            destination_airport: flightToMatch.destination_airport
+            destination_airport_name: flightToMatch.destination_airport_name
             arrival_datetime: arrivalDateTime
 
         # confirm with the user the details
@@ -67,7 +66,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
 
     _createMap = ->
         leafletData.getMap('map').then((map) ->
-# TODO(SK): Fix hack. Remove all the leaflet controls.
+            # TODO(SK): Fix hack. Remove all the leaflet controls.
             $('#map').find('.leaflet-control-container').remove()
 
             _map = map
