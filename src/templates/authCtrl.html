@@ -1,26 +1,29 @@
-<ons-page class="animated fadeIn" ng-controller="AuthCtrl as wlcm">
+<ons-page ng-controller="AuthCtrl as wlcm">
     <style>
         .page__content { margin-top: 0px; }
     </style>
 
-    <div class="welcome animated fadeIn">
-        <div class="welcome__inner animated fadeIn">
+    <div class="welcome">
+        <div class="welcome__inner">
 
             <div class="auth-form-container">
 
-                <div class="pre-login-form margin-btm animated fadeIn" ng-if="!wlcm.toShow" ng-animate=" 'animate' ">
-                    <p style="font-size: 16px"><strong>Qantas to the door</strong> is the easiest way for Qantas passengers to<br/>get from where they are to where they want to be.</p>
+                <div class="pre-login-form margin-btm" ng-if="!wlcm.toShow" ng-animate=" 'animate' ">
 
-                    <ons-button modifier="large" class="button--clear button-cyclinder" type="button" ng-click="wlcm.toShow = 'reg'">Register</ons-button>
-                    <br>
-                    <ons-button modifier="large--quiet" class="button--bs" type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
+                    <p style="font-size: 16px;" class="animated bounceInLeft">Qantas to the door is the easiest way for passengers to
+                    get from where they are to where they want to be.</p>
+
+                    <ons-button modifier="large padd-btm-md" class="button--clear button-cyclinder animated bounceInRight"
+                        type="button" ng-click="wlcm.toShow = 'reg'">Register</ons-button>
+
+                    <ons-button modifier="large--quiet" class="button--bs animated fadeIn"
+                        type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
                 </div>
 
                 <!-- LOG IN -->
 
                 <div class="login-form login-form--login" ng-if="wlcm.toShow === 'login'" ng-animate=" 'animate' ">
                     <form ng-submit="wlcm.loginSubmit()" autocomplete="off">
-                        <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
                         <input style="display:none" type="text" name="fakeusernameremembered"/>
                         <input style="display:none" type="password" name="fakepasswordremembered"/>
 
@@ -70,11 +73,6 @@
                                     type="text" placeholder="Last name" id="RegisterText">
                             <label for="RegisterText">Last name</label>
                         </div>
-<!--
-                        <div ng-switch="wlcm.isValidNumber">
-                            <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-success" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="true"></ons-icon>
-                            <ons-icon class="list-icon" icon="ion-ios7-telephone-outline icon-danger" size="25px" style="padding: 5px 5px 5px 0;" ng-click="nav.goto('editTelCtrl', {animation: 'lift'})" ng-model="wlcm.selectedCountry" ng-switch-when="false"></ons-icon>
-                        </div> -->
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
@@ -95,7 +93,6 @@
                         </div>
 
                         <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.registerSubmit()">Register</ons-button>
-
                     </form>
 
                     <p><ons-button modifier="large--quiet" class="button--bs"
