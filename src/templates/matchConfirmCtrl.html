@@ -1,21 +1,11 @@
 <div ng-controller="MatchConfirmCtrl as mach">
 
+<div class="confirm">
+
     <ons-page>
         <ons-toolbar>
             <div class="center">Confirmation</div>
         </ons-toolbar>
 
-        <div class="card text-center">
-            <div class="card-name">{{mach.request.flight_number}}</div>
-            <div class="card-desc">Travelling from {{mach.request.airport}} to {{mach.request.airport}}
-            <div class="card-desc">Your flight is leaving at {{mach.request.arrival_datetime | readableTime}}</div>
-                <br>Now time to find you a ride!</div>
-        </div>
-
-        <div class="card text-center">
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="mach.confirmRequest()">Confirm</ons-button>
-        </div>
-
     </ons-page>
-
 </div>
