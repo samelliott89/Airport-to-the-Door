@@ -7,5 +7,12 @@
             <div class="center">Confirmation</div>
         </ons-toolbar>
 
+        <div class="padd text-muted text-center animated fadeIn">
+            <p id="flightNumber" class="semi-bold">{{mach.request.flight_number}}</p>
+            <p id="depAirportName">{{mach.request.departure_airport_name}}</p>
+            <p id="desAirportName">{{mach.request.destination_airport_name}}</p>
+            <p id="arrivalTime">{{mach.request.arrival_datetime | readableTime}}</p>
+        </div>
+
     </ons-page>
 </div>

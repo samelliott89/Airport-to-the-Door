@@ -4,6 +4,19 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, MatchResource) ->
 
     @request = nav.getParams 'request'
 
+    # $('#flightNumber').hide()
+    $('#depAirportName').hide()
+    $('#desAirportName').hide()
+    $('#arrivalTime').hide()
+
+    $('#flightNumber').ready ->
+        $('#depAirportName').show()
+        $('#flightNumber').ready ->
+            $('#desAirportName').show()
+            $('#flightNumber').ready ->
+                $('#arrivalTime').show()
+
+
     @confirmRequest = ->
         MatchResource.requestMatch @request
             .$promise.then (match) ->
