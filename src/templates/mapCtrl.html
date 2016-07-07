@@ -1,12 +1,13 @@
 <div ng-controller="MapCtrl as mapv">
     <ons-page>
         <ons-toolbar>
-            <div class="left"><shifts-left-button></shifts-left-button></div>
+            <div class="left">
+                <shifts-left-button></shifts-left-button>
+            </div>
             <div class="center" ng-bind="pageTitle"></div>
         </ons-toolbar>
 
         <leaflet id="map" class="map animated fadeIn" lf-center="defaultLocation" layers="layers" markers="markers" height="480px" width="100%"></leaflet>
-
         <ion-icon class="map-pin ion-location animated bounceInDown"></ion-icon>
 
         <ons-button class="location-finder" ng-click="mapv.panToUserLocation()">
@@ -14,7 +15,7 @@
         </ons-button>
 
         <div class="map-back-button">
-            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="mapv.sendRequest()">Set Pickup Location</ons-button>
+            <ons-button class="button--clear margin-top button-cyclinder button--map" ng-click="mapv.onSetPickupLocation()">Set Pickup Location</ons-button>
         </div>
 
     </ons-page>

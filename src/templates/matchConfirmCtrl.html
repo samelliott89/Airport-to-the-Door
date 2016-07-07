@@ -4,7 +4,7 @@
 
     <ons-page>
         <ons-toolbar>
-            <div class="center">Confirmation</div>
+            <div class="center">Itinerary</div>
         </ons-toolbar>
 
         <div class="padd text-muted text-center animated fadeIn">
@@ -12,6 +12,8 @@
             <p id="depAirportName">{{mach.request.departure_airport_name}}</p>
             <p id="desAirportName">{{mach.request.destination_airport_name}}</p>
             <p id="arrivalTime">{{mach.request.arrival_datetime | readableTime}}</p>
+        </div>
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="mach.confirmRequest()">Find a ride</ons-button>
         </div>
 
     </ons-page>
