@@ -46,14 +46,13 @@ gulp = (task, config) ->
 
 installPlugins = ->
     plugins = [
-        'org.apache.cordova.console'
-        'org.apache.cordova.dialogs'
-        'org.apache.cordova.statusbar'
-        'org.apache.cordova.geolocation'
-        'org.apache.cordova.file-transfer'
+        'cordova-plugin-console'
+        'cordova-plugin-dialogs'
+        'cordova-plugin-statusbar'
+        'cordova-plugin-geolocation'
+        'cordova-plugin-file-transfer'
         'cordova-plugin-device',
         # 'org.apache.cordova.globalization'
-        'nl.x-services.plugins.socialsharing'
         # Need to sort this one out 'de.appplant.cordova.plugin.badge@0.6.1'
         # Old version, incompatible with latest cordova 'https://github.com/Shifts/cordova-plugin-inappbrowser.git'
         'cordova-plugin-inappbrowser'
