@@ -16,7 +16,9 @@ qantasApp.controller 'SidemenuCtrl', ($scope, $http, $window, nav, pg, auth, req
 
     @logout = ->
         nav.resetTo 'flightNumberCtrl'
+        window.logoutUser.show()
         auth.logout()
+        window.logoutUser.hide()
 
     @shareSheet = ->
         if window.isNativeAndroid

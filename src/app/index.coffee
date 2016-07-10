@@ -76,6 +76,13 @@ qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, prefs, 
     # Prefetch necessary templates
     $timeout templatePrefetch.run, 1000, false
 
+# qantasApp.run ->
+#     adjustNavigation = window.device.platform == 'iOS' && parseFloat(window.device.version) == 7.0
+
+#     if adjustNavigation
+#         console.log 'adjustNavigation'
+#         $(body).addClass('adjust-nav')
+
 # Setup some notitication things
 qantasApp.run ($rootScope, localNotifications) ->
     $rootScope.isCordova = window.isCordova

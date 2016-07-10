@@ -1,33 +1,20 @@
 <div ng-controller="MatchConfirmCtrl as mach">
 
+<div class="confirm">
+
     <ons-page>
         <ons-toolbar>
             <div class="center">Itinerary</div>
         </ons-toolbar>
 
-        <div class="card text-center">
-            <div class="card-name">Your Itinerary</div>
+        <div class="padd text-muted text-center animated fadeIn">
+            <p id="flightNumber" class="semi-bold">{{mach.request.flight_number}}</p>
+            <p id="depAirportName">{{mach.request.departure_airport_name}}</p>
+            <p id="desAirportName">{{mach.request.destination_airport_name}}</p>
+            <p id="arrivalTime">{{mach.request.arrival_datetime | readableTime}}</p>
         </div>
-        <div class="card text-center">
-            <div class="card-desc">
-                Travelling on flight <strong>{{mach.flightNumber}}</strong> from <strong>{{mach.departureAirportName}}</strong> to <strong>{{mach.destinationAirportName }}</strong>
-            </div>
-        </div>
-        <div class="card text-center">
-            <div class="card-desc">
-                You're aiming to be at the airport by <strong>{{mach.arrivalDatetime | readableTime}}</strong>
-            </div>
-        </div>
-        <div class="card text-center">
-            <div class="card-desc">
-                Now time to find you a ride!
-            </div>
-        </div>
-
-        <div class="card text-center">
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="mach.onSetPickupLocation()">Confirm</ons-button>
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="mach.confirmRequest()">Find a ride</ons-button>
         </div>
 
     </ons-page>
-
 </div>

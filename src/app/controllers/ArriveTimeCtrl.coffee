@@ -15,8 +15,9 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         $('.buttonTwo').removeClass('rollIn').addClass('bounceOut')
         $('.buttonThree').removeClass('rollIn').addClass('bounceOut')
         $('.buttonFour').removeClass('rollIn').addClass('bounceOut')
-        # $('.textOne').addClass('bounceOutUp')
-        # $('.textTwo').addClass('bounceOutDown')
+
+        $('.textOne').addClass('fadeOut')
+        $('.textTwo').addClass('fadeOut')
 
         storage.set 'minutesBefore', value
 
