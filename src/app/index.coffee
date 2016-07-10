@@ -108,18 +108,7 @@ qantasApp.run ($rootScope, $location, $timeout, auth, nav, MatchResource) ->
         # Important: this controls the first page the user sees
         # If you never do this, it'll get stuck on a blank page
         if auth.isAuthenticated()
-            # check on run for request setting
-            MatchResource.getMatch()
-                .$promise.then (match) ->
-                    nav.setRootPage 'pollingMatchCtrl'
-
-                .catch (err) ->
-                    if err.status == 404
-                        nav.setRootPage 'navigator'
-
-                    else
-                        console.log 'err status is', err.status
-
+            nav.setRootPage 'navigator'
         else
             nav.setRootPage 'authCtrl'
 

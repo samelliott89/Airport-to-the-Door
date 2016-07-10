@@ -9,7 +9,6 @@ qantasApp.factory 'MatchResource', ($resource, transform) ->
     #
         requestMatch:
             method: 'post'
-            transformResponse: transform.response 'match'
 
         getMatch:
             method: 'get'
@@ -17,14 +16,11 @@ qantasApp.factory 'MatchResource', ($resource, transform) ->
         acceptProposedMatch:
             method: 'post'
             url: "#{config.apiBase}/match/request/accept"
-            transformResponse: transform.response 'acceptedMatch'
 
         cancelMatch:
             method: 'post'
             url: "#{config.apiBase}/match/cancel"
-            transformResponse: transform.response null
 
         rejectProposedMatch:
             method: 'post'
             url: "#{config.apiBase}/match/request/reject"
-            transformResponse: transform.response null

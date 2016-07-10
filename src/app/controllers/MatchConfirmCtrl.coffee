@@ -1,9 +1,6 @@
 qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'MatchConfirmCtrl', (nav, storage, MatchResource) ->
-
-    @request = nav.getParams 'request'
-
     # $('#flightNumber').hide()
     $('#depAirportName').hide()
     $('#desAirportName').hide()
@@ -25,9 +22,9 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, MatchResource) ->
             arrival_datetime: _arrivalDatetime
 
         MatchResource.requestMatch request
-            .$promise.then (match) ->
-                nav.goto 'pollingMatchCtrl'
-                console.log 'match is', match
+            .$promise.then (matchRequest) ->
+                nav.goto 'pollingMatchCtrl', {'matchRequest': matchRequest}
+                console.log 'match is', matchRequest
             .catch (err) ->
                 console.log 'err is', err
                 pg.alert {title: 'Error', msg: err.status}

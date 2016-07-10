@@ -67,8 +67,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         )
 
     _createGeolocation = ->
-        console.log('loaded')
-
         navigator.geolocation.getCurrentPosition(
             (position) ->
                 if _map
