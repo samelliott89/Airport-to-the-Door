@@ -19,6 +19,10 @@
 .margin-lg
     margin spacing * 2
 
+// text helpers
+.text-grey
+  color light-grey
+
 // lists
 .page--menu-page__content
   .list
@@ -84,6 +88,9 @@ page__content
 .padd-xl
     padding spacing * 4
 
+.padd-top-md
+  padding-top spacing
+
 .padd-top-lg
     padding-top spacing * 2
 
@@ -92,6 +99,9 @@ page__content
 
 .padding-top-success
     padding-top spacing * 8
+
+.circle-thick
+  border 3px solid white !important
 
 // Removal of border bottom on nav bar
 .navigation-bar
@@ -128,6 +138,12 @@ input, select, textarea
   color white
 
 // buttons helpers
+.button-dark
+  background-color brand-blue
+
+// TODO (sam elliott) - fix up the padding for all circle buttons
+.buttonOne-helper
+  padding 30px 45px !important;
 
 .button:active
   background-color: brand-blue-darker !important
@@ -276,9 +292,8 @@ pre, code
   animation: subtle-bounce 1100ms linear both;
 }
 
-.navigation-bar {
-  border-bottom: 1px solid transparent !important;
-}
+.navigation-bar
+  // border-bottom 1px solid transparent !important
 
 // hidden
 

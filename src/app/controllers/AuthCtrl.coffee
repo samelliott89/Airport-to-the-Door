@@ -68,8 +68,6 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
             email: @email
             password: @password
 
-        console.log 'preparing credentials', credentials
-
         window.registerUserModal.show()
 
         auth.register credentials
@@ -84,7 +82,9 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
                 ), 1000
 
                 $rootScope.$broadcast 'register'
-                nav.setRootPage 'navigator'
+
+                nav.setRootPage 'onBoardingCtrl'
+
             .finally ->
                 inProgress = false
                 window.registerUserModal.hide()

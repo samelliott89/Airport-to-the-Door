@@ -1,0 +1,52 @@
+<ons-page ng-controller="OnboardingCtrl as onbd">
+
+   <ons-toolbar>
+       <div class="left"></div>
+       <div class="center"></div>
+       <div class="right"></div>
+   </ons-toolbar>
+
+    <ons-carousel class="carousel" swipeable overscrollable auto-scroll fullscreen var="onboardingCarousel">
+
+        <ons-carousel-item class="carousel-first animated fadeIn">
+            <div class="item-image">
+                <img src="images/onboarding1.png" class="item-image" alt="Select the date you are flying.">
+            </div>
+            <p class="padd-top-md carousel-text semi-bold">Select the date <br>that you're are flying</p>
+            <ons-icon class="ion-ios-arrow-thin-right text-grey" style="font-size: 45px;"></ons-icon>
+        </ons-carousel-item>
+
+        <ons-carousel-item class="carousel-second">
+           <div class="item-image">
+               <img src="images/onboarding2.png" class="item-image" alt="Add your schedule quickly">
+           </div>
+           <p class="padd-top-md carousel-text semi-bold">Select the flight number</p>
+           <ons-icon class="ion-ios-arrow-thin-right text-grey" style="font-size: 45px;"></ons-icon>
+        </ons-carousel-item>
+
+        <ons-carousel-item class-"carousel-third">
+            <div class="item-image">
+                <img src="images/onboarding3.png" class="item-image" alt="See who you're working with">
+            </div>
+            <p class="padd-top-md carousel-text semi-bold">Choose how early you want to arrive at the airport</p>
+            <ons-icon class="ion-ios-arrow-thin-right text-grey" style="font-size: 45px;"></ons-icon>
+        </ons-carousel-item>
+
+        <ons-carousel-item class="carousel-fourth">
+            <div class="item-image">
+                <img src="images/onboarding4.png" class="item-image" alt="View your coworkers schedule">
+            </div>
+            <p class="padd-top-md carousel-text semi-bold">Select how many people are travelling with you</p>
+            <ons-icon class="ion-ios-arrow-thin-right text-grey" style="font-size: 45px;"></ons-icon>
+        </ons-carousel-item>
+
+        <ons-carousel-item class="carousel-fifth">
+            <div class="item-image">
+                <img src="images/onboarding5.png" class="item-image" alt="Get reminders">
+            </div>
+            <p class="padd-top-md carousel-text semi-bold">Set a pickup location and we'll find you a ride</p>
+            <ons-button class="button-dark margin-top button-cyclinder" ng-click="onbd.start()">Get started</ons-button>
+        </ons-carousel-item>
+
+    </ons-carousel>
+</ons-page>
