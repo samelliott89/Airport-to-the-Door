@@ -13,6 +13,3 @@ qantasApp.controller 'BootstrapCtrl', (nav, MatchResource) ->
                 nav.setRootPage 'authCtrl'
 
     return
-
-
-

@@ -1,7 +1,9 @@
 <ons-page ng-controller="DateOfFlightCtrl as date">
     <ons-toolbar>
         <div class="left">
-            <shifts-left-button></shifts-left-button>
+            <ons-toolbar-button ng-click="date.logout()">
+                <ons-icon icon="ion-ios-gear-outline" size="28px" fixed-width="false"></ons-icon>
+            </ons-toolbar-button>
         </div>
         <div class="center animated fadeIn">Date of Flight</div>
         <div class="right"><ons-toolbar-button ng-click="date.findFlights()">Next</ons-toolbar-button></div>

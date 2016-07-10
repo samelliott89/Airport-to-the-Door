@@ -3,6 +3,7 @@ qantasApp = angular.module 'qantasApp'
 qantasApp.directive 'shiftsLeftButton', ($rootScope, $timeout, nav) ->
     restrict: 'AE'
     templateUrl: 'templates/directives/shiftsLeftButton.html'
+
     link: (scope) ->
         scope.pendingConnections = $rootScope.pendingConnections
         $rootScope.$on 'shifts.pendingConnections.refreshed', (ev, pendingConnections) ->

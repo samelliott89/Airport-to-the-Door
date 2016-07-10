@@ -163,6 +163,9 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
             selectNextPeriod()
             handleDigitPressed key
 
+    _actuallyLogout = ->
+        auth.logout()
+
     selectNextPeriod = =>
         # Move onto the next field, whether it is the end time or the next day
         if @selectedField is 'start'
@@ -267,6 +270,23 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
             .map createDateObject
 
         eventName = if @shiftToEdit? then 'Edit' else 'Add'
+
+
+    @logout = ->
+        if window.isCordova
+            pg.actionSheet {
+                title: 'Are you sure you want to log out?'
+                destructive: {label: 'Logout', action: _actuallyLogout}
+                cancel: {label: 'Cancel', action: -> }
+            }
+        else
+            pg.confirm {
+                title: 'Are you sure you want to log out'
+                buttons: {
+                    'Logout': _actuallyLogout
+                    'Cancel': ->
+                }
+            }
 
     @findFlights = ->
         window.findingFlightsModal.show()

@@ -1,8 +1,10 @@
 <ons-toolbar-button ng-click="nav.toggleMenu()" ng-if="showMenuButton">
+
     <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
 
     <div class="notify-badge" ng-if="pendingConnections.length">{{pendingConnections.length}}</div>
     <div class="notify-badge" ng-if="currentUser.defaultDisplayNameSet">!</div>
+
 </ons-toolbar-button>
 
 <ons-back-button ng-if="showBackButton"></ons-back-button>
