@@ -1,5 +1,4 @@
 dyn-font-size-base = 4.5vw
-dyn-font-size-lg = 5.5vw
 
 .add
     display flex
@@ -19,24 +18,24 @@ dyn-font-size-lg = 5.5vw
     flex 0 0 keypad-height
 
 .week
-    padding: 12px 0 12px 0
+    padding: 12px 0 18px 0
     text-align center
+    background brand-blue
     white-space nowrap
-    background none
     // Float forces the element to have a 'proper' height
     float left
 
 // just to show scrolling
 .week-wrap
-    width 99.8%
+    _bg = #EEEEEE
+    width 100%
     overflow auto
+    background _bg
 
 .week__day
     position relative
     display: inline-block
     min-width: 15vw
-    padding: 10px 0;
-    border-right: 1px solid white;
 
 .week__background
     _size = 8.5vw
@@ -53,10 +52,13 @@ dyn-font-size-lg = 5.5vw
     z-index 1
 
     .week__day:active &
-        // background: lighten(brand-blue, 60%)
+        background: lighten(brand-blue, 60%)
 
     .week__day--working &
         background #F0CECE
+
+    .week__day--selected &
+        background lighten(brand-blue, 20%)
 
     .week__day--invalid
         band-width = 7px
@@ -77,14 +79,13 @@ dyn-font-size-lg = 5.5vw
 
 .week__number
     position relative
-    font-size dyn-font-size-lg
+    font-size dyn-font-size-base
     color white
     z-index 2
-    padding-top 3px
 
     .week__day--selected &
     .week__day--invalid &
-        color darken(white, 20%)
+        color white
 
 .keypad
     position relative
@@ -195,16 +196,14 @@ dyn-font-size-lg = 5.5vw
 .keypad__am
     border-left none
 
-.add__display__timesd
+.add__display__times
     position: relative
     margin 15px -7px 0 -7px
 
 .add__display__text
 .add__display__duration
-    font-size font-size-ridic
+    font-size dyn-font-size-base
     min-height: 1em
-    color white
-    text-align center
 
 .add__display__duration
     position: absolute

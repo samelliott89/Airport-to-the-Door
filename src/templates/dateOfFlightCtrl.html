@@ -3,20 +3,14 @@
         <div class="left">
             <shifts-left-button></shifts-left-button>
         </div>
-
         <div class="center animated fadeIn">Date of Flight</div>
-
         <div class="right"><ons-toolbar-button ng-click="date.findFlights()">Next</ons-toolbar-button></div>
-
     </ons-toolbar>
 
-    <div class="padd text-muted text-center animated fadeIn">
-        <p>What date are you travelling?</p>
-    </div>
+    <div class="padd text-muted text-center animated fadeIn semi-bold"><p>What date are you travelling?</p></div>
 
     <div class="add">
-    <p class="padd-left-right text-muted animated bounceInLeft semi-bold">{{date.month}}</p>
-        <div class="add__week week-wrap animated bounceInRight" ng-if="!date.isEditing">
+        <div class="add__week week-wrap" ng-if="!date.isEditing">
             <div class="week" shifts-week-scroller="date.selectedDayIndex">
                 <div class="week__day"
                     ng-class="{
@@ -31,8 +25,10 @@
                 </div>
             </div>
         </div>
+
+        <div class="text-muted padd text-center animated fadeIn">
+            <p>{{date.selectedDay.day | date:'EEEE d'}}{{date.selectedDay.day | ordinal}} {{date.selectedDay.day | date:'MMMM'}}</p>
+        </div>
     </div>
-
-
 
 </ons-page>
