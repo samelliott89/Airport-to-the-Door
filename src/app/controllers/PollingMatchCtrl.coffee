@@ -6,7 +6,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
         REQUESTED: 'REQUESTED',
         PROPOSED: 'PROPOSED',
         ACCEPTED: 'ACCEPTED',
-        CONFIRMED: 'CONFIRED'
+        CONFIRMED: 'CONFIRMED'
     }
 
     _renderMatchRequestState = (state) ->
@@ -43,6 +43,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
         $scope.subTitle = 'You will be travelling with ' + state.request.given_name + '.'
 
     pollMatchRequest = ->
+        console.log 'polling...'
         MatchResource.getMatch()
             .$promise.then -> _renderMatchRequestState
             .catch (err) ->
