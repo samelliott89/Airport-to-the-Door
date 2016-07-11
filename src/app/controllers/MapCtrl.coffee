@@ -71,6 +71,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             (position) ->
                 if _map
                     _map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude))
+                    _reverseGeoCodeLookup({lat: position.coords.latitude, lng: position.coords.longitude})
         )
 
         navigator.geolocation.watchPosition(

@@ -10,7 +10,6 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
     }
 
     _renderMatchRequestState = (state) ->
-        console.log 'poll state', state
         $scope.status = state.status
         switch state.status
             when _STATE.REQUESTED
@@ -43,14 +42,11 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
         $scope.subTitle = 'You will be travelling with ' + state.request.given_name + '.'
 
     pollMatchRequest = ->
-        console.log 'polling...'
         MatchResource.getMatch()
-            .$promise.then -> _renderMatchRequestState
+            .$promise.then (state) ->
+                _renderMatchRequestState(state)
             .catch (err) ->
                 console.log 'an error occured', err
-
-            # update bindings
-            $scope.$apply
 
     @cancelMatch = ->
         MatchResource.cancelMatch()
@@ -61,17 +57,19 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
             .finally ->
                 $interval.cancel(_poll_promise)
                 storage.clearFlightData()
-                nav.setRootPage 'navigator'
+                nav.goto 'dateOfFlightCtrl'
 
     @rejectProposedMatch = ->
         MatchResource.rejectProposedMatch()
-            .$promise.then _renderMatchRequestState
+            .$promise.then (state) ->
+                _renderMatchRequestState(state)
             .catch (err) ->
                 console.log 'reject proposed match err is', err
 
     @acceptProposedMatch = ->
         MatchResource.acceptProposedMatch()
-        .$promise.then _renderMatchRequestState
+        .$promise.then (state) ->
+            _renderMatchRequestState(state)
         .catch (err) ->
             console.log 'accept proposed match err is', err
 
