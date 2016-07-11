@@ -47,6 +47,10 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
                 _renderMatchRequestState(state)
             .catch (err) ->
                 console.log 'an error occured', err
+                if err.status is 404
+                    $interval.cancel(_poll_promise)
+                    storage.clearFlightData()
+                    nav.goto 'dateOfFlightCtrl'
 
     @cancelMatch = ->
         MatchResource.cancelMatch()
