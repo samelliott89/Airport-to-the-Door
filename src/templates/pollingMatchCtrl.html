@@ -5,7 +5,7 @@
         </ons-toolbar>
 
         <div class="animated fadeIn">
-            <folding-cube-spinner ng-show="status === 'REQUESTED' || status === 'PROPOSED' || status === 'ACCEPTED'"></folding-cube-spinner>
+            <circle-spinner ng-show="status === 'REQUESTED' || status === 'PROPOSED' || status === 'ACCEPTED'"></circle-spinner>
             <confirm-animation ng-show="status === 'CONFIRMED' && status !== 'NO_MATCH_FOUND'"></confirm-animation>
         </div>
 
