@@ -1,16 +1,32 @@
 qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResource, nav, storage) ->
+
     _POLL_RATE_MS = 3000
-    _STATE = {
-        REQUESTED: 'REQUESTED',
-        PROPOSED: 'PROPOSED',
-        ACCEPTED: 'ACCEPTED',
+
+    _STATE =
+        REQUESTED: 'REQUESTED'
+        PROPOSED: 'PROPOSED'
+        ACCEPTED: 'ACCEPTED'
         CONFIRMED: 'CONFIRMED'
-    }
+
+    $scope.isLoading = true
+
+    _actuallyCancelRequest = ->
+        MatchResource.cancelMatch()
+            .$promise.then (res) ->
+                console.log 'canceled match is', res
+            .catch (err) ->
+                console.log 'cancel match err is', err
+            .finally ->
+                $interval.cancel _poll_promise
+                storage.clearFlightData()
+                nav.setRootPage 'navigator'
 
     _renderMatchRequestState = (state) ->
+        console.log '_renderMatchRequestState being run'
         $scope.status = state.status
+        $scope.isLoading = false
         switch state.status
             when _STATE.REQUESTED
                 _renderRequestedState state
@@ -44,41 +60,45 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
     pollMatchRequest = ->
         MatchResource.getMatch()
             .$promise.then (state) ->
-                _renderMatchRequestState(state)
+                _renderMatchRequestState state
+                console.log 'pollMatchRequest being run', state
+                $scope.isLoading = false
             .catch (err) ->
                 console.log 'an error occured', err
                 if err.status is 404
-                    $interval.cancel(_poll_promise)
+                    $scope.isLoading = false
+                    $interval.cancel _poll_promise
                     storage.clearFlightData()
-                    nav.goto 'dateOfFlightCtrl'
+                    nav.setRootPage 'navigator'
 
     @cancelMatch = ->
-        MatchResource.cancelMatch()
-            .$promise.then (res) ->
-                console.log 'canceled match is', res
-            .catch (err) ->
-                console.log 'cancel match err is', err
-            .finally ->
-                $interval.cancel(_poll_promise)
-                storage.clearFlightData()
-                nav.goto 'dateOfFlightCtrl'
+        pg.confirm {
+            title: 'Cancel request'
+            msg: 'Are you sure you want to cancel your request?'
+            buttons: {
+                'Yes': _actuallyCancelRequest
+                'Cancel': ->
+            }
+        }
 
     @rejectProposedMatch = ->
         MatchResource.rejectProposedMatch()
             .$promise.then (state) ->
-                _renderMatchRequestState(state)
+                _renderMatchRequestState state
             .catch (err) ->
                 console.log 'reject proposed match err is', err
 
     @acceptProposedMatch = ->
         MatchResource.acceptProposedMatch()
         .$promise.then (state) ->
-            _renderMatchRequestState(state)
+            _renderMatchRequestState state
         .catch (err) ->
             console.log 'accept proposed match err is', err
 
     state = nav.getParams 'matchRequest'
-    _renderMatchRequestState state
+    $scope.state = state
+    console.log (nav.getParams 'matchRequest')
     _poll_promise = $interval pollMatchRequest, _POLL_RATE_MS
+    _renderMatchRequestState state
 
     return
