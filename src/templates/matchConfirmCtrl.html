@@ -1,20 +1,20 @@
 <div ng-controller="MatchConfirmCtrl as mach">
+    <div class="confirm">
+        <ons-page>
+            <ons-toolbar>
+                <div class="center">Itinerary</div>
+            </ons-toolbar>
 
-<div class="confirm">
+            <div class="text-muted padd-top-xl text-center animated fadeIn">
+                <p id="flightNumber"><strong>{{mach.flightNumber}}</strong></p>
+                <p id="trip" class="text-xxl remove-p-padding"><strong>{{mach.departureAirport}}</strong> to <strong>{{mach.destinationAirport}}</strong></p>
+                <p id="arrivalTime">Leaving: <strong>{{mach.arrivalDatetime | readableTime}}</strong></p>
+            </div>
 
-    <ons-page>
-        <ons-toolbar>
-            <div class="center">Itinerary</div>
-        </ons-toolbar>
-
-        <div class="padd text-muted text-center animated fadeIn">
-            <p id="flightNumber" class="semi-bold">{{mach.request.flight_number}}</p>
-            <p id="depAirportName">{{mach.request.departure_airport_name}}</p>
-            <p id="desAirportName">{{mach.request.destination_airport_name}}</p>
-            <p id="arrivalTime">{{mach.request.arrival_datetime | readableTime}}</p>
-        </div>
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="mach.confirmRequest()">Find a ride</ons-button>
-        </div>
-
-    </ons-page>
+            <div class="card text-center animated fadeIn">
+                <ons-button class="button--clear margin-top button-cyclinder" ng-click="mach.confirmRequest()">Find me a ride</ons-button>
+                <ons-button modifier="large--quiet" class="button--bs" ng-click="mach.cancelRequest()">or cancel</ons-button>
+            </div>
+        </ons-page>
+    </div>
 </div>
