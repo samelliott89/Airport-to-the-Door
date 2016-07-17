@@ -11,76 +11,49 @@
 
         <!-- button state request status is REQUESTED -->
         <div class="card text-center" ng-if="status === 'REQUESTED' && !isLoading">
-            <div class="text-muted text-center">
-                <p>
-                    <strong>Sit tight</strong>.
-                </p>
-                <p>
-                    We're busy finding you a rideshare to the airport.
-                </p>
-                <p>
-                    We'll SMS you when we find someone nearby.
-                </p>
+            <div class="text-muted">
+                <p><strong>Sit tight</strong>.</p>
+                <p>We're busy finding you a rideshare to the airport.</p>
+                <p>We'll SMS you when we find someone nearby.</p>
             </div>
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Cancel</ons-button>
         </div>
+        <!-- end button state when request status is REQUESTED -->
 
-        <!-- button state request status is PROPOSED -->
+        <!-- button state when request status is PROPOSED -->
         <div class="card text-center" ng-if="status === 'PROPOSED' && !isLoading">
-            <div class="text-muted text-center">
+            <div class="text-muted">
                 <ons-icon icon="ion-ios-paperplane-outline" class="icon-center animate icon-bounce" size="7em"></ons-icon>
-                <p>
-                    <strong>{{state.proposal.given_name}}</strong> wants to get to the airport by <strong>{{state.proposal.arrival_datetime | readableTime}}</strong>.
-                </p>
-                <p>
-                    They're <strong>{{state.proposal.distance | readableDistance}}</strong> away from you.
-                </p>
-            </div>
-            <div>
-                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.acceptProposedMatch()">Accept</ons-button>
-            </div>
-            <div>
-                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.rejectProposedMatch()">Keep searching</ons-button>
-            </div>
+                <p><strong>{{state.proposal.given_name}}</strong> wants to get to the airport by <strong>{{state.proposal.arrival_datetime | readableTime}}</strong>.</p>
+                <p>They're <strong>{{state.proposal.distance | readableDistance}}</strong> away from you.</p>
+              <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.acceptProposedMatch()">Accept</ons-button>
+              <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.rejectProposedMatch()">Keep searching</ons-button>
+          </div>
         </div>
-        <!-- button state if request status is ACCEPTED -->
+        <!-- end button state when request status is PROPOSED -->
+
+        <!-- button state when request status is ACCEPTED -->
         <div class="card text-center" ng-if="status === 'ACCEPTED' && !isLoading">
-            <div class="text-muted text-center">
-              <p>
-                  You've accepted to ride with <strong>{{state.proposal.given_name}}</strong>.
-              </p>
-              <p>
-                  We're waiting for them to also accept.
-              </p>
+            <div class="text-muted">
+              <p>You've accepted to ride with <strong>{{state.proposal.given_name}}</strong>.</p>
+              <p>We're waiting for them to also accept.</p>
             </div>
-            <div>
-                <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Start over</ons-button>
-            </div>
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Start over</ons-button>
         </div>
+        <!-- end button state when request status is ACCEPTED -->
 
         <!-- button state if request status is CONFIRMED -->
         <div class="card text-center" ng-if="status === 'CONFIRMED' && !isLoading">
-          <div class="text-muted text-center">
-              <p>
-                  <strong>{{currentUser.given_name}}</strong>, meet <strong>{{state.proposal.given_name}}</strong>.
-              </p>
-              <p>
-                  <strong>{{state.proposal.given_name}}</strong>, meet <strong>{{currentUser.given_name}}</strong>.
-              </p>
-              <p>
-                  You'll be riding together.
-              </p>
-              <p>
-                  To work out logistics, contact {{state.proposal.given_name}} on
-                  <br>
-                  <strong>{{state.proposal.phone_number}}</strong>
-              </p>
-              <p>
-                  Have a great flight!
-              </p>
+          <div class="text-muted">
+              <p><strong>{{currentUser.given_name}}</strong>, meet <strong>{{state.proposal.given_name}}</strong>.</p>
+              <p><strong>{{state.proposal.given_name}}</strong>, meet <strong>{{currentUser.given_name}}</strong>.</p>
+              <p>You'll be riding together.</p>
+              <p>To work out logistics, contact {{state.proposal.given_name}} on<br><strong>{{state.proposal.phone_number}}</strong></p>
+              <p>Have a great flight!</p>
           </div>
-          <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Start over</ons-button>
-        </div>
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.makeContact()">Contact</ons-button>
+            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Start over</ons-button>
+          <!-- end button state when request status is CONFIRMED -->
 
     </ons-page>
 </div>

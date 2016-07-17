@@ -46,10 +46,6 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
 
         auth.login credentials
             .then (user) ->
-                setTimeout (->
-                    analytics.track 'App Login'
-                ), 1000
-
                 nav.setRootPage 'navigator'
             .finally ->
                 inProgress = false
@@ -76,10 +72,6 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
                 auth.login credentials
             .then (user) ->
                 console.log 'user', user
-
-                setTimeout (->
-                    analytics.track 'App Register'
-                ), 1000
 
                 $rootScope.$broadcast 'register'
 

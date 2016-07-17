@@ -63,7 +63,7 @@ qantasApp.run ($q, $timeout) ->
     )
 
 # Bunch of first-run one-liners
-qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, prefs, analyticsSetup, templatePrefetch) ->
+qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, prefs, templatePrefetch) ->
     # Hide necessary elements
     window.jQuery('.hide-on-first-load').css({visibility: 'visible'})
 

@@ -2,31 +2,71 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
 
-    selectedFlight = storage.get 'flightObj'
-    @selectedFlightNumber = selectedFlight.flight_number
+    _selectedFlight = storage.get 'flightObj'
+    _localDatetime = _selectedFlight.local_departure_datetime
+    _momentDatetime = moment(_localDatetime, 'DD-MM-YYYY_HH-mm-ss')
+    _buttonElement = '.animationButton'
+    _textElement = '.animationText'
+    _listOfButtons = [
+        '#60'
+        '#120'
+        '#180'
+        '#240'
+    ]
 
-    localDatetime = selectedFlight.local_departure_datetime
-    momentDatetime = moment(localDatetime, 'DD-MM-YYYY_HH-mm-ss')
-    @formattedTimeOfFlight = momentDatetime.format('h:mm a')
-    @relativeTimeUntilFlight = momentDatetime.fromNow()
+    @selectedFlightNumber = _selectedFlight.flight_number
+    @formattedTimeOfFlight = _momentDatetime.format('h:mm a')
+    @relativeTimeUntilFlight = _momentDatetime.fromNow()
 
-    @submitValue = (value) ->
-        $('.buttonOne').removeClass('rollIn').addClass('bounceOut')
-        $('.buttonTwo').removeClass('rollIn').addClass('bounceOut')
-        $('.buttonThree').removeClass('rollIn').addClass('bounceOut')
-        $('.buttonFour').removeClass('rollIn').addClass('bounceOut')
+    _selectAnimationById = (amount) ->
+        id = '#' + amount
+        $(id).removeClass('rollIn').addClass('bounceOut')
+        listOfElementsToHide = _.without(_listOfButtons, id)
 
-        $('.textOne').addClass('fadeOut')
-        $('.textTwo').addClass('fadeOut')
+        for element in listOfElementsToHide
+            # elementId = '#' + element
+            $(element).removeClass('rollIn').addClass('fadeOut')
 
-        storage.set 'minutesBefore', value
-
-        # kind of fucking gross,
-        # but will come up with better way to use animations
         setTimeout (->
-            nav.goto 'rideCountCtrl'
+            _goToNextView()
         ), 800
 
+    _goToNextView = ->
+        console.log '_goToNextView'
+        nav.goto 'rideCountCtrl'
+        setTimeout (->
+            _removeAnimatedClass()
+        ), 800
+
+    _addIntroAnimations = ->
+        console.log '_addIntroAnimations'
+        $(_buttonElement).addClass('animated rollIn')
+        $(_textElement).addClass('animated fadeIn')
+
+    _removeAnimatedClass = ->
+        console.log '_removeAnimatedClass'
+        $(_buttonElement).removeClass('animated')
+        $(_textElement).removeClass('animated')
+
+    _addOutroAnimations = ->
+        console.log '_addOutroAnimations'
+        $(_buttonElement).removeClass('rollIn').addClass('bounceOut')
+        $(_textElement).removeClass('fadeIn').addClass('fadeOut')
+        #
+        setTimeout (->
+            _goToNextView()
+        ), 800
+
+    @submitValue = (value) ->
+        _selectAnimationById(value)
+        storage.set 'minutesBefore', value
+        console.log 'submitValue', value
+
+        # _addOutroAnimations()
+
+    _addIntroAnimations()
+
     return
+
 
 

@@ -4,36 +4,35 @@
             <div class="left">
                 <shifts-left-button></shifts-left-button>
             </div>
-            <div class="center">Arrival Time</div>
+            <div class="center">Arrival time</div>
         </ons-toolbar>
 
-        <div class="removeElement">
-            <div class="textOne padd text-muted text-center animated fadeIn">
-                <p>How many hours before your flight
-                would you like to arrive at the airport?</p>
-            </div>
+        <div class="animationText padd text-muted text-center">
+            <p>How many hours before your flight
+            would you like to arrive at the airport?</p>
+        </div>
 
-            <div class="text-center">
-                <ons-button class="buttonOne buttonOne-helper circle-thick button--clear margin-top button-radius-thin margin-md animated rollIn"
-                    ng-click="arri.submitValue(60)">1 </ons-button>
-                <ons-button class="buttonTwo circle-thick button--clear margin-top button-radius-thin margin-md animated rollIn"
-                    ng-click="arri.submitValue(120)">
-                    <span class="special-pad">2</span></ons-button>
-            </div>
+        <div class="text-center">
+            <ons-button id="60" class="animationButton buttonOne-helper circle-thick button--clear margin-top button-radius-thin margin-md"
+                ng-click="arri.submitValue(60)">1 </ons-button>
+            <ons-button id="120" class="animationButton circle-thick button--clear margin-top button-radius-thin margin-md"
+                ng-click="arri.submitValue(120)">
+                <span class="special-pad">2</span></ons-button>
+        </div>
 
-            <div class="text-center">
-                <ons-button class="buttonThree circle-thick button--clear margin-top button-radius-thin margin-md animated rollIn"
-                    ng-click="arri.submitValue(180)">
-                    <span class="special-pad">3</span></ons-button>
-                <ons-button class="buttonFour circle-thick button--clear margin-top button-radius-thin margin-md animated rollIn"
-                    ng-click="arri.submitValue(240)">
-                    <span class="special-pad">4</span></ons-button>
-            </div>
+        <div class="text-center">
+            <ons-button id="180" class="animationButton circle-thick button--clear margin-top button-radius-thin margin-md"
+                ng-click="arri.submitValue(180)">
+                <span class="special-pad">3</span></ons-button>
+            <ons-button id="240" class="animationButton circle-thick button--clear margin-top button-radius-thin margin-md"
+                ng-click="arri.submitValue(240)">
+                <span class="special-pad">4</span></ons-button>
+        </div>
 
-            <div class="textTwo text-muted padd text-center animated fadeIn">
-                <p><span class="semi-bold">{{arri.selectedFlightNumber}}</span> leaves at <span class="strong">{{arri.formattedTimeOfFlight}}</span> <br>{{arri.relativeTimeUntilFlight}}</p>
-            </div>
-
+        <div id="callbackAnimation" class="animationText text-muted padd text-center">
+            <p><span class="semi-bold">{{arri.selectedFlightNumber}}
+            </span> leaves at <span class="strong">{{arri.formattedTimeOfFlight}}
+            </span><br> {{arri.relativeTimeUntilFlight}}</p>
         </div>
 
     </ons-page>
