@@ -83,7 +83,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
 
                 $rootScope.$broadcast 'register'
 
-                nav.setRootPage 'onBoardingCtrl'
+                nav.setRootPage 'onboardingCtrl'
 
             .finally ->
                 inProgress = false
