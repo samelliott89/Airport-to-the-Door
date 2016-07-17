@@ -5,19 +5,16 @@
 
     <div class="welcome">
         <div class="welcome__inner">
-
             <div class="auth-form-container">
-
                 <div class="pre-login-form margin-btm" ng-if="!wlcm.toShow" ng-animate=" 'animate' ">
-
-                    <p style="font-size: 16px;" class="animated bounceInLeft">Qantas to the door is the easiest way for passengers to
-                    get from where they are to where they want to be.</p>
+                    <p style="font-size: 16px;" class="animated bounceInLeft">Qantas to the Door is the easiest way to
+                    get from where you are to where you want to be.</p>
 
                     <ons-button modifier="large padd-btm-md" class="button--clear button-cyclinder animated bounceInRight"
                         type="button" ng-click="wlcm.toShow = 'reg'">Register</ons-button>
 
                     <ons-button modifier="large--quiet" class="button--bs animated fadeIn"
-                        type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
+                        type="button" ng-click="wlcm.toShow = 'login'">Already have an account? Login</ons-button>
                 </div>
 
                 <!-- LOG IN -->
@@ -96,21 +93,11 @@
                     </form>
 
                     <p><ons-button modifier="large--quiet" class="button--bs"
-                        type="button" ng-click="wlcm.toShow = 'login'">Already got an account? Login</ons-button>
-<!--
-                        <p class="text-center small">
-                            By registering, you agree to our
-                            <strong ng-click="nav.openInAppBrowser('http://getatum.com/terms')">Terms of Service</strong> and
-                            <strong ng-click="nav.openInAppBrowser('http://getatum.com/privacy')">Privacy Policy</strong>.
-                        </p> -->
-
+                        type="button" ng-click="wlcm.toShow = 'login'">Already have an account? Login</ons-button>
                     </p>
-
                 </div>
-
                 <!-- END REGISTER -->
             </div>
-
         </div>
     </div>
 </ons-page>

@@ -15,7 +15,7 @@
         <!-- search bar -->
         <form class="search-panel" ng-class="(list.flightsAvailable > 0) ? 'visible' : ''">
             <div class="search-panel__field search-input">
-                <input class="search-panel__input" type="text" placeholder="Search for flight number" ng-model="searchFilter">
+                <input class="search-panel__input" type="text" placeholder="Flight number or destination" ng-model="searchFilter">
             </div>
         </form>
         <!-- end search bar -->
@@ -29,7 +29,7 @@
 
         <!-- list of flights shown when no flights are found -->
         <ons-list class="flight-list animated fadeIn" ng-if="list.flightsAvailable">
-            <ons-list-header>Please select a flight</ons-list-header>
+            <ons-list-header>Select your flight</ons-list-header>
             <ons-list-item flight-list-item modifier="chevron" ng-repeat="flight in list.flights | filter:searchFilter | orderBy: 'flight_number'" ng-click="list.goToFlightSummary(flight)">
                 <ons-row>
                     <img src="qantas/qantas_logo.png"
