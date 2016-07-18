@@ -62,8 +62,6 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         storage.set 'minutesBefore', value
         console.log 'submitValue', value
 
-        # _addOutroAnimations()
-
     _addIntroAnimations()
 
     return

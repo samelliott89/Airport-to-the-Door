@@ -127,4 +127,5 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
     _poll_promise = $interval _pollMatchRequest, _POLL_RATE_MS
     _renderMatchRequestState state
 
+
     return
