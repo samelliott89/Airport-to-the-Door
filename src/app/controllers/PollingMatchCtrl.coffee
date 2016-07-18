@@ -85,6 +85,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
     @makeContact = ->
         user = state.proposal
         contactName = user.given_name
+
         actions = [
             {label: 'Call ', action: -> _callUser() }
             {label: 'Message', action: -> _messageUser() }
