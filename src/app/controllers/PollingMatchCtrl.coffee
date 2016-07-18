@@ -93,8 +93,8 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
         console.log 'contactName', contactName
 
         actions = [
-            {label: 'Call ', action: -> _callUser(proposal) }
-            {label: 'Message', action: -> _messageUser(proposal) }
+            {label: 'Call ', action: -> _callUser proposal }
+            {label: 'Message', action: -> _messageUser proposal }
         ]
 
         pg.actionSheet {
