@@ -56,15 +56,18 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
         $scope.title = 'Congratulations'
         $scope.subTitle = 'You will be travelling with ' + state.proposal.given_name + '.'
 
-    _callUser = ->
+    _callUser = (user) ->
         console.log 'calling user'
-        mobile = '+61437634569'
+        mobile = user.phone_number
+        console.log 'mobile is', mobile
         link = 'tel:' + mobile
         window.open(link, '_self')
 
-    _messageUser = ->
+    _messageUser = (proposal) ->
         console.log '_messageUser being called'
-        mobile = '+61437634569'
+        mobile = proposal.phone_number
+        console.log 'proposal from _messageUser being called'
+        console.log 'mobile from _messageUser', mobile
         link = 'sms:' + mobile
         window.open(link, '_self')
 
@@ -74,6 +77,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
                 _renderMatchRequestState state
                 console.log '_pollMatchRequest being run', state
                 $scope.isLoading = false
+                $scope.$apply
             .catch (err) ->
                 console.log 'an error occured', err
                 if err.status is 404
@@ -83,18 +87,20 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
                     nav.setRootPage 'navigator'
 
     @makeContact = ->
-        user = state.proposal
-        contactName = user.given_name
+        proposal = state.proposal
+        console.log 'proposal is', proposal
+        contactName = proposal.given_name
+        console.log 'contactName', contactName
 
         actions = [
-            {label: 'Call ', action: -> _callUser() }
-            {label: 'Message', action: -> _messageUser() }
+            {label: 'Call ', action: -> _callUser(proposal) }
+            {label: 'Message', action: -> _messageUser(proposal) }
         ]
 
         pg.actionSheet {
             title: contactName
             actions: actions
-            destructive: { label: 'Reset', action: @rejectProposedMatch() }
+            destructive: { label: 'Reset', action: @rejectProposedMatch }
             cancel: { label: 'Cancel', action: -> }
         }
 
