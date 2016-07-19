@@ -49,21 +49,20 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
         flightToMatch = storage.get 'flightObj'
         center = _map.getCenter()
 
-        # confirm with the user the details
-        # they've inputted
         nav.goto 'matchConfirmCtrl', {location: center, flight: flightToMatch, animation: 'lift'}
 
     _onPanZoomEnd = ->
         _reverseGeoCodeLookup(_map.getCenter())
 
     _createMap = ->
+        if _map
+            _map.remove()
         leafletData.getMap('map').then((map) ->
             # TODO(SK): Fix hack. Remove all the leaflet controls.
-            $('#map').find('.leaflet-control-container').remove()
+            $('#map').find('.leaflet-control-container').hide()
             _map = map
             _map.on('dragend', _onPanZoomEnd)
             _map.on('zoomend', _onPanZoomEnd)
-            _createGeolocation()
         )
 
     _createGeolocation = ->
@@ -112,4 +111,6 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             console.log 'err status is', err.status
 
     _createMap()
+    _createGeolocation()
+
     return
