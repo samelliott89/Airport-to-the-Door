@@ -50,12 +50,12 @@
           <div class="text-muted">
               <p><strong>{{currentUser.given_name}}</strong>, meet <strong>{{state.proposal.given_name}}</strong>. <strong>{{state.proposal.given_name}}</strong>, meet <strong>{{currentUser.given_name}}</strong>.</p>
               <p>You'll be riding together.</p>
-              <p>To work out logistics, you can contact {{state.proposal.given_name}} by tapping on <strong>'Contact'</strong></p>
+              <p>To work out logistics, you can contact {{state.proposal.given_name}} on <strong>{{state.proposal.phone_number}}</strong></p>
               <p>Have a great flight!</p>
           </div>
 
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.makeContact()">Contact</ons-button>
-            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">or start over</ons-button>
+<!--             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.makeContact()">Contact</ons-button>
+ -->            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">or start over</ons-button>
       </div>
           <!-- end button state when request status is CONFIRMED -->
 

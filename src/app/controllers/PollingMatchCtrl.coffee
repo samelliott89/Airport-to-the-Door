@@ -57,11 +57,12 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
         $scope.subTitle = 'You will be travelling with ' + state.proposal.given_name + '.'
 
     _callUser = (user) ->
-        console.log 'calling user'
         mobile = user.phone_number
-        console.log 'mobile is', mobile
         link = 'tel:' + mobile
-        window.open(link, '_self')
+        if window.isCordova
+            window.open link, '_system'
+        else
+            window.open link, '_blank'
 
     _messageUser = (proposal) ->
         console.log '_messageUser being called'
