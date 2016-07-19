@@ -65,12 +65,12 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
             window.open link, '_blank'
 
     _messageUser = (proposal) ->
-        console.log '_messageUser being called'
         mobile = proposal.phone_number
-        console.log 'proposal from _messageUser being called'
-        console.log 'mobile from _messageUser', mobile
         link = 'sms:' + mobile
-        window.open(link, '_self')
+        if window.isCordova
+            window.open link, '_system'
+        else
+            window.open link, '_blank'
 
     _pollMatchRequest = ->
         MatchResource.getMatch()
@@ -78,6 +78,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
                 _renderMatchRequestState state
                 console.log '_pollMatchRequest being run', state
                 $scope.isLoading = false
+                $scope.state = state
                 $scope.$apply
             .catch (err) ->
                 console.log 'an error occured', err
