@@ -1,6 +1,6 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResource, nav, storage) ->
+qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchResource, nav, storage) ->
 
     _POLL_RATE_MS = 3000
 
@@ -16,12 +16,11 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
         MatchResource.cancelMatch()
             .$promise.then (res) ->
                 console.log 'canceled match is', res
-            .catch (err) ->
-                console.log 'cancel match err is', err
-            .finally ->
                 $interval.cancel _poll_promise
                 storage.clearFlightData()
                 nav.setRootPage 'navigator'
+            .catch (err) ->
+                console.log 'cancel match err is', err
 
     _renderMatchRequestState = (state) ->
         $scope.status = state.status
@@ -122,6 +121,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
                 _renderMatchRequestState state
             .catch (err) ->
                 console.log 'reject proposed match err is', err
+                pg.alert {title: 'Error', msg: err.status}
 
     @acceptProposedMatch = ->
         MatchResource.acceptProposedMatch()
@@ -129,6 +129,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, $interval, MatchResourc
             _renderMatchRequestState state
         .catch (err) ->
             console.log 'accept proposed match err is', err
+            pg.alert {title: 'Error', msg: err.status}
 
     state = nav.getParams 'matchRequest'
     $scope.state = state

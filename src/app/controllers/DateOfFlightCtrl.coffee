@@ -122,7 +122,7 @@ _pluralize = (num, string, suffix = 's') ->
 # DATE OF FLIGHT CONTROLLER BEGINS
 ###
 
-qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, storage, FlightResource, month) ->
+qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, pg, storage, FlightResource, month) ->
 
     # clear all flight data in local storage
     # and start with a clean slate
@@ -305,12 +305,13 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, s
             .$promise.then (flights) ->
                 # set list of flights into local storage
                 storage.set 'listOfFlights', flights
-            .catch (err) ->
-                alert 'An error has occured', err
-            .finally ->
-                window.findingFlightsModal.hide()
                 # go to list of flights
                 nav.goto 'listOfFlightsCtrl'
+            .catch (err) ->
+                alert 'An error has occured', err
+                pg.alert {title: 'Error', msg: err.status}
+            .finally ->
+                window.findingFlightsModal.hide()
 
     @back = ->
         nav.back()

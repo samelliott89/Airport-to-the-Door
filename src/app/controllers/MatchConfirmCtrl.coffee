@@ -1,6 +1,6 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'MatchConfirmCtrl', (nav, storage, $scope, MatchResource) ->
+qantasApp.controller 'MatchConfirmCtrl', (nav, storage, pg, $scope, MatchResource) ->
 
     $('#flightNumber').addClass('animated bounceInLeft')
     $('#trip').addClass('animated bounceInRight')
@@ -17,13 +17,13 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, $scope, MatchResource) -
 
         MatchResource.requestMatch request
             .$promise.then (matchRequest) ->
-                window.cancelRequestModal.hide()
                 nav.goto 'pollingMatchCtrl', {'matchRequest': matchRequest}
                 console.log 'match is', matchRequest
             .catch (err) ->
-                window.cancelRequestModal.hide()
                 console.log 'err is', err
                 pg.alert {title: 'Error', msg: err.status}
+            .finally ->
+                window.cancelRequestModal.hide()
 
     @cancelRequest = ->
         pg.confirm {
@@ -46,20 +46,20 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, $scope, MatchResource) -
         MatchResource.cancelMatch()
             .$promise.then (res) ->
                 console.log 'canceled match is', res
-            .catch (err) ->
-                console.log 'cancel match err is', err
-            .finally ->
                 storage.clearFlightData()
                 nav.setRootPage 'navigator'
+            .catch (err) ->
+                console.log 'cancel match err is', err
+                pg.alert {title: 'Error', msg: err.status}
 
     _location = nav.getParams 'location'
     _flight = nav.getParams 'flight'
     _arrivalDatetime = _getArrivalDatetime(_flight, storage.get 'minutesBefore')
 
-    @departureAirport = _flight.departure_airport
+    @departureAirport = if _flight.departure_airport is 'YSSY' then 'SYD' else _flight.departure_airport
     @departureAirportName = _flight.departure_airport_name
 
-    @destinationAirport = _flight.destination_airport
+    @destinationAirport = if _flight.destination_airport is 'YSSY' then 'SYD' else _flight.destination_airport
     @destinationAirportName = _flight.destination_airport_name
 
     @flightNumber = _flight.flight_number
