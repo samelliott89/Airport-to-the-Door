@@ -111,6 +111,3 @@ qantasApp.run ($rootScope, $location, $timeout, auth, nav, MatchResource) ->
             nav.setRootPage 'navigator'
         else
             nav.setRootPage 'authCtrl'
-
-        $rootScope.$on 'logout', (ev, currentUser) ->
-            nav.setRootPage 'authCtrl'

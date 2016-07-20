@@ -1,6 +1,6 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserResource) ->
+qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, nav, storage, UserResource) ->
     # Set some variables for this factory and create a new user
     window.pg = pg
     factory = { currentUser: new UserResource() }
@@ -24,7 +24,6 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
             .then (resp) ->
                 _.extend factory.currentUser, userInfo, resp.data
                 storage.set 'user_info', factory.currentUser
-                $rootScope.$broadcast 'login', factory.currentUser
 
                 return
 
@@ -51,7 +50,6 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
             storage.set 'user_info', factory.currentUser
             storage.set 'auth_token', resp.data.auth_token
             dfd.resolve factory.currentUser
-            $rootScope.$broadcast 'login', factory.currentUser
 
         $http.post "#{config.apiBase}/auth/login", credentials
             .then postLogin
@@ -60,14 +58,24 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, storage, UserReso
         return dfd.promise
 
     factory.register = (credentials) ->
-        $http.post "#{config.apiBase}/auth/signup", credentials
+        dfd = $q.defer()
 
-    factory.logout = (preventBroadcast) ->
+        postRegister = (resp) ->
+            _.extend factory.currentUser, resp.data
+            storage.set 'user_info', factory.currentUser
+            storage.set 'auth_token', resp.data.auth_token
+            dfd.resolve factory.currentUser
+
+        $http.post "#{config.apiBase}/auth/signup", credentials
+            .then postRegister
+            .catch dfd.reject
+
+        return dfd.promise
+
+    factory.logout = ->
         storage.clearAll()
         factory.currentUser = new UserResource()
-        $rootScope.$broadcast 'logout', factory.currentUser unless preventBroadcast
-
-        return factory.currentUser
+        nav.setRootPage 'authCtrl'
 
     factory.isAuthenticated = ->
         !!factory.currentUser.user_id

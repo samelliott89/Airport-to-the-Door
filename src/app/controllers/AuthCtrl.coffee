@@ -45,12 +45,12 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
         window.loginUserModal.show()
 
         auth.login credentials
-            .then (user) ->
+            .then ->
                 nav.setRootPage 'navigator'
+            .catch lolHandleErrors
             .finally ->
                 inProgress = false
                 window.loginUserModal.hide()
-            .catch lolHandleErrors
 
     @registerSubmit = =>
         return if inProgress
@@ -67,20 +67,12 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
         window.registerUserModal.show()
 
         auth.register credentials
-            .then (data) ->
-                console.log 'response', data
-                auth.login credentials
-            .then (user) ->
-                console.log 'user', user
-
-                $rootScope.$broadcast 'register'
-
+            .then ->
                 nav.setRootPage 'onboardingCtrl'
-
+            .catch lolHandleErrors
             .finally ->
                 inProgress = false
                 window.registerUserModal.hide()
-            .catch lolHandleErrors
 
     @auth = auth
     @nav = nav
