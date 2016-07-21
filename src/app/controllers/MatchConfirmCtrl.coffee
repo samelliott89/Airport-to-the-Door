@@ -7,7 +7,7 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, pg, $scope, MatchResourc
     $('#arrivalTime').addClass('animated bounceInLeft')
 
     @confirmRequest = ->
-        window.cancelRequestModal.show()
+        window.requestMatchModal.show()
         request =
             pickup_latitude: _location.lat
             pickup_longitude: _location.lng
@@ -23,7 +23,7 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, pg, $scope, MatchResourc
                 console.log 'err is', err
                 pg.alert {title: 'Error', msg: err.status}
             .finally ->
-                window.cancelRequestModal.hide()
+                window.requestMatchModal.hide()
 
     @cancelRequest = ->
         pg.confirm {
@@ -43,14 +43,8 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, pg, $scope, MatchResourc
         return arrivalMoment.format('DD-MM-YYYY_HH-mm-ss')
 
     _actuallyCancelRequest = ->
-        MatchResource.cancelMatch()
-            .$promise.then (res) ->
-                console.log 'canceled match is', res
-                storage.clearFlightData()
-                nav.setRootPage 'navigator'
-            .catch (err) ->
-                console.log 'cancel match err is', err
-                pg.alert {title: 'Error', msg: err.status}
+        storage.clearFlightData()
+        nav.setRootPage 'navigator'
 
     _location = nav.getParams 'location'
     _flight = nav.getParams 'flight'
