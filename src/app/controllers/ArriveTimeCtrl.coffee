@@ -24,7 +24,6 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         listOfElementsToHide = _.without(_listOfButtons, id)
 
         for element in listOfElementsToHide
-            # elementId = '#' + element
             $(element).removeClass('rollIn').addClass('fadeOut')
 
         setTimeout (->
@@ -47,15 +46,6 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         console.log '_removeAnimatedClass'
         $(_buttonElement).removeClass('animated')
         $(_textElement).removeClass('animated')
-
-    _addOutroAnimations = ->
-        console.log '_addOutroAnimations'
-        $(_buttonElement).removeClass('rollIn').addClass('bounceOut')
-        $(_textElement).removeClass('fadeIn').addClass('fadeOut')
-        #
-        setTimeout (->
-            _goToNextView()
-        ), 800
 
     @submitValue = (value) ->
         _selectAnimationById(value)
