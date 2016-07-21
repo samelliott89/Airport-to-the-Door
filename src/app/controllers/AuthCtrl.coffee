@@ -11,7 +11,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
     if auth.isAuthenticated()
         nav.setRootPage 'navigator'
 
-    lolHandleErrors = (err) ->
+    handleErrors = (err) ->
         error = (err?.data) or {}
         title = 'Oops'
         messages = ['Unknown error occured - Please try again later.']
@@ -47,7 +47,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
         auth.login credentials
             .then ->
                 nav.setRootPage 'navigator'
-            .catch lolHandleErrors
+            .catch (err) -> handleErrors
             .finally ->
                 inProgress = false
                 window.loginUserModal.hide()
@@ -60,6 +60,8 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
             given_name: @given_name
             surname: @surname
             phone_number: @phone
+            # hard coded in until we find
+            # a work around for this
             phone_locale: 'AU'
             email: @email
             password: @password
@@ -69,7 +71,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
         auth.register credentials
             .then ->
                 nav.setRootPage 'onboardingCtrl'
-            .catch lolHandleErrors
+            .catch (err) -> handleErrors err
             .finally ->
                 inProgress = false
                 window.registerUserModal.hide()

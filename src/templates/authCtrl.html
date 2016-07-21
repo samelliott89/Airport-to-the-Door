@@ -20,30 +20,28 @@
                 <!-- LOG IN -->
 
                 <div class="login-form login-form--login" ng-if="wlcm.toShow === 'login'" ng-animate=" 'animate' ">
-                    <form ng-submit="wlcm.loginSubmit()" autocomplete="off">
+                    <form ng-submit="wlcm.loginSubmit()" name="loginForm" autocomplete="off">
+
                         <input style="display:none" type="text" name="fakeusernameremembered"/>
                         <input style="display:none" type="password" name="fakepasswordremembered"/>
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" ng-model="wlcm.email"
-                                    type="email" placeholder="Email" id="LoginEmail">
+                                    type="email" placeholder="Email" id="LoginEmail" required>
                             <label for="LoginEmail">Email</label>
                         </div>
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" ng-model="wlcm.password"
-                                type="password" placeholder="Password" id="LoginPassword">
+                                type="password" placeholder="Password" id="LoginPassword" required>
                             <label for="LoginPassword">Password</label>
                         </div>
 
-                        <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.loginSubmit()">Log in</ons-button>
-
+                        <ons-button modifier="large" class="button--clear margin-top button-cyclinder"
+                            ng-disabled="loginForm.$invalid || loginForm.$pending" type="button" ng-click="wlcm.loginSubmit()">Log in</ons-button>
                     </form>
 
-                    <p>
-                        <ons-button modifier="large--quiet" class="button--bs" type="button"
-                            ng-click="wlcm.toShow = 'reg'">Haven't registered yet?</ons-button>
-                    </p>
+                    <ons-button modifier="large--quiet" class="button--bs padd-top-md" type="button" ng-click="wlcm.toShow = 'reg'">Haven't registered yet?</ons-button>
                 </div>
 
                 <!-- END LOG IN -->
@@ -51,7 +49,7 @@
                 <!-- START REGISTER -->
 
                 <div class="login-form login-form--reg" ng-if="wlcm.toShow === 'reg'" ng-animate=" 'animate' ">
-                    <form ng-submit="wlcm.registerSubmit()" autocomplete="off">
+                    <form name="regForm" ng-submit="wlcm.registerSubmit()" autocomplete="off">
                         <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
                         <input style="display:none" type="text" name="fakeusernameremembered"/>
                         <input style="display:none" type="password" name="fakepasswordremembered"/>
@@ -60,41 +58,35 @@
                         <!-- TODO: replace floatfield with a directive -->
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.given_name"
-                                    type="text" placeholder="First name" id="RegisterText">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.given_name" required type="text" placeholder="First name" id="RegisterText">
                             <label for="RegisterText">First name</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.surname"
-                                    type="text" placeholder="Last name" id="RegisterText">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.surname" required type="text" placeholder="Last name" id="RegisterText">
                             <label for="RegisterText">Last name</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*"
-                                placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.onPhoneNumberChange()" ng-click="wlcm.onPhoneNumberChange()">
+                            <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*" required placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.onPhoneNumberChange()" ng-click="wlcm.onPhoneNumberChange()">
                           <label for="RegisterText">Mobile number</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.email"
-                                    type="email" placeholder="Email" id="RegisterEmail">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.email" required type="email" placeholder="Email" id="RegisterEmail">
                             <label for="RegisterEmail">Email</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.password"
-                                    type="password" placeholder="Password" id="RegisterPassword">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.password" required type="password" placeholder="Password" id="RegisterPassword">
                             <label for="RegisterPassword">Password</label>
                         </div>
 
-                        <ons-button modifier="large" class="button--clear margin-top button-cyclinder" ng-click="wlcm.registerSubmit()">Register</ons-button>
+                        <ons-button modifier="large" class="button--clear margin-top button-cyclinder" type="button" ng-disabled="regForm.$invalid || regForm.$pending"
+                            ng-click="wlcm.registerSubmit()">Register</ons-button>
                     </form>
 
-                    <p><ons-button modifier="large--quiet" class="button--bs"
-                        type="button" ng-click="wlcm.toShow = 'login'">Already have an account? Login</ons-button>
-                    </p>
+                    <ons-button modifier="large--quiet" class="button--bs padd-top-md" ng-click="wlcm.toShow = 'login'">Already have an account? Login</ons-button>
                 </div>
                 <!-- END REGISTER -->
             </div>

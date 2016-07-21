@@ -4,17 +4,14 @@
             <div class="center">{{title}}</div>
         </ons-toolbar>
 
-        <div>
-            <circle-spinner ng-if="status === 'REQUESTED' || status === 'ACCEPTED'"></circle-spinner>
-            <confirm-animation ng-if="status === 'CONFIRMED'"></confirm-animation>
-        </div>
+        <circle-spinner ng-if="status === 'REQUESTED' || status === 'ACCEPTED'"></circle-spinner>
+        <confirm-animation ng-if="status === 'CONFIRMED'"></confirm-animation>
 
         <!-- button state request status is REQUESTED -->
         <div class="view card text-center" ng-if="status === 'REQUESTED' && !isLoading">
             <div class="text-muted">
-                <p><strong>Sit tight</strong>.</p>
-                <p>We're busy finding you a rideshare to the airport.</p>
-                <p>We'll SMS you when we find someone nearby.</p>
+                <p><strong>Sit tight</strong></p>
+                <p>We're busy finding you a rideshare to the airport and we'll SMS you when we find someone nearby.</p>
             </div>
 
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.cancelMatch()">Cancel</ons-button>
@@ -23,9 +20,9 @@
 
         <!-- button state when request status is PROPOSED -->
         <div class="view card text-center" ng-if="status === 'PROPOSED' && !isLoading">
+        <ons-icon icon="ion-ios-paperplane-outline" class="icon-center animate icon-bounce" size="4em"></ons-icon>
             <div class="text-muted">
-                <ons-icon icon="ion-ios-paperplane-outline" class="icon-center animate icon-bounce" size="7em"></ons-icon>
-                <p><strong>{{state.proposal.given_name}}</strong> wants to get to the airport by <strong>{{state.proposal.arrival_datetime | readableTime}}</strong>.</p>
+                <p><strong>{{state.proposal.given_name}}</strong> wants to get to <strong>{{state.proposal.airport}}</strong> airport by <strong>{{state.proposal.arrival_datetime | readableTime}}</strong>.</p>
                 <p>They're <strong>{{state.proposal.distance | readableDistance}}</strong> away from you.</p>
             </div>
 
@@ -41,23 +38,21 @@
               <p>We're waiting for them to also accept.</p>
             </div>
 
-            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">or start over</ons-button>
+            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">Start over</ons-button>
         </div>
         <!-- end button state when request status is ACCEPTED -->
 
         <!-- button state if request status is CONFIRMED -->
         <div class="view card text-center" ng-if="status === 'CONFIRMED' && !isLoading">
           <div class="text-muted">
-              <p><strong>{{currentUser.given_name}}</strong>, meet <strong>{{state.proposal.given_name}}</strong>. <strong>{{state.proposal.given_name}}</strong>, meet <strong>{{currentUser.given_name}}</strong>.</p>
-              <p>You'll be riding together.</p>
-              <p>To work out logistics, you can contact {{state.proposal.given_name}} on <strong>{{state.proposal.phone_number}}</strong>.</p>
+            <p>You'll be riding with <strong>{{state.proposal.given_name}}.</strong></p>
+            <p>To work out logistics, you can contact {{state.proposal.given_name}} on <strong>{{state.proposal.phone_number}}</strong>.</p>
               <p>Have a great flight!</p>
           </div>
 
 <!--             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.makeContact()">Contact</ons-button>
- -->            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">or start over</ons-button>
+ -->            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">Start over</ons-button>
       </div>
           <!-- end button state when request status is CONFIRMED -->
-
     </ons-page>
 </div>
