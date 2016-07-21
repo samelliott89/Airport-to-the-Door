@@ -47,7 +47,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
         auth.login credentials
             .then ->
                 nav.setRootPage 'navigator'
-            .catch (err) -> handleErrors
+            .catch (err) -> handleErrors err
             .finally ->
                 inProgress = false
                 window.loginUserModal.hide()

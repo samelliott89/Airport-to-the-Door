@@ -22,7 +22,7 @@
         <div class="view card text-center" ng-if="status === 'PROPOSED' && !isLoading">
         <ons-icon icon="ion-ios-paperplane-outline" class="icon-center animate icon-bounce" size="4em"></ons-icon>
             <div class="text-muted">
-                <p><strong>{{state.proposal.given_name}}</strong> wants to get to <strong>{{state.proposal.airport}}</strong> airport by <strong>{{state.proposal.arrival_datetime | readableTime}}</strong>.</p>
+                <p><strong>{{state.proposal.given_name}}</strong> wants to get to the airport by <strong>{{state.proposal.arrival_datetime | readableTime}}</strong>.</p>
                 <p>They're <strong>{{state.proposal.distance | readableDistance}}</strong> away from you.</p>
             </div>
 
