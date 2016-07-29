@@ -34,6 +34,7 @@ qantasApp.factory 'auth', ($rootScope, $window, $http, $q, pg, nav, storage, Use
                 if err.status in [400, 401, 403, 404]
 
                     msg = 'Login details have expired. Please log in again.'
+
                     factory.logout()
                 else
                     msg = 'Error communicating with the server. Some functionality may not be available.'

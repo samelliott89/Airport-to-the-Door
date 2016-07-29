@@ -63,41 +63,15 @@ qantasApp.run ($q, $timeout) ->
     )
 
 # Bunch of first-run one-liners
-qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, prefs, templatePrefetch) ->
+qantasApp.run ($rootScope, $timeout, DialogView, IOSAlertDialogAnimator, templatePrefetch) ->
     # Hide necessary elements
     window.jQuery('.hide-on-first-load').css({visibility: 'visible'})
 
     # Enable the 'alert dialog animation' (fade in and drop down from top) for regular ons-dialogs
     DialogView.registerAnimator 'iosAlertStyle', new IOSAlertDialogAnimator()
 
-    # Sync preferences
-    # $rootScope.$on 'login', prefs.$fetch
-
     # Prefetch necessary templates
     $timeout templatePrefetch.run, 1000, false
-
-# qantasApp.run ->
-#     adjustNavigation = window.device.platform == 'iOS' && parseFloat(window.device.version) == 7.0
-
-#     if adjustNavigation
-#         console.log 'adjustNavigation'
-#         $(body).addClass('adjust-nav')
-
-# Setup some notitication things
-qantasApp.run ($rootScope, localNotifications) ->
-    $rootScope.isCordova = window.isCordova
-    $rootScope.isNativeAndroid = window.isNativeAndroid
-    $rootScope.isNativeiOSEmulator = window.isNativeiOSEmulator
-
-    document.addEventListener 'deviceready', ->
-        return unless window.cordova?.plugins?.notification?.badge?
-
-        window.cordova.plugins.notification.badge.hasPermission (granted) ->
-            return unless granted
-            window.cordova.plugins.notification.badge.configure {autoClear: true}
-
-        $rootScope.$on 'login',  -> localNotifications.syncOnShiftChanges()
-        $rootScope.$on 'logout', -> localNotifications.clearAll()
 
 qantasApp.run ($rootScope, $location, $timeout, auth, nav, MatchResource) ->
     $rootScope.nav = nav
