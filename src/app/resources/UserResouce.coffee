@@ -9,4 +9,4 @@ qantasApp.factory 'UserResource', ($resource, transform) ->
 
         update:
             method: 'post'
-            transformResponse: transform.response 'user', {broadcast: 'shifts.user.changed'}
+            transformResponse: transform.response 'user'

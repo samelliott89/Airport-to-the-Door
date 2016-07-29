@@ -122,7 +122,7 @@ _pluralize = (num, string, suffix = 's') ->
 # DATE OF FLIGHT CONTROLLER BEGINS
 ###
 
-qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, pg, storage, FlightResource, month) ->
+qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, pg, storage, FlightResource, month) ->
 
     # clear all flight data in local storage
     # and start with a clean slate
@@ -255,22 +255,6 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, prefs, p
         outputString = output.join join
         outputString = outputString.replace join + '##', ' and '
         return outputString
-
-    @saveShifts = ->
-        for day in @schedule when hasShift day
-            unless (day.isValid is true) or (day.start.isValid is true) or (day.end.isValid is true)
-                pg.alert {msg: 'Please fix invalid shifts. Days must have valid 12 hour times.', title: 'Invalid Shifts'}
-
-                return
-
-        window.addShiftsModal.show()
-
-        shiftsToSave = @schedule
-            .filter hasShift
-            .map createDateObject
-
-        eventName = if @shiftToEdit? then 'Edit' else 'Add'
-
 
     @logout = ->
         if window.isCordova

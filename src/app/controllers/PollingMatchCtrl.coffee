@@ -55,8 +55,8 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
         $scope.title = 'Congratulations'
         $scope.subTitle = 'You will be travelling with ' + state.proposal.given_name + '.'
 
-    _callUser = (user) ->
-        mobile = user.phone_number
+    _callUser = (proposal) ->
+        mobile = proposal.phone_number
         link = 'tel:' + mobile
         if window.isCordova
             window.open link, '_system'
