@@ -143,7 +143,6 @@
     androidStoreURL: 'https://play.google.com/store/apps/details?id=com.samelliotsam.workerapp'
     appleStoreURL: 'https://itunes.apple.com/app/id988221518'
     prefetchAngularTemplates: [
-        'templates/editProfileCtrl.html',
         'templates/mapCtrl.html'
     ]
     defaultShiftReminderTime: 1 # 1 minute
