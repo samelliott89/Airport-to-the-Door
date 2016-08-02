@@ -47,11 +47,13 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
 
         auth.login credentials
             .then ->
+                window.loginUserModal.hide()
                 nav.setRootPage 'navigator'
-            .catch (err) -> handleErrors err
+            .catch (err) ->
+                window.loginUserModal.hide()
+                handleErrors err
             .finally ->
                 inProgress = false
-                window.loginUserModal.hide()
 
     @registerSubmit = =>
         if @password isnt @passwordConfirm
@@ -81,11 +83,13 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
 
             auth.register credentials
                 .then ->
+                    window.registerUserModal.hide()
                     nav.setRootPage 'onboardingCtrl'
-                .catch (err) -> handleErrors err
+                .catch (err) ->
+                    window.registerUserModal.hide()
+                    handleErrors err
                 .finally ->
                     inProgress = false
-                    window.registerUserModal.hide()
 
     @auth = auth
     @nav = nav
