@@ -84,8 +84,6 @@
     # Tells build not to load hotfix script
     loadHotfix: false
 
-    cacheBust: false
-
     build:
         minifyAssets: false
         serverPort: 5014
@@ -107,19 +105,6 @@
             './src/lib/google-leaflet.js'
         ]
 
-    s3Region: 'ap-southeast-2'
-    s3AccessKeyId: 'AKIAIRFKF4NMFFOBHQRA'
-    s3SecretAccessKey: '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'
-    s3WebAppBucketName: 'robby-web-mobile-app-dev'
-    s3CacheTime: 60 * 60 * 24 * 365 # One year (!!!)
-
-    # Google Maps JS API
-    googleMapsApiKey: 'AIzaSyABDfiu8acm8wNzM_XfHRTfxjwf2pv-Y6I'
-    # Google Maps iOS SDK Key
-    googleIOSMapsKey: 'AIzaSyCPqd22gRFirDp773CN7TOEX_HxqIxGULw'
-    # Google Maps Android SDK Key
-    googleAndroidMapsKey: 'AIzaSyDW695iBXikVtO78-8GH4X5xPkhrrb0a0Y'
-
     ##
     # __Public Values__
     # Only items in this list will be made 'public' in config.json and index.html
@@ -127,24 +112,13 @@
     publicConfigKeys: [
         'apiBase'
         'appVersion'
-        'segmentioKey'
-        'uploadcarePublicKey'
-        'googleTimeZoneApiKey'
         'prefetchAngularTemplates'
         'androidStoreURL'
-        'appleStoreURL'
-        'defaultShiftReminderTime'
     ]
 
     apiBase: 'http://localhost:7070'
-    segmentioKey: 'qUNYwC2RrEWiBfZkMaQynZCTs4UTgrrL'
-    uploadcarePublicKey: 'd7f59e4c0193cf7a0608'
-    googleTimeZoneApiKey: 'AIzaSyDjl5OGPbHU3TGF16rEfdgf0C4GSvDDzto'
-    androidStoreURL: 'https://play.google.com/store/apps/details?id=com.samelliotsam.workerapp'
-    appleStoreURL: 'https://itunes.apple.com/app/id988221518'
     prefetchAngularTemplates: [
         'templates/mapCtrl.html'
     ]
-    defaultShiftReminderTime: 1 # 1 minute
 
 }
