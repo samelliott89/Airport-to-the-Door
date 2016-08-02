@@ -28,6 +28,7 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
                     messages = [error.message]
 
         message = messages.join '\n'
+
         pg.alert {title: title, msg: message}
 
     @loginSubmit = =>
@@ -53,28 +54,38 @@ qantasApp.controller 'AuthCtrl', ($rootScope, $scope, auth, errorList, pg, nav, 
                 window.loginUserModal.hide()
 
     @registerSubmit = =>
-        return if inProgress
-        inProgress = true
+        if @password isnt @passwordConfirm
+            console.log 'passwords did not match'
 
-        credentials =
-            given_name: @given_name
-            surname: @surname
-            phone_number: @phone
-            # hard coded in until we find
-            # a work around for this
-            phone_locale: 'AU'
-            email: @email
-            password: @password
+            # clear passwords
+            @password = null
+            @passwordConfirm = null
+            pg.alert {title: 'Password error', msg: 'The passwords you entered did not match. Please try again.'}
 
-        window.registerUserModal.show()
+        else
+            console.log 'passwords matched'
+            return if inProgress
+            inProgress = true
 
-        auth.register credentials
-            .then ->
-                nav.setRootPage 'onboardingCtrl'
-            .catch (err) -> handleErrors err
-            .finally ->
-                inProgress = false
-                window.registerUserModal.hide()
+            credentials =
+                given_name: @given_name
+                surname: @surname
+                phone_number: @phone
+                # hard coded in until we find
+                # a work around for this
+                phone_locale: 'AU'
+                email: @email
+                password: @password
+
+            window.registerUserModal.show()
+
+            auth.register credentials
+                .then ->
+                    nav.setRootPage 'onboardingCtrl'
+                .catch (err) -> handleErrors err
+                .finally ->
+                    inProgress = false
+                    window.registerUserModal.hide()
 
     @auth = auth
     @nav = nav

@@ -111,7 +111,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
             msg: 'Are you sure you want to cancel your request?'
             buttons: {
                 'Yes': _actuallyCancelRequest
-                'Cancel': ->
+                'No': ->
             }
         }
 

@@ -27,13 +27,15 @@
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" ng-model="wlcm.email"
-                                    type="email" placeholder="Email" id="LoginEmail" required>
+                                    type="email" placeholder="Email" id="LoginEmail"
+                                    ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.loginSubmit()" required>
                             <label for="LoginEmail">Email</label>
                         </div>
 
                         <div class="floatfield">
                             <input class="text-input text-input--underbar" ng-model="wlcm.password"
-                                type="password" placeholder="Password" id="LoginPassword" required>
+                                type="password" placeholder="Password" id="LoginPassword"
+                                ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.loginSubmit()" required>
                             <label for="LoginPassword">Password</label>
                         </div>
 
@@ -50,6 +52,7 @@
 
                 <div class="login-form login-form--reg" ng-if="wlcm.toShow === 'reg'" ng-animate=" 'animate' ">
                     <form name="regForm" ng-submit="wlcm.registerSubmit()" autocomplete="off">
+
                         <!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
                         <input style="display:none" type="text" name="fakeusernameremembered"/>
                         <input style="display:none" type="password" name="fakepasswordremembered"/>
@@ -58,28 +61,42 @@
                         <!-- TODO: replace floatfield with a directive -->
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.given_name" required type="text" placeholder="First name" id="RegisterText">
+                            <input class="text-input text-input--underbar"
+                                ng-model="wlcm.given_name" ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.registerSubmit()" type="text"
+                                placeholder="First name" id="RegisterText" required>
                             <label for="RegisterText">First name</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.surname" required type="text" placeholder="Last name" id="RegisterText">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.surname" ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.registerSubmit()" type="text" placeholder="Last name" id="RegisterText" required>
                             <label for="RegisterText">Last name</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" name="n" type="text" min="5" inputmode="numeric" pattern="[0-9]*" required placeholder="Mobile number" ng-model="wlcm.phone" ng-change="wlcm.onPhoneNumberChange()" ng-click="wlcm.onPhoneNumberChange()">
-                          <label for="RegisterText">Mobile number</label>
+                            <input class="text-input text-input--underbar" name="n" type="text" min="5"
+                                inputmode="numeric" pattern="[0-9]*" placeholder="Mobile number"
+                                ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.registerSubmit()"
+                                ng-model="wlcm.phone" ng-change="wlcm.onPhoneNumberChange()" ng-click="wlcm.onPhoneNumberChange()" required>
+                          <label for="RegisterPhone">Mobile number</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.email" required type="email" placeholder="Email" id="RegisterEmail">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.email" ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.registerSubmit()" type="email" placeholder="Email" id="RegisterEmail" required>
                             <label for="RegisterEmail">Email</label>
                         </div>
 
                         <div class="floatfield">
-                            <input class="text-input text-input--underbar" ng-model="wlcm.password" required type="password" placeholder="Password" id="RegisterPassword">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.password"
+                            ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.registerSubmit()"
+                            type="password" placeholder="Password" id="RegisterPassword" required>
                             <label for="RegisterPassword">Password</label>
+                        </div>
+
+                        <div class="floatfield">
+                            <input class="text-input text-input--underbar" ng-model="wlcm.passwordConfirm"
+                            ng-keydown="($event.which === 13 || $event.which === 32) && wlcm.registerSubmit()"
+                            type="password" placeholder="Confirm password" id="RegisterPasswordConfirm" required>
+                            <label for="RegisterPasswordConfirm">Confirm password</label>
                         </div>
 
                         <ons-button modifier="large" class="button--clear margin-top button-cyclinder" type="button" ng-disabled="regForm.$invalid || regForm.$pending"
