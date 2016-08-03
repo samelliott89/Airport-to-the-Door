@@ -272,6 +272,15 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, pg, stor
                 }
             }
 
+    # TODO(SK): Remove when we either:
+    # a) Understand more about flight number standards
+    # b) Use a non-fucking-retarded flight API that gives proper flight numbers
+    applyQfaHack = (flights) ->
+        return flights.map((flight) ->
+            flight.flight_number = flight.flight_number.replace(/QFA/ig, 'QF')
+            return flight
+        )
+
     @findFlights = ->
         window.findingFlightsModal.show()
         # get the selected day from local storage
@@ -288,6 +297,7 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, pg, stor
         FlightResource.getForDateAndAirport {date: formatDay, airport: airport}
             .$promise.then (flights) ->
                 window.findingFlightsModal.hide()
+                flights = applyQfaHack flights
                 # set list of flights into local storage
                 storage.set 'listOfFlights', flights
                 # go to list of flights
