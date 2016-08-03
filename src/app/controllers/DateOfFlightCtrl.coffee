@@ -287,15 +287,15 @@ qantasApp.controller 'DateOfFlightCtrl', ($rootScope, $http, auth, nav, pg, stor
         # call resource and pass parameters
         FlightResource.getForDateAndAirport {date: formatDay, airport: airport}
             .$promise.then (flights) ->
+                window.findingFlightsModal.hide()
                 # set list of flights into local storage
                 storage.set 'listOfFlights', flights
                 # go to list of flights
                 nav.goto 'listOfFlightsCtrl'
             .catch (err) ->
-                alert 'An error has occured', err
-                pg.alert {title: 'Error', msg: err.status}
-            .finally ->
                 window.findingFlightsModal.hide()
+                console.log 'An error has occured', err
+                pg.alert {title: 'Error', msg: 'Error is' + err.status}
 
     @back = ->
         nav.back()

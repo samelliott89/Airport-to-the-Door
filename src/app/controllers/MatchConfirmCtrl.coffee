@@ -17,13 +17,14 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, pg, $scope, MatchResourc
 
         MatchResource.requestMatch request
             .$promise.then (matchRequest) ->
-                nav.goto 'pollingMatchCtrl', {'matchRequest': matchRequest}
-                console.log 'match is', matchRequest
-            .catch (err) ->
-                console.log 'err is', err
-                pg.alert {title: 'Error', msg: err.status}
-            .finally ->
                 window.requestMatchModal.hide()
+                console.log 'match is', matchRequest
+                nav.goto 'pollingMatchCtrl', {'matchRequest': matchRequest}
+            .catch (err) ->
+                window.requestMatchModal.hide()
+                console.log 'err is', err
+                pg.alert {title: 'Error', msg: 'Error is' + err.status}
+
 
     @cancelRequest = ->
         pg.confirm {

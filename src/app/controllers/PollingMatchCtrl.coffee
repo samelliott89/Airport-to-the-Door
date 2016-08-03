@@ -121,7 +121,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
                 _renderMatchRequestState state
             .catch (err) ->
                 console.log 'reject proposed match err is', err
-                pg.alert {title: 'Error', msg: err.status}
+                pg.alert {title: 'Error', msg: 'Error is' + err.status}
 
     @acceptProposedMatch = ->
         MatchResource.acceptProposedMatch()
@@ -129,7 +129,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
             _renderMatchRequestState state
         .catch (err) ->
             console.log 'accept proposed match err is', err
-            pg.alert {title: 'Error', msg: err.status}
+            pg.alert {title: 'Error', msg: 'Error is' + err.status}
 
     state = nav.getParams 'matchRequest'
     $scope.state = state
