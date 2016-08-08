@@ -13,7 +13,7 @@
                     <ons-button modifier="large padd-btm-md" class="button--clear button-cyclinder animated bounceInRight"
                         type="button" ng-click="wlcm.toShow = 'reg'">Register</ons-button>
 
-                    <ons-button modifier="large--quiet" class="button--bs animated fadeIn"
+                    <ons-button modifier="large--quiet" class="button--bs animated fadeIn padd-top-md"
                         type="button" ng-click="wlcm.toShow = 'login'">Already have an account? Login</ons-button>
                 </div>
 
@@ -43,7 +43,10 @@
                             ng-disabled="loginForm.$invalid || loginForm.$pending" type="button" ng-click="wlcm.loginSubmit()">Log in</ons-button>
                     </form>
 
-                    <ons-button modifier="large--quiet" class="button--bs padd-top-md" type="button" ng-click="wlcm.toShow = 'reg'">Haven't registered yet?</ons-button>
+                    <ons-button modifier="large--quiet" class="button--bs padd-top-md"
+                        type="button" ng-click="wlcm.toShow = 'reg'">Haven't registered yet?</ons-button>
+                    <ons-button modifier="large--quiet" class="button--bs" type="button"
+                        ng-click="nav.setRootPage('resetPasswordCtrl', {animation: 'lift'})">Forgotten password?</ons-button>
                 </div>
 
                 <!-- END LOG IN -->
