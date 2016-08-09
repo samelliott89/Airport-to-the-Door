@@ -54,18 +54,26 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
     _renderConfirmedState = (state) ->
         $scope.title = 'Congratulations'
         $scope.subTitle = 'You will be travelling with ' + state.proposal.given_name + '.'
+        $scope.state = state
 
+    _formatNumber = (number) ->
+        formattedNumber = number.replace(/\s/g, '')
+
+        return formattedNumber
+
+    # TODO(Sam Elliott) make these two functions one function
+    # and differ on just the prepended protocol
     _callUser = (proposal) ->
-        mobile = proposal.phone_number
-        link = 'tel:' + mobile
+        mobile = _formatNumber(proposal.phone_number)
+        link = 'tel://' + mobile
         if window.isCordova
             window.open link, '_system'
         else
             window.open link, '_blank'
 
     _messageUser = (proposal) ->
-        mobile = proposal.phone_number
-        link = 'sms:' + mobile
+        mobile = _formatNumber(proposal.phone_number)
+        link = 'sms://' + mobile
         if window.isCordova
             window.open link, '_system'
         else
@@ -75,7 +83,6 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
         MatchResource.getMatch()
             .$promise.then (state) ->
                 _renderMatchRequestState state
-                console.log '_pollMatchRequest being run', state
                 $scope.isLoading = false
                 $scope.state = state
                 $scope.$apply
@@ -88,10 +95,8 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
                     nav.setRootPage 'navigator'
 
     @makeContact = ->
-        proposal = state.proposal
-        console.log 'proposal is', proposal
+        proposal = $scope.state.proposal
         contactName = proposal.given_name
-        console.log 'contactName', contactName
 
         actions = [
             {label: 'Call ', action: -> _callUser proposal }
@@ -99,9 +104,8 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
         ]
 
         pg.actionSheet {
-            title: contactName
+            title: 'Contact ' + contactName
             actions: actions
-            destructive: { label: 'Reset', action: @rejectProposedMatch }
             cancel: { label: 'Cancel', action: -> }
         }
 
@@ -133,9 +137,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
 
     state = nav.getParams 'matchRequest'
     $scope.state = state
-    console.log (nav.getParams 'matchRequest')
     _poll_promise = $interval _pollMatchRequest, _POLL_RATE_MS
     _renderMatchRequestState state
-
 
     return
