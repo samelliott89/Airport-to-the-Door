@@ -120,6 +120,9 @@ $ =
         buildToDevice config, 'ios', true
         print 'Done!', 'green'
 
+    createIcons: ->
+        sh "./ios-icon-generator.sh ../../buildAssets/prod-icon/iTunesArtwork@2x.png ../../buildAssets/prod-icon/"
+
     upload: (config) ->
         print 'Using config ' + config, 'magenta'
         gulp 'build', config
