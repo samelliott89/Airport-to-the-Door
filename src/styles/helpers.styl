@@ -1,5 +1,4 @@
 // padding helpers
-
 .special-pad
   padding 3px
 
@@ -23,28 +22,35 @@
 .text-grey
   color light-grey
 
+.text-white
+  color white
+
 // lists
 .page--menu-page__content
   .list
     background-color transparent !important
-    border-top: 1px solid brand-blue !important;
+    border-top: 1px solid white !important;
 
 .list
-  background-color brand-blue !important
-  border-top 1px solid brand-blue !important
+  background-color white !important
+  border-top 1px solid white !important
+  color: red !important
 
 .list__item--chevron:active
-  background-color brand-blue-darker !important
+  background-color light-grey !important
 
 .list__item--chevron.flight-selected
-  background-color brand-blue-darker !important
+  background-color light-grey !important
 
 .list__header
-  background-color brand-blue !important
-  color white !important
+  background-color dark-grey !important
+  color grey !important
 
 .list__item
-  color white
+  color grey
+
+.item-label
+  color grey !important
 
 // page content
 
@@ -62,7 +68,7 @@ page__content
     background white
 
 .cell-blue
-    color brand-blue
+    color qantas-red
 
 // Helper to push down log out
 // .list__item:last-child
@@ -102,7 +108,8 @@ page__content
     padding-top spacing * 8
 
 .circle-thick
-  border 3px solid white !important
+  border 3px solid grey !important
+  color grey !important
 
 // Removal of border bottom on nav bar
 .navigation-bar
@@ -110,7 +117,7 @@ page__content
 
 //text helpers
 .text-muted
-    color white
+    color grey
 
 .text-center
     text-align center
@@ -149,6 +156,12 @@ input, select, textarea
   color white
 
 // buttons helpers
+
+ons-button &
+button &
+.button
+  transition: all 0.5s ease-in-out;
+
 .button-dark
   background-color brand-blue
 
@@ -157,19 +170,32 @@ input, select, textarea
   padding 30px 45px !important;
 
 .button:active
-  background-color: brand-blue-darker !important
+  background-color: transparent !important
   opacity: 0.8 !important
 
 .button--clear
-    background none
+    background grey--trans
     border 1px solid white
     border-radius: 50%
 
+.button--grey--text
+  color grey !important
+
+.button--clear--white
+  background-color white !important
+
+.button--clear:active
+    background grey--trans !important
+    color qantas-red
+    border 1px solid white
+    transition color 0.5s
+
 .button--map
-  background-color brand-blue
-  color white
+  background-color white !important
+  color qantas-red
   padding 5px 20px 5px 20px
-  box-shadow rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px
+  border 1px solid qantas-red
+  box-shadow: rgba(0,0,0,0.298) 0px 8px 19px -8px;
 
 .button--bs
     font-size font-size-base

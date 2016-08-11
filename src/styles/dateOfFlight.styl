@@ -20,7 +20,6 @@ dyn-font-size-base = 4.5vw
 .week
     padding: 12px 0 18px 0
     text-align center
-    background brand-blue
     white-space nowrap
     // Float forces the element to have a 'proper' height
     float left
@@ -40,7 +39,7 @@ dyn-font-size-base = 4.5vw
     _size = 8.5vw
     display block
     position absolute
-    background rgba(brand-blue, 0%)
+    background: lighten(grey, 60%)
     content ''
     width _size
     height _size
@@ -51,13 +50,16 @@ dyn-font-size-base = 4.5vw
     z-index 1
 
     .week__day:active &
-        background: lighten(brand-blue, 60%)
+        background: lighten(qantas-red, 60%)
+        transition: background 0.2s
 
     .week__day--working &
         background #F0CECE
 
     .week__day--selected &
-        background lighten(brand-blue, 20%)
+        background lighten(qantas-red, 50%)
+        color white !important
+        transition background 0.5s
 
     .week__day--invalid
         band-width = 7px
@@ -72,19 +74,18 @@ dyn-font-size-base = 4.5vw
 .week__title
     position relative
     font-size 3.5vw
-    color white
     margin-bottom 2.5vw
     z-index 2
 
 .week__number
     position relative
     font-size dyn-font-size-base
-    color white
     z-index 2
 
     .week__day--selected &
     .week__day--invalid &
         color white
+        transition color 0.5s
 
 .keypad
     position relative
@@ -172,7 +173,6 @@ dyn-font-size-base = 4.5vw
     height key-height * 3
     top key-height * 1
     left key-width * 3
-    color white
 
     &:active
         background darken(brand-blue, 15%) !important

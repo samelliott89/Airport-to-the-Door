@@ -3,8 +3,10 @@
         <ons-toolbar>
             <div class="center"></div>
         </ons-toolbar>
-        <circle-spinner ng-if="status === 'REQUESTED' || status === 'PROPOSED' || status === 'ACCEPTED'"></circle-spinner>
-        <confirm-animation ng-if="status === 'CONFIRMED'"></confirm-animation>
+
+        <circle-spinner id="circleSpinner" ng-if="status === 'REQUESTED' || status === 'PROPOSED' || status === 'ACCEPTED'"></circle-spinner>
+
+        <confirm-animation ng-if="status === 'CONFIRMED'" class="animated bounceInDown"></confirm-animation>
 
         <!-- button state request status is REQUESTED -->
         <div class="view card text-center" ng-if="status === 'REQUESTED' && !isLoading">
@@ -24,7 +26,7 @@
                 <p>They're <strong>{{state.proposal.distance | readableDistance}}</strong> away from you.</p>
             </div>
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.acceptProposedMatch()">Accept</ons-button>
-            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.rejectProposedMatch()">or keep searching</ons-button>
+            <ons-button modifier="large--quiet" class="padd-top-md button button--bs button--grey--text" ng-click="poll.rejectProposedMatch()">or keep searching</ons-button>
         </div>
         <!-- end button state when request status is PROPOSED -->
 
@@ -35,7 +37,7 @@
                 <p>You've accepted to ride with <strong>{{state.proposal.given_name}}</strong>.</p>
                 <p>We're waiting for them to also accept.</p>
             </div>
-            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">Start over</ons-button>
+            <ons-button modifier="large--quiet" class="padd-top-md button button--bs button--grey--text" ng-click="poll.cancelMatch()">Start over</ons-button>
         </div>
         <!-- end button state when request status is ACCEPTED -->
 
@@ -49,7 +51,7 @@
             </div>
 
             <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.makeContact()">Contact</ons-button>
-            <ons-button modifier="large--quiet" class="padd-top-md button button--bs" ng-click="poll.cancelMatch()">Start over</ons-button>
+            <ons-button modifier="large--quiet" class="padd-top-md button button--bs button--grey--text" ng-click="poll.finish()">Finished</ons-button>
         </div>
         <!-- end button state when request status is CONFIRMED -->
 

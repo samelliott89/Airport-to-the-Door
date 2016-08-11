@@ -52,6 +52,8 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
         $scope.subTitle = 'We are waiting for reply from your .'
 
     _renderConfirmedState = (state) ->
+        # hack to hide the circle spinner as soon as this state resolves
+        $('#circleSpinner').hide()
         $scope.title = 'Congratulations'
         $scope.subTitle = 'You will be travelling with ' + state.proposal.given_name + '.'
         $scope.state = state
@@ -99,7 +101,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
         contactName = proposal.given_name
 
         actions = [
-            {label: 'Call ', action: -> _callUser proposal }
+            {label: 'Call', action: -> _callUser proposal }
             {label: 'Message', action: -> _messageUser proposal }
         ]
 
@@ -108,6 +110,9 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
             actions: actions
             cancel: { label: 'Cancel', action: -> }
         }
+
+    @finish = ->
+        _actuallyCancelRequest()
 
     @cancelMatch = ->
         pg.confirm {

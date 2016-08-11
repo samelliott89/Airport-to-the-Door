@@ -5,14 +5,14 @@
                 <div class="center">Your Itinerary</div>
             </ons-toolbar>
 
-            <div class="text-muted padd-top-xl text-center animated fadeIn">
+            <div class="text-white padd-top-xl text-center animated fadeIn">
                 <p id="flightNumber"><strong>{{mach.flightNumber}}</strong></p>
                 <p id="trip" class="text-xxl remove-p-padding"><strong>{{mach.departureAirport}}</strong> to <strong>{{mach.destinationAirport}}</strong></p>
                 <p id="arrivalTime">Airport arrival: <strong>{{mach.arrivalDatetime | readableTime}}</strong></p>
             </div>
 
             <div class="card text-center animated fadeIn">
-                <ons-button class="button--clear margin-top button-cyclinder" ng-click="mach.confirmRequest()">Find me a rideshare</ons-button>
+                <ons-button class="button--clear margin-top button-cyclinder button--pulse" ng-click="mach.confirmRequest()">Find me a rideshare</ons-button>
                 <ons-button modifier="large--quiet" class="button button--bs" ng-click="mach.cancelRequest()">or start over</ons-button>
             </div>
         </ons-page>
