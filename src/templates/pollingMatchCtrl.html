@@ -46,11 +46,12 @@
             <div class="text-muted">
                 <p>{{title}}</p>
                 <p>You'll be riding with <strong>{{state.proposal.given_name}}.</strong></p>
-                <p>To work out logistics, you can contact {{state.proposal.given_name}} by tapping on 'Contact' below.</p>
-                <p>Have a great flight!</p>
+                <!-- <p>To work out logistics, you can contact {{state.proposal.given_name}} by tapping on 'Contact' below.</p> -->
+                <p>We just sent you and {{state.proposal.given_name}} an SMS letting you know what to do next.</p>
+                <p>We hope you have a great flight!</p>
             </div>
 
-            <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.makeContact()">Contact</ons-button>
+            <!-- <ons-button class="button--clear margin-top button-cyclinder" ng-click="poll.makeContact()">Contact</ons-button> -->
             <ons-button modifier="large--quiet" class="padd-top-md button button--bs button--grey--text" ng-click="poll.finish()">Finished</ons-button>
         </div>
         <!-- end button state when request status is CONFIRMED -->
