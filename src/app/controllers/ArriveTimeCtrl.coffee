@@ -31,26 +31,22 @@ qantasApp.controller 'ArriveTimeCtrl', ($http, nav, storage) ->
         ), 800
 
     _goToNextView = ->
-        console.log '_goToNextView'
         nav.goto 'rideCountCtrl'
         setTimeout (->
             _removeAnimatedClass()
         ), 800
 
     _addIntroAnimations = ->
-        console.log '_addIntroAnimations'
         $(_buttonElement).addClass('animated rollIn')
         $(_textElement).addClass('animated fadeIn')
 
     _removeAnimatedClass = ->
-        console.log '_removeAnimatedClass'
         $(_buttonElement).removeClass('animated')
         $(_textElement).removeClass('animated')
 
     @submitValue = (value) ->
         _selectAnimationById(value)
         storage.set 'minutesBefore', value
-        console.log 'submitValue', value
 
     _addIntroAnimations()
 
