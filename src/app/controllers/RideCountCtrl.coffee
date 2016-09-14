@@ -2,37 +2,52 @@ qantasApp = angular.module 'qantasApp'
 
 qantasApp.controller 'RideCountCtrl', ($http, auth, nav, storage) ->
 
-    @riders = [1,2,3]
+    _listOfButtons = [
+        '#1'
+        '#2'
+        '#3'
+    ]
+    _buttonElement = '.rideAnimationButton'
+    _textElement = '.rideAnimationText'
 
-    # _goToNextView = ->
-    #     nav.goto 'mapCtrl'
-    #     setTimeout (->
-    #         _removeAnimatedClass()
-    #     ), 800
+    _selectAnimationById = (amount) ->
+        console.log 'amount', amount
+        id = '#' + amount
+        $(id).removeClass('rollIn').addClass('bounceOut')
+        listOfElementsToHide = _.without(_listOfButtons, id)
 
-    # _addIntroAnimations = ->
-    #     $('#buttonOne').addClass('animated rollIn')
-    #     $('#buttonTwo').addClass('animated rollIn')
+        console.log 'listOfElementsToHide', listOfElementsToHide
 
-    # _addOutAnimations = ->
-    #     $('#buttonOne').removeClass('rollIn').addClass('bounceOutLeft')
-    #     $('#buttonTwo').removeClass('rollIn').addClass('bounceOutRight')
-    #     $('.textOne').addClass('fadeOut')
+        for element in listOfElementsToHide
+            $(element).removeClass('rollIn').addClass('fadeOut')
+            console.log 'hiding element', element
+            console.log $(element)
 
-    # _removeAnimatedClass = ->
-    #     $('#buttonOne').removeClass('animated')
-    #     $('#buttonTwo').removeClass('animated')
+        setTimeout (->
+            _goToNextView()
+        ), 800
+
+    _goToNextView = ->
+        nav.goto 'mapCtrl'
+        setTimeout (->
+            _removeAnimatedClass()
+        ), 800
+
+    _addIntroAnimations = ->
+        console.log '_addIntroAnimations'
+        $(_buttonElement).addClass('animated rollIn')
+        $(_textElement).addClass('animated fadeIn')
+
+    _removeAnimatedClass = ->
+        console.log '_removeAnimatedClass'
+        $(_buttonElement).removeClass('animated')
+        $(_textElement).removeClass('animated')
 
     @submitValue = (partySize) ->
-        console.log('partySize is', partySize)
+        console.log 'partySize is', partySize
+        _selectAnimationById(partySize)
         storage.set 'partySize', partySize
-        nav.goto 'mapCtrl'
-        # _addOutAnimations()
 
-        # setTimeout (->
-        #     _goToNextView()
-        # ), 400
-
-    # _addIntroAnimations()
+    _addIntroAnimations()
 
     return
