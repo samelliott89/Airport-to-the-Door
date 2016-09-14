@@ -15,7 +15,7 @@ qantasApp.factory 'storage', ($window) ->
     clearAll: -> ls.clear()
 
     clearFlightData: ->
-        keysToClear = ['flightObj', 'minutesBefore', 'listOfFlights', 'flightDate', 'flightNumber', 'rideCount']
+        keysToClear = ['flightObj', 'minutesBefore', 'listOfFlights', 'flightDate', 'flightNumber', 'partySize']
         for key in keysToClear
             try
                 ls.removeItem key

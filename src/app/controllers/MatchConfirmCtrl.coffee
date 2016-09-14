@@ -14,6 +14,9 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, pg, $scope, MatchResourc
             flight_number: _flight.flight_number
             airport: _flight.departure_airport
             arrival_datetime: _arrivalDatetime
+            party_size: _partySize
+
+        console.log('request to go ', request)
 
         MatchResource.requestMatch request
             .$promise.then (matchRequest) ->
@@ -49,6 +52,8 @@ qantasApp.controller 'MatchConfirmCtrl', (nav, storage, pg, $scope, MatchResourc
 
     _location = nav.getParams 'location'
     _flight = nav.getParams 'flight'
+    _partySize = parseInt(storage.get 'partySize')
+    console.log('_partySize', _partySize)
     _arrivalDatetime = _getArrivalDatetime(_flight, storage.get 'minutesBefore')
 
     @departureAirport = if _flight.departure_airport is 'YSSY' then 'SYD' else _flight.departure_airport

@@ -7,8 +7,16 @@
             <div class="center" ng-bind="pageTitle"></div>
         </ons-toolbar>
 
-        <leaflet id="map" class="map animated fadeIn" lf-center="defaultLocation" layers="layers" markers="markers" height="480px" width="100%"></leaflet>
+        <leaflet id="map" class="map animated fadeIn"
+            lf-center="defaultLocation" layers="layers" markers="markers" height="480px" width="100%"></leaflet>
         <ion-icon class="map-pin ion-location animated bounceInDown"></ion-icon>
+
+        <form class="search-panel animated fadeIn box-shadow">
+            <div class="search-panel__field search-input border-none">
+                <input class="search-panel__input" type="text" placeholder="Enter an address"
+                    ng-model="mapv.addressToConvert" ng-keydown="($event.which === 13 || $event.which === 32) && mapv.geoCodeLookup()">
+            </div>
+        </form>
 
         <ons-button class="location-finder" ng-click="mapv.panToUserLocation()">
             <ion-icon class="ion-navigate"></ion-icon>
