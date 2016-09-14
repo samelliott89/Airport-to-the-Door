@@ -44,7 +44,7 @@ qantasApp.controller 'PollingMatchCtrl', ($http, $scope, pg, $interval, MatchRes
         $scope.subTitle = 'We are looking for someone to match you with. We will let you know when we find someone!'
 
     _renderProposedState = (state) ->
-        $scope.title = 'Waiting...'
+        $scope.title = 'We’ve found a match'
         $scope.subTitle = state.proposal.given_name + ' would like to share a ride with you. Click Accept to proceed'
 
     _renderAcceptedState = (state) ->

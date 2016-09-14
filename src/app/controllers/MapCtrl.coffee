@@ -1,6 +1,6 @@
 qantasApp = angular.module 'qantasApp'
 
-qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg, leafletData, ReverseGeocodeResource, storage) ->
+qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg, leafletData, ReverseGeocodeResource, GeocodeResource, storage) ->
     DEFAULT_LAT = -33.8688
     DEFAULT_LNG = 151.2093
     DEFAULT_ZOOM_LEVEL = 17
@@ -17,11 +17,11 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
     _markerConfig =
         fillOpacity: 1
         stroke: false
-        fillColor: '#68000C'
+        fillColor: '#8e8e8e'
 
     _accuracyCircleConfig =
         stroke: false
-        fillColor: '#E6001B'
+        fillColor: '##EE0000'
 
     _marker = null
     _accuracyCircle = null
@@ -45,9 +45,24 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             _map.panTo(new L.LatLng(_mostRecentLocation.lat, _mostRecentLocation.lng))
             _onPanZoomEnd()
 
+    @geoCodeLookup = ->
+        GeocodeResource.getLatLng {address: @addressToConvert}
+            .$promise
+            .then (response) ->
+                console.log 'response', response
+                _map.panTo(new L.LatLng(response.latitude, response.longitude))
+                $scope.pageTitle = response.address
+
+            .catch (err) ->
+                console.log 'err', err
+                pg.alert { msg: 'Unfortunately we could not find the address you specified. Please try a different address.', title: 'No address found' }
+                @addressToConvert = null
+
     @onSetPickupLocation = ->
         flightToMatch = storage.get 'flightObj'
         center = _map.getCenter()
+
+        console.log 'request', flightToMatch, center
 
         nav.goto 'matchConfirmCtrl', {location: center, flight: flightToMatch, animation: 'lift'}
 
@@ -80,6 +95,7 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
                     lng: position.coords.longitude
                 if _map
                     _drawPosition(_mostRecentLocation, position.coords.accuracy)
+                    $scope.showSerch = true
             (error) ->
                 console.log(error)
             _geolocationConfig
@@ -106,8 +122,9 @@ qantasApp.controller 'MapCtrl', ($scope, $element, auth, nav, MatchResource, pg,
             if response and response.address
                 $scope.pageTitle = response.address
             else
-                $scope.pageTitle = ''
+                console.log 'no address found'
         .catch (err) ->
+            $scope.pageTitle = ''
             console.log 'err status is', err.status
 
     _createMap()
