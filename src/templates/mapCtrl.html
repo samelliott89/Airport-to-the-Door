@@ -12,7 +12,7 @@
         <ion-icon class="map-pin ion-location animated bounceInDown"></ion-icon>
 
         <form class="search-panel animated fadeIn box-shadow">
-            <div class="search-panel__field search-input border-none">
+            <div class="search-panel__field search-panel__field--map search-input border-none">
                 <input class="search-panel__input" type="text" placeholder="Enter your pickup address"
                     ng-model="mapv.addressToConvert" ng-keydown="($event.which === 13 || $event.which === 32) && mapv.geoCodeLookup()">
             </div>
