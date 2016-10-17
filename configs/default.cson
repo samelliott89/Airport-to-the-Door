@@ -44,18 +44,7 @@
             { name: "Default-Landscape-736h@3x.png", width: "2208",  height: "1242" }
         ]
     }
-
-    androidIcons: {
-        base: 'buildAssets/android-icons-prod'
-        sizes: [
-            { name: "xxxhdpi.png", density: "xxxhdpi",}
-            { name: "xxhdpi.png",  density: "xxhdpi", }
-            { name: "xhdpi.png",   density: "xhdpi",  }
-            { name: "hdpi.png",    density: "hdpi",   }
-            { name: "mdpi.png",    density: "mdpi",   }
-        ]
-    }
-
+    
     preferences:
         "EnableViewportScale": "true"
         "StatusBarOverlaysWebView": "true"
